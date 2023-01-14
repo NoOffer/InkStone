@@ -27,9 +27,15 @@
     <ClInclude Include="src\InkStone\Entry.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\InkStone\Log.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InkStone\Application.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InkStone\Log.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

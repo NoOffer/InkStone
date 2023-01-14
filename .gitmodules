@@ -1,0 +1,3 @@
+[submodule "InkStone/vendor/spdlog"]
+	path = InkStone/vendor/spdlog
+	url = https://github.com/gabime/spdlog
