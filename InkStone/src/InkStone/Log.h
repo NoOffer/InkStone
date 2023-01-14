@@ -5,7 +5,7 @@
 
 namespace InkStone
 {
-	class INKSTONE_API Log
+	class INKS_API Log
 	{
 	public:
 		static void Init();

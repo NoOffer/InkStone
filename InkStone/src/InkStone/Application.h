@@ -4,7 +4,7 @@
 
 namespace InkStone
 {
-	class INKSTONE_API Application
+	class INKS_API Application
 	{
 	public:
 		Application();
