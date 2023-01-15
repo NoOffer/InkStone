@@ -150,6 +150,7 @@
     <ClInclude Include="src\InkStone\Application.h" />
     <ClInclude Include="src\InkStone\Core.h" />
     <ClInclude Include="src\InkStone\Entry.h" />
+    <ClInclude Include="src\InkStone\Event.h" />
     <ClInclude Include="src\InkStone\Log.h" />
   </ItemGroup>
   <ItemGroup>
