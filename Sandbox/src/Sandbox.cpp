@@ -3,16 +3,13 @@
 class Sandbox : public InkStone::Application
 {
 public:
-	Sandbox()
-	{
+	Sandbox() {
 	}
 
-	~Sandbox()
-	{
+	~Sandbox() {
 	}
 };
 
-InkStone::Application* InkStone::CreateApplication()
-{
+InkStone::Application* InkStone::CreateApplication() {
 	return new Sandbox();
 }

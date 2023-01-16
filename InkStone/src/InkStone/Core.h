@@ -9,3 +9,5 @@
 #else
 	#error Unsupported platform (InkStone supports Windows only)
 #endif // INKS_PLATFORM_WINDOWS
+
+#define BIT(x) (1 << x)

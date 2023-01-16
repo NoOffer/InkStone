@@ -4,8 +4,7 @@
 
 extern InkStone::Application* InkStone::CreateApplication();
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
 	auto app = InkStone::CreateApplication();
 	app->Run();
 	delete app;
