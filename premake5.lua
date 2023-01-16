@@ -10,6 +10,8 @@ workspace "InkStone"
 
 outputdir = "%{cfg.buildcfg}/%{cfg.system}-%{cfg.architecture}"
 
+include "InkStone/vendor/GLFW"
+
 project "InkStone"
 	location "InkStone"
 	kind "SharedLib"
@@ -26,8 +28,15 @@ project "InkStone"
 
 	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include"
-		"%{prj.name}/src"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/GLFW/include"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"

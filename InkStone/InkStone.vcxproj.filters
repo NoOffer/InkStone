@@ -4,6 +4,15 @@
     <Filter Include="InkStone">
       <UniqueIdentifier>{F088B6ED-DC55-11F9-056F-FFA0F19A4687}</UniqueIdentifier>
     </Filter>
+    <Filter Include="InkStone\Events">
+      <UniqueIdentifier>{D4C63AE7-4052-A8AB-4963-2BA0B56D04AC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platforms">
+      <UniqueIdentifier>{DDACA145-4917-56BC-9255-0762FEFE3311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platforms\Windows">
+      <UniqueIdentifier>{17E40808-83FA-069E-CC71-92BF38C7D725}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\InkStone.h" />
@@ -16,16 +25,34 @@
     <ClInclude Include="src\InkStone\Entry.h">
       <Filter>InkStone</Filter>
     </ClInclude>
-    <ClInclude Include="src\InkStone\Log.h">
+    <ClInclude Include="src\InkStone\Events\ApplicationEvent.h">
+      <Filter>InkStone\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InkStone\Events\Event.h">
+      <Filter>InkStone\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InkStone\Events\KeyboardEvent.h">
+      <Filter>InkStone\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InkStone\Events\MouseEvent.h">
+      <Filter>InkStone\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InkStone\Events\WindowEvent.h">
+      <Filter>InkStone\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InkStone\Window.h">
       <Filter>InkStone</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platforms\Windows\WindowsWindow.h">
+      <Filter>Platforms\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InkStone\Application.cpp">
       <Filter>InkStone</Filter>
     </ClCompile>
-    <ClCompile Include="src\InkStone\Log.cpp">
-      <Filter>InkStone</Filter>
+    <ClCompile Include="src\Platforms\Windows\WindowsWindow.cpp">
+      <Filter>Platforms\Windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

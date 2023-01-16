@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>INKS_PLATFORM_WINDOWS;INKS_BUILD_DLL;INKS_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -89,6 +89,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Debug\windows-x86_64\InkStone\InkStone.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
@@ -100,7 +101,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>INKS_PLATFORM_WINDOWS;INKS_BUILD_DLL;INKS_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -114,6 +115,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Release\windows-x86_64\InkStone\InkStone.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
@@ -125,7 +127,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>INKS_PLATFORM_WINDOWS;INKS_BUILD_DLL;INKS_DISTRIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -139,6 +141,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Distrib\windows-x86_64\InkStone\InkStone.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
@@ -150,12 +153,22 @@
     <ClInclude Include="src\InkStone\Application.h" />
     <ClInclude Include="src\InkStone\Core.h" />
     <ClInclude Include="src\InkStone\Entry.h" />
-    <ClInclude Include="src\InkStone\Event.h" />
-    <ClInclude Include="src\InkStone\Log.h" />
+    <ClInclude Include="src\InkStone\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\InkStone\Events\Event.h" />
+    <ClInclude Include="src\InkStone\Events\KeyboardEvent.h" />
+    <ClInclude Include="src\InkStone\Events\MouseEvent.h" />
+    <ClInclude Include="src\InkStone\Events\WindowEvent.h" />
+    <ClInclude Include="src\InkStone\Window.h" />
+    <ClInclude Include="src\Platforms\Windows\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InkStone\Application.cpp" />
-    <ClCompile Include="src\InkStone\Log.cpp" />
+    <ClCompile Include="src\Platforms\Windows\WindowsWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">
+      <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

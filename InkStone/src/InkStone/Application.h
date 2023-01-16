@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "Window.h"
 
 namespace InkStone
 {
@@ -11,6 +12,11 @@ namespace InkStone
 		virtual ~Application();
 
 		void Run();
+		
+	private:
+		bool m_Running = true;
+
+		std::unique_ptr<Window> m_Window;
 	};
 
 	Application* CreateApplication();

@@ -16,16 +16,17 @@ namespace InkStone
 	class INKS_API WindowResizedEvent : public Event
 	{
 	public:
-		WindowResizedEvent(int newHeight, int newWidth)
-			: m_Height(newHeight), m_Width(newWidth) {
+		WindowResizedEvent(int newWidth, int newHeight)
+			: m_Width(newWidth), m_Height(newHeight)
+		{
 		}
 
 		EVENT_TYPE(WindowResized);
 		EVENT_FLAG(EventFlag::WindowEvent);
 
 	private:
-		int m_Height;
 		int m_Width;
+		int m_Height;
 	};
 
 	class INKS_API WindowLostFocusEvent : public Event
@@ -41,7 +42,8 @@ namespace InkStone
 	{
 	public:
 		WindowMovedEvent(int dx, int dy)
-			: m_XOffset(dx), m_YOffset(dy) {
+			: m_XOffset(dx), m_YOffset(dy)
+		{
 		}
 
 		EVENT_TYPE(WindowMoved);

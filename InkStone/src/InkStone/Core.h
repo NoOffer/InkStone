@@ -10,4 +10,11 @@
 	#error Unsupported platform (InkStone supports Windows only)
 #endif // INKS_PLATFORM_WINDOWS
 
+#ifdef INKS_ENABLE_ASSERTS
+#define INKS_ASSERT(x) { if(!(x)) { INKS_ERROR("Assertion failed"); __debugbreak(); } }
+#else
+#define INKS_ASSERT(x)
+#endif // INKS_ENABLE_ASSERTS
+
+
 #define BIT(x) (1 << x)

@@ -14,7 +14,8 @@ namespace InkStone
 	{
 	public:
 		MouseButtonPressedEvent(int button)
-			: m_button(button) {
+			: m_button(button)
+		{
 		}
 
 		inline int GetButton() { return m_button; }
@@ -29,7 +30,8 @@ namespace InkStone
 	{
 	public:
 		MouseButtonReleasedEvent(int button)
-			: m_button(button) {
+			: m_button(button)
+		{
 		}
 
 		inline int GetButton() { return m_button; }
@@ -44,7 +46,8 @@ namespace InkStone
 	{
 	public:
 		MouseMovedEvent(int dx, int dy)
-			: m_X(dx), m_Y(dy) {
+			: m_X(dx), m_Y(dy)
+		{
 		}
 
 		inline int GetX() { return m_X; }
@@ -61,7 +64,8 @@ namespace InkStone
 	{
 	public:
 		MouseScrolledEvent(int dx, int dy)
-			: m_X(dx), m_Y(dy) {
+			: m_X(dx), m_Y(dy)
+		{
 		}
 
 		inline int GetX() { return m_X; }

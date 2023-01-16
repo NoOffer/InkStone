@@ -12,7 +12,8 @@ namespace InkStone
 		inline int GetKeyCode() { return m_KeyCode; }
 	protected:
 		KeyboardEvent(int keyCode)
-			: m_KeyCode(keyCode) {
+			: m_KeyCode(keyCode)
+		{
 		}
 		int m_KeyCode;
 	};
@@ -21,7 +22,8 @@ namespace InkStone
 	{
 	public:
 		KeyPressedEvent(int KeyCode)
-			: KeyboardEvent(KeyCode) {
+			: KeyboardEvent(KeyCode)
+		{
 		}
 
 		EVENT_TYPE(KeyPressed);
@@ -31,9 +33,10 @@ namespace InkStone
 	{
 	public:
 		KeyRepeatedEvent(int KeyCode)
-			: KeyboardEvent(KeyCode) {
+			: KeyboardEvent(KeyCode)
+		{
 		}
-		
+
 		EVENT_TYPE(KeyRepeated);
 	};
 
@@ -41,7 +44,8 @@ namespace InkStone
 	{
 	public:
 		KeyReleasedEvent(int KeyCode)
-			: KeyboardEvent(KeyCode) {
+			: KeyboardEvent(KeyCode)
+		{
 		}
 
 		EVENT_TYPE(KeyReleased);
