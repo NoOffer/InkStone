@@ -6,6 +6,9 @@ extern InkStone::Application* InkStone::CreateApplication();
 
 int main(int argc, char** argv)
 {
+	InkStone::Log::Init();
+	INKS_WARNING("Test Warning");
+
 	auto app = InkStone::CreateApplication();
 	app->Run();
 	delete app;

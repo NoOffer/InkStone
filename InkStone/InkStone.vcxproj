@@ -149,6 +149,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\InkStone\Log.h" />
     <ClInclude Include="src\InkStone.h" />
     <ClInclude Include="src\InkStone\Application.h" />
     <ClInclude Include="src\InkStone\Core.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="src\Platforms\Windows\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\InkStone\Log.cpp" />
     <ClCompile Include="src\InkStone\Application.cpp" />
     <ClCompile Include="src\Platforms\Windows\WindowsWindow.cpp" />
   </ItemGroup>

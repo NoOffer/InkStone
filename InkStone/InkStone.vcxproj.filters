@@ -46,6 +46,7 @@
     <ClInclude Include="src\Platforms\Windows\WindowsWindow.h">
       <Filter>Platforms\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\InkStone\Log.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InkStone\Application.cpp">
@@ -54,5 +55,6 @@
     <ClCompile Include="src\Platforms\Windows\WindowsWindow.cpp">
       <Filter>Platforms\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\InkStone\Log.cpp" />
   </ItemGroup>
 </Project>
