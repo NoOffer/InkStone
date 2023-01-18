@@ -19,6 +19,9 @@ project "InkStone"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-obj/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "inks_pch.h"
+	pchsource "InkStone/src/inks_pch.cpp"
 	
 	files
 	{

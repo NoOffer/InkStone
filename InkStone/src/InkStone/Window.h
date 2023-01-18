@@ -3,8 +3,6 @@
 #include "Core.h"
 #include "Events/Event.h"
 
-#include <functional>
-
 namespace InkStone
 {
 	class INKS_API Window

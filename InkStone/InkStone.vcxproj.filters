@@ -40,21 +40,27 @@
     <ClInclude Include="src\InkStone\Events\WindowEvent.h">
       <Filter>InkStone\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\InkStone\Log.h">
+      <Filter>InkStone</Filter>
+    </ClInclude>
     <ClInclude Include="src\InkStone\Window.h">
       <Filter>InkStone</Filter>
     </ClInclude>
     <ClInclude Include="src\Platforms\Windows\WindowsWindow.h">
       <Filter>Platforms\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\InkStone\Log.h" />
+    <ClInclude Include="src\inks_pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InkStone\Application.cpp">
       <Filter>InkStone</Filter>
     </ClCompile>
+    <ClCompile Include="src\InkStone\Log.cpp">
+      <Filter>InkStone</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platforms\Windows\WindowsWindow.cpp">
       <Filter>Platforms\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\InkStone\Log.cpp" />
+    <ClCompile Include="src\inks_pch.cpp" />
   </ItemGroup>
 </Project>

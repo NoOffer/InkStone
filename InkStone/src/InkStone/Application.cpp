@@ -1,3 +1,4 @@
+#include "inks_pch.h"
 #include "Application.h"
 
 namespace InkStone
