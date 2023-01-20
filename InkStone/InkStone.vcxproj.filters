@@ -25,19 +25,7 @@
     <ClInclude Include="src\InkStone\Entry.h">
       <Filter>InkStone</Filter>
     </ClInclude>
-    <ClInclude Include="src\InkStone\Events\ApplicationEvent.h">
-      <Filter>InkStone\Events</Filter>
-    </ClInclude>
     <ClInclude Include="src\InkStone\Events\Event.h">
-      <Filter>InkStone\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\InkStone\Events\KeyboardEvent.h">
-      <Filter>InkStone\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\InkStone\Events\MouseEvent.h">
-      <Filter>InkStone\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\InkStone\Events\WindowEvent.h">
       <Filter>InkStone\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\InkStone\Log.h">
@@ -50,6 +38,10 @@
       <Filter>Platforms\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\inks_pch.h" />
+    <ClInclude Include="src\InkStone\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\InkStone\Events\KeyboardEvent.h" />
+    <ClInclude Include="src\InkStone\Events\MouseEvent.h" />
+    <ClInclude Include="src\InkStone\Events\WindowEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InkStone\Application.cpp">
@@ -62,5 +54,6 @@
       <Filter>Platforms\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\inks_pch.cpp" />
+    <ClCompile Include="src\InkStone\Events\Event.cpp" />
   </ItemGroup>
 </Project>

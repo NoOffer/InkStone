@@ -168,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InkStone\Application.cpp" />
+    <ClCompile Include="src\InkStone\Events\Event.cpp" />
     <ClCompile Include="src\InkStone\Log.cpp" />
     <ClCompile Include="src\Platforms\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\inks_pch.cpp">

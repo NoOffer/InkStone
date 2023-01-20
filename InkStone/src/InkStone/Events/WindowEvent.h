@@ -4,7 +4,7 @@
 
 namespace InkStone
 {
-	class INKS_API WindowClosedEvent : public Event
+	struct INKS_API WindowClosedEvent : public Event
 	{
 	public:
 		WindowClosedEvent() {}
@@ -13,7 +13,7 @@ namespace InkStone
 		EVENT_FLAG(EventFlag::WindowEvent);
 	};
 
-	class INKS_API WindowResizedEvent : public Event
+	struct INKS_API WindowResizedEvent : public Event
 	{
 	public:
 		WindowResizedEvent(int newWidth, int newHeight)
@@ -29,7 +29,7 @@ namespace InkStone
 		int m_Height;
 	};
 
-	class INKS_API WindowLostFocusEvent : public Event
+	struct INKS_API WindowLostFocusEvent : public Event
 	{
 	public:
 		WindowLostFocusEvent() {}
@@ -38,7 +38,7 @@ namespace InkStone
 		EVENT_FLAG(EventFlag::WindowEvent);
 	};
 
-	class INKS_API WindowMovedEvent : public Event
+	struct INKS_API WindowMovedEvent : public Event
 	{
 	public:
 		WindowMovedEvent(int dx, int dy)
