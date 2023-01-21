@@ -1,6 +1,1 @@
-﻿  Sandbox.cpp
-E:\Projects\C++\InkStone\InkStone\src\InkStone\Log.h(17,42): warning C4251: “InkStone::Log::s_Logger”: class“std::shared_ptr<spdlog::logger>”需要有 dll 接口由 class“InkStone::Log”的客户端使用
-E:\Projects\C++\InkStone\InkStone\vendor\spdlog\include\spdlog\details\registry.h(34): message : 参见“std::shared_ptr<spdlog::logger>”的声明
-E:\Projects\C++\InkStone\InkStone\src\InkStone\Application.h(19,27): warning C4251: “InkStone::Application::m_Window”: class“std::unique_ptr<InkStone::Window,std::default_delete<InkStone::Window>>”需要有 dll 接口由 class“InkStone::Application”的客户端使用
-E:\Projects\C++\InkStone\InkStone\src\InkStone\Application.h(19): message : 参见“std::unique_ptr<InkStone::Window,std::default_delete<InkStone::Window>>”的声明
-  Sandbox.vcxproj -> E:\Projects\C++\InkStone\bin\Debug\windows-x86_64\Sandbox\Sandbox.exe
+﻿  Sandbox.vcxproj -> E:\Projects\C++\InkStone\bin\Debug\windows-x86_64\Sandbox\Sandbox.exe

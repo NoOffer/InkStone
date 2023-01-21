@@ -1,3 +1,4 @@
+#include "inks_pch.h"
 #include "EventManager.h"
 
 #include "ApplicationEvent.h"
@@ -7,17 +8,5 @@
 
 namespace InkStone
 {
-	EventManager::EventManager()
-	{
-		EventManager::m_Dispatchers = {};
 
-		m_Dispatchers.push_back(EventDispatcherLL<WindowClosedEvent>());
-	}
-
-	void EventManager::PushCallback(EventType e, std::function<EventType(void)> callback)
-	{
-
-	}
-
-	void EventManager::Handle(EventType e) {}
 }

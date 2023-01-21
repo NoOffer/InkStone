@@ -158,6 +158,7 @@
     <ClInclude Include="src\InkStone\Entry.h" />
     <ClInclude Include="src\InkStone\Events\ApplicationEvent.h" />
     <ClInclude Include="src\InkStone\Events\Event.h" />
+    <ClInclude Include="src\InkStone\Events\EventManager.h" />
     <ClInclude Include="src\InkStone\Events\KeyboardEvent.h" />
     <ClInclude Include="src\InkStone\Events\MouseEvent.h" />
     <ClInclude Include="src\InkStone\Events\WindowEvent.h" />
@@ -168,7 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InkStone\Application.cpp" />
-    <ClCompile Include="src\InkStone\Events\Event.cpp" />
+    <ClCompile Include="src\InkStone\Events\EventManager.cpp" />
     <ClCompile Include="src\InkStone\Log.cpp" />
     <ClCompile Include="src\Platforms\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\inks_pch.cpp">

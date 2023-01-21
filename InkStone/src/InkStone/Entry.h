@@ -9,6 +9,8 @@ int main(int argc, char** argv)
 	InkStone::Log::Init();
 	INKS_WARNING("Test Warning");
 
+	InkStone::EventDispatcher();
+
 	auto app = InkStone::CreateApplication();
 	app->Run();
 	delete app;

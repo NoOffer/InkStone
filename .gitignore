@@ -1,5 +1,5 @@
 .vs/
 bin/
-bin-int/
+bin-obj/
 vendor/
 InkStone/vendor/
