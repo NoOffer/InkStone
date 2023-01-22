@@ -3,3 +3,4 @@ bin/
 bin-obj/
 vendor/
 InkStone/vendor/
+InkStone/InkStone.*
