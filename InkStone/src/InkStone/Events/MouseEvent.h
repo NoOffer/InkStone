@@ -4,76 +4,40 @@
 
 namespace InkStone
 {
-	class INKS_API MouseEvent : public Event
+	struct INKS_API MouseButtonPressedEvent : public Event
 	{
-	public:
-		EVENT_FLAG(EventFlag::InputEvent | EventFlag::MouseEvent);
-	};
-
-	class INKS_API MouseButtonPressedEvent : public MouseEvent
-	{
-	public:
-		MouseButtonPressedEvent(int button)
-			: m_button(button)
-		{
-		}
-
-		inline int GetButton() { return m_button; }
+		MouseButtonPressedEvent(int button) : m_button(button) {}
 
 		EVENT_TYPE(KeyPressed);
 
-	private:
 		int m_button;
 	};
 
-	class INKS_API MouseButtonReleasedEvent : public MouseEvent
+	struct INKS_API MouseButtonReleasedEvent : public Event
 	{
-	public:
-		MouseButtonReleasedEvent(int button)
-			: m_button(button)
-		{
-		}
-
-		inline int GetButton() { return m_button; }
+		MouseButtonReleasedEvent(int button) : m_button(button) {}
 
 		EVENT_TYPE(KeyPressed);
 
-	private:
 		int m_button;
 	};
 
-	class INKS_API MouseMovedEvent : public MouseEvent
+	struct INKS_API MouseMovedEvent : public Event
 	{
-	public:
-		MouseMovedEvent(int dx, int dy)
-			: m_X(dx), m_Y(dy)
-		{
-		}
-
-		inline int GetX() { return m_X; }
-		inline int GetY() { return m_Y; }
+		MouseMovedEvent(int dx, int dy) : m_X(dx), m_Y(dy) {}
 
 		EVENT_TYPE(KeyPressed);
 
-	private:
 		int m_X;
 		int m_Y;
 	};
 
-	class INKS_API MouseScrolledEvent : public MouseEvent
+	struct INKS_API MouseScrolledEvent : public Event
 	{
-	public:
-		MouseScrolledEvent(int dx, int dy)
-			: m_X(dx), m_Y(dy)
-		{
-		}
-
-		inline int GetX() { return m_X; }
-		inline int GetY() { return m_Y; }
+		MouseScrolledEvent(int dx, int dy) : m_X(dx), m_Y(dy) {}
 
 		EVENT_TYPE(KeyPressed);
 
-	private:
 		int m_X;
 		int m_Y;
 	};
