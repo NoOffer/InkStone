@@ -7,16 +7,12 @@ namespace InkStone
 {
 	class INKS_API EventDispatcher
 	{
-	private:
+	public:
 		EventDispatcher();
 		~EventDispatcher();
 
-	public:
-		// Singleton
-		static EventDispatcher& GetInstance();
-
 		void PushCallback(EventType eventType, std::function<void(Event*)> dispatcherFn);
-		void Distpatch(Event* event);
+		void Distpatch(EventType eventType, Event* event);
 
 	private:
 		std::unordered_map<EventType, std::vector<std::function<void(Event*)>>> m_Dispatchers;
