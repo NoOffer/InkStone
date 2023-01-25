@@ -24,7 +24,7 @@ namespace InkStone
 
 	struct INKS_API MouseMovedEvent : public Event
 	{
-		MouseMovedEvent(int dx, int dy) : m_X(dx), m_Y(dy) {}
+		MouseMovedEvent(int xPos, int yPos) : m_X(xPos), m_Y(yPos) {}
 
 		EVENT_TYPE(KeyPressed);
 
@@ -32,9 +32,9 @@ namespace InkStone
 		int m_Y;
 	};
 
-	struct INKS_API MouseScrolledEvent : public Event
+	struct INKS_API MouseWheelScrolledEvent : public Event
 	{
-		MouseScrolledEvent(int dx, int dy) : m_X(dx), m_Y(dy) {}
+		MouseWheelScrolledEvent(int dx, int dy) : m_X(dx), m_Y(dy) {}
 
 		EVENT_TYPE(KeyPressed);
 

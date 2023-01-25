@@ -23,6 +23,14 @@ namespace InkStone
 		int m_Height;
 	};
 
+	struct INKS_API WindowFocusedEvent : public Event
+	{
+		WindowFocusedEvent() {}
+
+		EVENT_TYPE(WindowFocused);
+		//EVENT_FLAG(EventFlag::WindowEvent);
+	};
+
 	struct INKS_API WindowLostFocusEvent : public Event
 	{
 		WindowLostFocusEvent() {}

@@ -2,6 +2,8 @@
 
 #include "InkStone/Window.h"
 
+#include "InkStone/EventDispatcher.h"
+
 #include <GLFW/glfw3.h>
 
 namespace InkStone
@@ -17,12 +19,13 @@ namespace InkStone
 		inline unsigned int GetWidth() const override { return m_Width; }
 		inline unsigned int GetHeight() const override { return m_Height; }
 
-		inline void SetEventCallback(const EventCallbackFn& callback) override {}
 		void SetVSync(bool enabled) override;
 		inline bool IsVSync() const override { return m_IsVSync; };
 
+		void SetEventCallback(EventType eventType, std::function<void(Event*)> callback);
+
 	private:
-		void Init(unsigned int height, unsigned int width, std::string title);
+		//void Init(unsigned int height, unsigned int width, std::string title);
 		void Shutdown();
 
 	private:
@@ -31,6 +34,8 @@ namespace InkStone
 		bool m_IsVSync;
 
 		GLFWwindow* m_Window;
+
+		EventDispatcher m_EventDispatcher;
 	};
 }
 

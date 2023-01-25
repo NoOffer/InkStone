@@ -15,16 +15,6 @@ namespace InkStone
 	WindowsWindow::WindowsWindow(unsigned int height, unsigned int width, std::string title)
 		: m_Width(width), m_Height(height)
 	{
-		Init(height, width, title);
-	}
-
-	WindowsWindow::~WindowsWindow()
-	{
-		Shutdown();
-	}
-
-	void WindowsWindow::Init(unsigned int height, unsigned int width, std::string title)
-	{
 		if (!s_GLFWInitialized) {
 			int success = glfwInit();
 			//INKS_ASSERT(success);
@@ -37,7 +27,73 @@ namespace InkStone
 		glfwMakeContextCurrent(m_Window);
 		//glfwSetWindowUserPointer();
 		SetVSync(true);
+
+		glfwSetWindowUserPointer(m_Window, &m_EventDispatcher);
+
+		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) {
+			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(WindowClosed, new WindowClosedEvent());
+			});
+
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
+			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(WindowResized, new WindowResizedEvent(width, height));
+			});
+
+		glfwSetWindowFocusCallback(m_Window, [](GLFWwindow* window, int focused) {
+			if (focused == GL_TRUE)
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(WindowFocused, new WindowFocusedEvent());
+			else
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(WindowLostFocus, new WindowLostFocusEvent());
+			});
+
+		glfwSetWindowPosCallback(m_Window, [](GLFWwindow* window, int xPos, int yPos) {
+			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(WindowMoved, new WindowMovedEvent(xPos, yPos));
+			});
+
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+			switch (action) {
+			case GLFW_PRESS:
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(KeyPressed, new KeyPressedEvent(key));
+				break;
+			case GLFW_REPEAT:
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(KeyRepeated, new KeyRepeatedEvent(key));
+				break;
+			case GLFW_RELEASE:
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(KeyReleased, new KeyReleasedEvent(key));
+				break;
+			}
+			});
+
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
+			switch (action) {
+			case GLFW_PRESS:
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(MouseButtonPressed, new MouseButtonPressedEvent(button));
+				break;
+			case GLFW_RELEASE:
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(MouseButtonReleased, new MouseButtonReleasedEvent(button));
+				break;
+			}
+			});
+
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos) {
+			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(MouseMoved, new MouseMovedEvent(xPos, yPos));
+			});
+
+		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset) {
+			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(MouseWheelScrolled, new MouseWheelScrolledEvent(xOffset, yOffset));
+			});
 	}
+
+	WindowsWindow::~WindowsWindow()
+	{
+		Shutdown();
+	}
+
+	void WindowsWindow::SetEventCallback(EventType eventType, std::function<void(Event*)> callback)
+	{
+		m_EventDispatcher.PushCallback(eventType, callback);
+	}
+
+	//void WindowsWindow::Init(unsigned int height, unsigned int width, std::string title) {}
 
 	void WindowsWindow::Shutdown()
 	{

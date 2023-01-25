@@ -3,6 +3,10 @@
 #include "inks_pch.h"
 #include "Events/Event.h"
 
+#include "Events/KeyboardEvent.h"
+#include "Events/MouseEvent.h"
+#include "Events/WindowEvent.h"
+
 namespace InkStone
 {
 	class INKS_API EventDispatcher
