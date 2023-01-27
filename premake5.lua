@@ -7,6 +7,18 @@ workspace "InkStone"
 		"Release",
 		"Distrib"
 	}
+		
+	filter "configurations:Debug"
+		defines "INKS_DEBUG"
+		symbols "On"
+
+	filter "configurations:Release"
+		defines "INKS_RELEASE"
+		optimize "On"
+
+	filter "configurations:Distrib"
+		defines "INKS_DISTRIB"
+		optimize "On"
 
 outputdir = "%{cfg.buildcfg}/%{cfg.system}-%{cfg.architecture}"
 
@@ -57,18 +69,6 @@ project "InkStone"
 		{
 			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
-		
-	filter "configurations:Debug"
-		defines "INKS_DEBUG"
-		symbols "On"
-
-	filter "configurations:Release"
-		defines "INKS_RELEASE"
-		optimize "On"
-
-	filter "configurations:Distrib"
-		defines "INKS_DISTRIB"
-		optimize "On"
 
 project "Sandbox"
 	location "Sandbox"
@@ -104,15 +104,3 @@ project "Sandbox"
 		{
 			"INKS_PLATFORM_WINDOWS",
 		}
-		
-	filter "configurations:Debug"
-		defines "INKS_DEBUG"
-		symbols "On"
-
-	filter "configurations:Release"
-		defines "INKS_RELEASE"
-		optimize "On"
-
-	filter "configurations:Distrib"
-		defines "INKS_DISTRIB"
-		optimize "On"
