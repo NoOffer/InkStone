@@ -15,9 +15,9 @@ namespace InkStone
 		m_Dispatchers[eventType].push_back(dispatcherFn);
 	}
 
-	void EventDispatcher::Distpatch(EventType eventType, Event* event)
+	void EventDispatcher::Distpatch(Event* event)
 	{
-		std::vector<std::function<void(Event*)>> dispatchers = m_Dispatchers[eventType];
+		std::vector<std::function<void(Event*)>> dispatchers = m_Dispatchers[event->GetType()];
 		for (int i = 0; i < dispatchers.size(); i++) {
 			dispatchers[i](event);
 			event->m_dispatched = true;

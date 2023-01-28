@@ -16,7 +16,7 @@ namespace InkStone
 		~EventDispatcher();
 
 		void PushCallback(EventType eventType, std::function<void(Event*)> dispatcherFn);
-		void Distpatch(EventType eventType, Event* event);
+		void Distpatch(Event* event);
 
 	private:
 		std::unordered_map<EventType, std::vector<std::function<void(Event*)>>> m_Dispatchers;

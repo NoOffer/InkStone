@@ -24,7 +24,7 @@ namespace InkStone
 	//	MouseEvent       = BIT(4)
 	//};
 
-#define EVENT_TYPE(type) static inline EventType GetType() { return EventType::##type; }/*\
+#define EVENT_TYPE(type) inline virtual EventType GetType() override { return EventType::##type; }/*\
 						 virtual inline int GetType() const override { return EventType::##type; }\
 						 virtual inline const char* GetName() const override { return #type; }*/
 
@@ -32,7 +32,7 @@ namespace InkStone
 
 	struct INKS_API Event
 	{
-		static inline EventType GetType() { return EventType::None; }
+		inline virtual EventType GetType() { return EventType::None; }
 
 		bool m_dispatched = false;
 	};

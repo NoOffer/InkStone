@@ -31,34 +31,34 @@ namespace InkStone
 		glfwSetWindowUserPointer(m_Window, &m_EventDispatcher);
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) {
-			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(WindowClosed, new WindowClosedEvent());
+			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(new WindowClosedEvent());
 			});
 
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
-			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(WindowResized, new WindowResizedEvent(width, height));
+			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(new WindowResizedEvent(width, height));
 			});
 
 		glfwSetWindowFocusCallback(m_Window, [](GLFWwindow* window, int focused) {
 			if (focused == GL_TRUE)
-				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(WindowFocused, new WindowFocusedEvent());
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(new WindowFocusedEvent());
 			else
-				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(WindowLostFocus, new WindowLostFocusEvent());
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(new WindowLostFocusEvent());
 			});
 
 		glfwSetWindowPosCallback(m_Window, [](GLFWwindow* window, int xPos, int yPos) {
-			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(WindowMoved, new WindowMovedEvent(xPos, yPos));
+			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(new WindowMovedEvent(xPos, yPos));
 			});
 
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
 			switch (action) {
 			case GLFW_PRESS:
-				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(KeyPressed, new KeyPressedEvent(key));
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(new KeyPressedEvent(key));
 				break;
 			case GLFW_REPEAT:
-				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(KeyRepeated, new KeyRepeatedEvent(key));
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(new KeyRepeatedEvent(key));
 				break;
 			case GLFW_RELEASE:
-				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(KeyReleased, new KeyReleasedEvent(key));
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(new KeyReleasedEvent(key));
 				break;
 			}
 			});
@@ -66,20 +66,20 @@ namespace InkStone
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
 			switch (action) {
 			case GLFW_PRESS:
-				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(MouseButtonPressed, new MouseButtonPressedEvent(button));
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(new MouseButtonPressedEvent(button));
 				break;
 			case GLFW_RELEASE:
-				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(MouseButtonReleased, new MouseButtonReleasedEvent(button));
+				(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(new MouseButtonReleasedEvent(button));
 				break;
 			}
 			});
 
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos) {
-			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(MouseMoved, new MouseMovedEvent(xPos, yPos));
+			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(new MouseMovedEvent(xPos, yPos));
 			});
 
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset) {
-			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(MouseWheelScrolled, new MouseWheelScrolledEvent(xOffset, yOffset));
+			(*(EventDispatcher*)glfwGetWindowUserPointer(window)).Distpatch(new MouseWheelScrolledEvent(xOffset, yOffset));
 			});
 	}
 
