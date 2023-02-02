@@ -6,14 +6,14 @@
 
 namespace InkStone
 {
-	void TestFn(Event*)
-	{
-		INKS_INFO("1");
-	}
+	//void TestFn(Event*)
+	//{
+	//	INKS_INFO("1");
+	//}
 
 	Application::Application() {
 		m_Window = std::unique_ptr<Window>(Window::Create());
-		m_Window->SetEventCallback(MouseMoved, TestFn);
+		//m_Window->SetEventCallback(MouseMoved, TestFn);
 	}
 
 	Application::~Application() {
