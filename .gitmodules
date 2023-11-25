@@ -1,6 +1,0 @@
-[submodule "InkStone/vendor/spdlog"]
-	path = InkStone/vendor/spdlog
-	url = https://github.com/gabime/spdlog
-[submodule "InkStone/vendor/GLFW"]
-	path = InkStone/vendor/GLFW
-	url = https://github.com/thecherno/glfw
