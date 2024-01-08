@@ -17,8 +17,13 @@ project "InkStone"
 	objdir ("bin-obj/%{prj.name}/" .. outputdir)
 
 	files{
+		"%{prj.name}/%{prj.name}.h",
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp"
+	}
+
+	includedirs{
+		"%{prj.name}/src"
 	}
 
 	filter "system:windows"
@@ -57,7 +62,7 @@ project "Sandbox"
 	}
 
 	includedirs{
-		"InkStone/src"
+		"InkStone"
 	}
 
 	links{

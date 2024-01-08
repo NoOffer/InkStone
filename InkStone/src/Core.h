@@ -9,3 +9,5 @@
 #else
 #error Platform Not Supported
 #endif // NXTN_PLATFORM_WINDOWS
+
+#define BITMASK(x) (1 << x)
