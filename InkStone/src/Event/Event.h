@@ -1,8 +1,8 @@
 #pragma once
 
-#include "InkStone/Core.h"
+#include "Core.h"
 
-#include <string>
+//#include "pch.h"
 
 namespace NXTN {
 	enum class EventType
@@ -29,7 +29,7 @@ namespace NXTN {
 	public:
 		virtual EventType GetEventType() const = 0;
 		virtual EventFlag GetEventFlag() const = 0;
-		virtual std::string ToString() const = 0;
+		//virtual std::string ToString() const = 0;
 
 	protected:
 		bool m_Handled = false;
