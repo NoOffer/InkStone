@@ -16,20 +16,36 @@ project "InkStone"
 	targetdir ("bin/%{prj.name}/" .. outputdir)
 	objdir ("bin-obj/%{prj.name}/" .. outputdir)
 
+	pchheader "pch.h"
+	pchsource "%{prj.name}/src/pch.cpp"
+
 	files{
 		"%{prj.name}/%{prj.name}.h",
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp"
 	}
 
+	syslibdirs{
+		"%{prj.name}/include/GLFW/lib"
+	}
+
 	includedirs{
-		"%{prj.name}/src"
+		"%{prj.name}/src",
+		"%{prj.name}/include/GLFW/include"
+	}
+
+	links{
+		"opengl32.lib",
+		"glfw3.lib"
 	}
 
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
+
+		staticruntime "off"
+		runtime "Release"
 
 		defines{
 			"NXTN_PLATFORM_WINDOWS",
