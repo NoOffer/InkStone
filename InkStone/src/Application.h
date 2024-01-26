@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "Window.h"
 
 namespace NXTN {
 	class NXTN_API Application
@@ -10,6 +11,11 @@ namespace NXTN {
 		virtual ~Application();
 
 		void Run();
+
+	private:
+		bool m_Paused = false;
+
+		std::unique_ptr<Window> m_Window;
 	};
 
 	Application* CreateApplication();

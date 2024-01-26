@@ -1,12 +1,25 @@
+#include "pch.h"
+
 #include "Application.h"
 
 namespace NXTN {
-	Application::Application() {}
+	Application::Application()
+	{
+		m_Window = std::unique_ptr<Window>(Window::Create());
 
-	Application::~Application() {}
+		Log::Info("InkStone Engine successfully initialized.");
+	}
+
+	Application::~Application()
+	{
+
+	}
 
 	void Application::Run()
 	{
-		while (true);
+		while (!m_Paused)
+		{
+			m_Window->Update();
+		}
 	}
 }
