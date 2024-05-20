@@ -37,6 +37,11 @@ namespace NXTN {
 	void WindowsWindow::Update()
 	{
 		glfwPollEvents();
+
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+
 		glfwSwapBuffers(m_Window);
 	}
 

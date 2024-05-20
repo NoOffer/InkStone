@@ -13,8 +13,8 @@ project "InkStone"
 	kind "SharedLib"
 	language "C++"
 
-	targetdir ("bin/%{prj.name}/" .. outputdir)
-	objdir ("bin-obj/%{prj.name}/" .. outputdir)
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-obj/" .. outputdir .. "/%{prj.name}")
 
 	pchheader "pch.h"
 	pchsource "%{prj.name}/src/pch.cpp"
@@ -25,13 +25,14 @@ project "InkStone"
 		"%{prj.name}/src/**.cpp"
 	}
 
-	syslibdirs{
-		"%{prj.name}/include/GLFW/lib"
-	}
-
 	includedirs{
 		"%{prj.name}/src",
-		"%{prj.name}/include/GLFW/include"
+		"%{prj.name}/include/GLFW/include",
+		"%{prj.name}/include/GLAD/include"
+	}
+
+	syslibdirs{
+		"%{prj.name}/include/GLFW/lib"
 	}
 
 	links{
@@ -53,24 +54,24 @@ project "InkStone"
 		}
 
 		postbuildcommands{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/Sandbox/" .. outputdir)
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .."/Sandbox")
 		}
 
 	filter "configurations:Debug"
 		defines "NXTN_DEBUG"
-		symbols "On"
+		buildoptions "/MDd"
 
 	filter "configurations:Release"
 		defines "NXTN_RELEASE"
-		optimize "On"
+		buildoptions "/MD"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
 	
-	targetdir ("bin/%{prj.name}/" .. outputdir)
-	objdir ("bin-obj/%{prj.name}/" .. outputdir)
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-obj/" .. outputdir .. "/%{prj.name}")
 
 	files{
 		"%{prj.name}/src/**.h",
@@ -96,8 +97,8 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "NXTN_DEBUG"
-		symbols "On"
+		buildoptions "/MDd"
 
 	filter "configurations:Release"
 		defines "NXTN_RELEASE"
-		optimize "On"
+		buildoptions "/MD"
