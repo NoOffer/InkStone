@@ -9,6 +9,7 @@ workspace "InkStone"
 outputdir = "%{cfg.architecture}/%{cfg.buildcfg}"
 
 include "InkStone/include/GLAD"
+include "InkStone/include/imgui"
 
 project "InkStone"
 	location "InkStone"
@@ -30,7 +31,8 @@ project "InkStone"
 	includedirs{
 		"%{prj.name}/src",
 		"%{prj.name}/include/GLFW/include",
-		"%{prj.name}/include/GLAD/include"
+		"%{prj.name}/include/GLAD/include",
+		"%{prj.name}/include/imgui/"
 	}
 
 	syslibdirs{
@@ -40,7 +42,8 @@ project "InkStone"
 	links{
 		"opengl32.lib",
 		"glfw3.lib",
-		"GLAD"
+		"GLAD",
+		"ImGUI"
 	}
 
 	filter "system:windows"
