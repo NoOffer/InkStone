@@ -41,14 +41,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>bin\x86_64\DebugGLAD\</OutDir>
-    <IntDir>bin-obj\x86_64\DebugGLAD\</IntDir>
+    <OutDir>bin\x86_64\Debug\GLAD\</OutDir>
+    <IntDir>bin-obj\x86_64\Debug\GLAD\</IntDir>
     <TargetName>GLAD</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>bin\x86_64\ReleaseGLAD\</OutDir>
-    <IntDir>bin-obj\x86_64\ReleaseGLAD\</IntDir>
+    <OutDir>bin\x86_64\Release\GLAD\</OutDir>
+    <IntDir>bin-obj\x86_64\Release\GLAD\</IntDir>
     <TargetName>GLAD</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>

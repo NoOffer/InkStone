@@ -8,6 +8,8 @@ workspace "InkStone"
 
 outputdir = "%{cfg.architecture}/%{cfg.buildcfg}"
 
+include "InkStone/include/GLAD"
+
 project "InkStone"
 	location "InkStone"
 	kind "SharedLib"
@@ -22,7 +24,7 @@ project "InkStone"
 	files{
 		"%{prj.name}/%{prj.name}.h",
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
 	}
 
 	includedirs{
@@ -37,7 +39,8 @@ project "InkStone"
 
 	links{
 		"opengl32.lib",
-		"glfw3.lib"
+		"glfw3.lib",
+		"GLAD"
 	}
 
 	filter "system:windows"
