@@ -53,7 +53,8 @@ project "InkStone"
 
 		defines{
 			"NXTN_PLATFORM_WINDOWS",
-			"NXTN_BUILD_DLL"
+			"NXTN_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands{
