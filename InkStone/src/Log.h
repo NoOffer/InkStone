@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Core.h"
+
 namespace NXTN {
-	class Log
+	class NXTN_API Log
 	{
 	public:
 		template <typename... Args>

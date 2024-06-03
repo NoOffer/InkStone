@@ -1,9 +1,9 @@
 #pragma once
 
-#include "pch.h"
+#include "Core.h"
 
 namespace NXTN {
-	class  NXTN_API Window
+	class NXTN_API Window
 	{
 	public:
 		virtual ~Window() {}
