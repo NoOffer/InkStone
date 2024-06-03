@@ -8,25 +8,36 @@ namespace NXTN {
 	Window* Window::Create(unsigned int width, unsigned int height, std::string title)
 	{
 		return new WindowsWindow(width, height, title);
-		;
 	}
 
 	WindowsWindow::WindowsWindow(unsigned int width, unsigned int height, std::string title)
 		: m_Width(width), m_Height(height), m_Title(title)
 	{
+		// GLFW initialization
 		if (!s_GLFWInitialized)
 		{
 			if (!glfwInit())
 			{
-				Log::Error("GLFW Initialization Failed");
+				Log::Error("Failed To Initialize GLFW");
 				NXTN_ERROR;
 			}
 			s_GLFWInitialized = true;
 		}
-
 		m_Window = glfwCreateWindow((int)width, (int)height, title.c_str(), nullptr, nullptr);
+		if (!m_Window)
+		{
+			Log::Error("Failed To Create Window (Title: %s)", title);
+			NXTN_ERROR;
+		}
 		glfwMakeContextCurrent(m_Window);
 		glfwSwapInterval(m_VSync ? 1 : 0);
+
+		// GLAD initialization
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+		{
+			Log::Error("Failed To Initialize GLAD");
+			NXTN_ERROR;
+		}
 	}
 
 	WindowsWindow::~WindowsWindow()
