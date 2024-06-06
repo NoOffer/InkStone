@@ -16,4 +16,3 @@ namespace NXTN {
 		static Input* s_Instance;
 	};
 }
-

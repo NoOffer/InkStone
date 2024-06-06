@@ -18,7 +18,9 @@ namespace NXTN {
 		inline unsigned int GetHeight() const { return m_Height; }
 
 		void SetVSync(bool enabled) override;
-		inline bool IsVSync() const override { return m_VSync; };
+		inline bool IsVSync() const override { return m_VSync; }
+
+		inline virtual void* GetNativeWindow() const override { return m_Window; }
 
 	private:
 		GLFWwindow* m_Window;
