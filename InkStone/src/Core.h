@@ -1,5 +1,7 @@
 #pragma once
 
+#include "pch.h"
+
 // NXTN_API (__declspec)
 #ifdef NXTN_PLATFORM_WINDOWS
 #ifdef NXTN_BUILD_DLL

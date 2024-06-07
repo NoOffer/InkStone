@@ -20,7 +20,3 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-
-// Custom includes
-#include "Core.h"
-#include "Log.h"
