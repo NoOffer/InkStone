@@ -2,6 +2,8 @@
 
 #include "Core.h"
 
+#include "Log.h"
+
 namespace NXTN {
 	class NXTN_API Window
 	{
