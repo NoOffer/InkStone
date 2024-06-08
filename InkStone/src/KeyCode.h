@@ -3,7 +3,19 @@
 /* -------- The Unknown Key ------- */
 #define NXTN_KEY_UNKNOWN            -1
 
-/* --------- Printable Key -------- */
+/* --------- Mouse Buttons -------- */
+#define NXTN_MOUSE_BUTTON_0         0
+#define NXTN_MOUSE_BUTTON_1         1
+#define NXTN_MOUSE_BUTTON_2         2
+#define NXTN_MOUSE_BUTTON_3         3
+#define NXTN_MOUSE_BUTTON_4         4
+#define NXTN_MOUSE_BUTTON_5         5
+#define NXTN_MOUSE_BUTTON_6         6
+#define NXTN_MOUSE_BUTTON_LEFT      NXTN_MOUSE_BUTTON_0
+#define NXTN_MOUSE_BUTTON_RIGHT     NXTN_MOUSE_BUTTON_1
+#define NXTN_MOUSE_BUTTON_MIDDLE    NXTN_MOUSE_BUTTON_2
+
+/* --------- Printable Keys -------- */
 /* Numbers - Top Row */
 #define NXTN_KEY_0                  30
 #define NXTN_KEY_1                  31
