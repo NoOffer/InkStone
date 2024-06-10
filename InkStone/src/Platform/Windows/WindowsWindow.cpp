@@ -59,6 +59,7 @@ namespace NXTN {
 	void WindowsWindow::SetVSync(bool enabled)
 	{
 		glfwSwapInterval(enabled ? 1 : 0);
+
 		m_VSync = enabled;
 	}
 }
