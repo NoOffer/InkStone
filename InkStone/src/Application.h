@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Window.h"
+#include "LayerStack.h"
 
 namespace NXTN {
 	class NXTN_API Application
@@ -15,6 +16,8 @@ namespace NXTN {
 		bool m_Paused = false;
 
 		std::unique_ptr<Window> m_Window;
+
+		LayerStack m_LayerStack;
 	};
 
 	Application* CreateApplication();

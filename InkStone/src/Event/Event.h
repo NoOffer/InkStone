@@ -14,7 +14,7 @@ namespace NXTN {
 		MouseButtonPressed, MouseButtonReleased, MouseScroll, MouseMovement
 	};
 
-	enum EventFlag
+	enum class EventFlag
 	{
 		None = 0,
 		Application    = BITMASK(0),

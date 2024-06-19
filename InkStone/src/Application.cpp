@@ -19,6 +19,8 @@ namespace NXTN {
 	{
 		while (!m_Paused)
 		{
+			m_LayerStack.Update();
+
 			m_Window->Update();
 		}
 	}
