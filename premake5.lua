@@ -1,5 +1,6 @@
 workspace "InkStone"
 	architecture "x64"
+	startproject "Sandbox"
 
 	configurations{
 		"Debug",
@@ -13,8 +14,10 @@ include "InkStone/include/imgui"
 
 project "InkStone"
 	location "InkStone"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-obj/" .. outputdir .. "/%{prj.name}")
@@ -34,25 +37,20 @@ project "InkStone"
 		"%{prj.name}/include/GLAD/include",
 		"%{prj.name}/include/imgui/"
 	}
-
+	
 	syslibdirs{
 		"%{prj.name}/include/GLFW/lib"
 	}
 
 	links{
 		"opengl32.lib",
-		"glfw3.lib",
+		"glfw3_mt.lib",
 		"GLAD",
 		"ImGUI"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
-
-		staticruntime "off"
-		runtime "Release"
 
 		defines{
 			"NXTN_PLATFORM_WINDOWS",
@@ -60,22 +58,22 @@ project "InkStone"
 			"GLFW_INCLUDE_NONE"
 		}
 
-		postbuildcommands{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .."/Sandbox")
-		}
-
 	filter "configurations:Debug"
 		defines "NXTN_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "NXTN_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-obj/" .. outputdir .. "/%{prj.name}")
@@ -94,8 +92,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines{
@@ -104,8 +100,8 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "NXTN_DEBUG"
-		buildoptions "/MDd"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "NXTN_RELEASE"
-		buildoptions "/MD"
+		optimize "on"
