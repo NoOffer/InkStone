@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Window.h"
+#include "Graphics/Window.h"
 #include "LayerStack.h"
 
 namespace NXTN {

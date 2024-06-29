@@ -1,16 +1,16 @@
 #pragma once
 
-#include "Window.h"
+#include "Graphics/Window.h"
 
 #include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace NXTN {
-	class WindowsWindow : public Window
+	class OpenGLWindow : public Window
 	{
 	public:
-		WindowsWindow(unsigned int width, unsigned int height, std::string title);
-		virtual ~WindowsWindow();
+		OpenGLWindow(unsigned int width, unsigned int height, std::string title, bool vSync = false);
+		virtual ~OpenGLWindow();
 
 		void Update() override;
 
@@ -18,7 +18,6 @@ namespace NXTN {
 		inline unsigned int GetHeight() const { return m_Height; }
 
 		void SetVSync(bool enabled) override;
-		inline bool IsVSync() const override { return m_VSync; }
 
 		inline virtual void* GetNativeWindow() const override { return m_Window; }
 
@@ -27,7 +26,6 @@ namespace NXTN {
 
 		unsigned int m_Width, m_Height;
 		std::string m_Title;
-		bool m_VSync = true;
 	};
 }
 

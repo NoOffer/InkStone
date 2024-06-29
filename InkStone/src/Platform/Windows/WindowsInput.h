@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Input.h"
+#include "Platform/Input.h"
 
 #include <GLFW/glfw3.h>
 

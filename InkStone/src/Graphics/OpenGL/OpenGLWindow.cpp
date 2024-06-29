@@ -1,16 +1,16 @@
 #include "pch.h"
 
-#include "WindowsWindow.h"
+#include "OpenGLWindow.h"
 
 namespace NXTN {
 	static bool s_GLFWInitialized = false;
 
 	Window* Window::Create(unsigned int width, unsigned int height, std::string title)
 	{
-		return new WindowsWindow(width, height, title);
+		return new OpenGLWindow(width, height, title);
 	}
 
-	WindowsWindow::WindowsWindow(unsigned int width, unsigned int height, std::string title)
+	OpenGLWindow::OpenGLWindow(unsigned int width, unsigned int height, std::string title, bool vSync)
 		: m_Width(width), m_Height(height), m_Title(title)
 	{
 		// GLFW initialization
@@ -23,6 +23,8 @@ namespace NXTN {
 			}
 			s_GLFWInitialized = true;
 		}
+
+		// Create window and context
 		m_Window = glfwCreateWindow((int)width, (int)height, title.c_str(), nullptr, nullptr);
 		if (!m_Window)
 		{
@@ -30,6 +32,9 @@ namespace NXTN {
 			NXTN_ERROR;
 		}
 		glfwMakeContextCurrent(m_Window);
+
+		// V Sync
+		m_VSync = vSync;
 		glfwSwapInterval(m_VSync ? 1 : 0);
 
 		// GLAD initialization
@@ -40,12 +45,12 @@ namespace NXTN {
 		}
 	}
 
-	WindowsWindow::~WindowsWindow()
+	OpenGLWindow::~OpenGLWindow()
 	{
 		glfwDestroyWindow(m_Window);
 	}
 
-	void WindowsWindow::Update()
+	void OpenGLWindow::Update()
 	{
 		glfwPollEvents();
 
@@ -56,7 +61,7 @@ namespace NXTN {
 		glfwSwapBuffers(m_Window);
 	}
 
-	void WindowsWindow::SetVSync(bool enabled)
+	void OpenGLWindow::SetVSync(bool enabled)
 	{
 		glfwSwapInterval(enabled ? 1 : 0);
 
