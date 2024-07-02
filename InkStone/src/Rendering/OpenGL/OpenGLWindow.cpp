@@ -18,7 +18,7 @@ namespace NXTN {
 		{
 			if (!glfwInit())
 			{
-				Log::Error("Failed To Initialize GLFW");
+				Log::Error("Failed to initialize GLFW");
 				NXTN_ERROR;
 			}
 			s_GLFWInitialized = true;
@@ -28,7 +28,7 @@ namespace NXTN {
 		m_Window = glfwCreateWindow((int)width, (int)height, title.c_str(), nullptr, nullptr);
 		if (!m_Window)
 		{
-			Log::Error("Failed To Create Window (Title: %s)", title);
+			Log::Error("Failed to create window (Title: %s)", title);
 			NXTN_ERROR;
 		}
 		glfwMakeContextCurrent(m_Window);
@@ -40,9 +40,15 @@ namespace NXTN {
 		// GLAD initialization
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
-			Log::Error("Failed To Initialize GLAD");
+			Log::Error("Failed to initialize GLAD");
 			NXTN_ERROR;
 		}
+
+		Log::Info(
+			"OpenGL context Initialized\n		  ©À- Hardware:       %s\n		  ©¸- OpenGL Version: %s",
+			glGetString(GL_RENDERER),
+			glGetString(GL_VERSION)
+		);
 	}
 
 	OpenGLWindow::~OpenGLWindow()
@@ -53,10 +59,6 @@ namespace NXTN {
 	void OpenGLWindow::Update()
 	{
 		glfwPollEvents();
-
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
 
 		glfwSwapBuffers(m_Window);
 	}

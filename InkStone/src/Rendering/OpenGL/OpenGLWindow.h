@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Graphics/Window.h"
+#include "Rendering/Window.h"
 
 #include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace NXTN {
-	class OpenGLWindow : public Window
+	class NXTN_API OpenGLWindow : public Window
 	{
 	public:
 		OpenGLWindow(unsigned int width, unsigned int height, std::string title, bool vSync = false);
