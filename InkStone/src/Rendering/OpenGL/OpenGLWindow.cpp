@@ -45,7 +45,7 @@ namespace NXTN {
 		}
 
 		Log::Info(
-			"OpenGL context Initialized\n		  ©À- Hardware:       %s\n		  ©¸- OpenGL Version: %s",
+			"OpenGL context Initialized\n		   ©À- Hardware:       %s\n		   ©¸- OpenGL Version: %s",
 			glGetString(GL_RENDERER),
 			glGetString(GL_VERSION)
 		);

@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Rendering/Window.h"
 #include "LayerStack.h"
+#include "Rendering/Window.h"
+#include "Rendering/RenderingDataBuffer.h"
 
 namespace NXTN {
 	class NXTN_API Application
@@ -19,7 +20,9 @@ namespace NXTN {
 
 		LayerStack m_LayerStack;
 
-		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		unsigned int m_VertexArray;
+		std::unique_ptr<VertexBuffer> vertexBuffer;
+		std::unique_ptr<IndexBuffer> indexBuffer;
 	};
 
 	Application* CreateApplication();
