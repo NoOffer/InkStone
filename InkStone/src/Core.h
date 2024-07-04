@@ -19,9 +19,9 @@
 
 // Error
 #ifdef NXTN_DEBUG
-	#define NXTN_ERROR __debugbreak()
+	#define NXTN_ERROR __debugbreak();
 #else
-	#define NXTN_ERROR exit(-1)
+	#define NXTN_ERROR exit(-1);
 #endif // NXTN_DEBUG
 
 #define BITMASK(x) (1 << x)

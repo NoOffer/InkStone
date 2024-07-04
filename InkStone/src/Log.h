@@ -46,6 +46,8 @@ namespace NXTN {
 			printf(msg, args...);
 			printf("\n");
 			mtx.unlock();
+
+			NXTN_ERROR;
 		}
 
 	private:
