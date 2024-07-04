@@ -16,7 +16,7 @@ namespace NXTN {
 
 		virtual unsigned int GetCount() const = 0;
 
-		static VertexBuffer* Create(const float* vertices, const unsigned int count);
+		static VertexBuffer* Create(const float* vertices, unsigned int count);
 	};
 
 	class NXTN_API IndexBuffer
@@ -29,6 +29,6 @@ namespace NXTN {
 
 		virtual unsigned int GetCount() const = 0;
 
-		static IndexBuffer* Create(const unsigned int* vertices, const unsigned int count);
+		static IndexBuffer* Create(const unsigned int* vertices, unsigned int count);
 	};
 }

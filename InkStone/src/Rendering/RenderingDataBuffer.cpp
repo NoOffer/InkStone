@@ -3,7 +3,7 @@
 #include "OpenGL/OpenGLDataBuffer.h"
 
 namespace NXTN {
-	VertexBuffer* VertexBuffer::Create(const float* vertices, const unsigned int count)
+	VertexBuffer* VertexBuffer::Create(const float* vertices, unsigned int count)
 	{
 		switch (Renderer::GetRenderingAPI())
 		{
@@ -21,7 +21,7 @@ namespace NXTN {
 		return nullptr;
 	}
 
-	IndexBuffer* IndexBuffer::Create(const unsigned int* indices, const unsigned int count)
+	IndexBuffer* IndexBuffer::Create(const unsigned int* indices, unsigned int count)
 	{
 		switch (Renderer::GetRenderingAPI())
 		{

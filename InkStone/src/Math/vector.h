@@ -323,62 +323,62 @@ struct vec3
 	}
 };
 
-//struct vec3i
-//{
-//	int x = 0;
-//	int y = 0;
-//	int z = 0;
-//
-//	inline vec3i() : x(0), y(0), z(0) {}
-//
-//	inline vec3i(int a) : x(a), y(a), z(a) {}
-//
-//	inline vec3i(int x0, int y0, int z0) : x(x0), y(y0), z(z0) {}
-//
-//	inline vec3i(vec2i v, int z0) : x(v.x), y(v.y), z(z0) {}
-//
-//	inline vec3i(const vec3i& v) : x(v.x), y(v.y), z(v.z) {}
-//
-//	inline vec3i operator+ (const vec3i& operand)
-//	{
-//		return vec3i{ x + operand.x, y + operand.y, z + operand.z };
-//	}
-//
-//	inline vec3i operator- ()
-//	{
-//		return vec3i{ -x, -y, -z };
-//	}
-//
-//	inline vec3i operator- (const vec3i& operand)
-//	{
-//		return vec3i{ x - operand.x, y - operand.y, z - operand.z };
-//	}
-//
-//	inline vec3i operator* (const vec3i& operand)
-//	{
-//		return vec3i{ x * operand.x, y * operand.y, z * operand.z };
-//	}
-//
-//	inline vec3i operator* (int operand)
-//	{
-//		return vec3i{ x * operand, y * operand, z * operand };
-//	}
-//
-//	//inline vec3 operator/ (const vec3& operand)
-//	//{
-//	//	return vec3{ x / operand.x, y / operand.y, z / operand.z };
-//	//}
-//
-//	inline vec3i operator/ (int operand)
-//	{
-//		return vec3i{ x / operand, y / operand, z / operand };
-//	}
-//
-//	inline vec3i operator% (int operand)
-//	{
-//		return vec3i{ x % operand, y % operand, z % operand };
-//	}
-//};
+struct vec3i
+{
+	int x = 0;
+	int y = 0;
+	int z = 0;
+
+	inline vec3i() : x(0), y(0), z(0) {}
+
+	inline vec3i(int a) : x(a), y(a), z(a) {}
+
+	inline vec3i(int x0, int y0, int z0) : x(x0), y(y0), z(z0) {}
+
+	inline vec3i(vec2i v, int z0) : x(v.x), y(v.y), z(z0) {}
+
+	inline vec3i(const vec3i& v) : x(v.x), y(v.y), z(v.z) {}
+
+	inline vec3i operator+ (const vec3i& operand)
+	{
+		return vec3i{ x + operand.x, y + operand.y, z + operand.z };
+	}
+
+	inline vec3i operator- ()
+	{
+		return vec3i{ -x, -y, -z };
+	}
+
+	inline vec3i operator- (const vec3i& operand)
+	{
+		return vec3i{ x - operand.x, y - operand.y, z - operand.z };
+	}
+
+	inline vec3i operator* (const vec3i& operand)
+	{
+		return vec3i{ x * operand.x, y * operand.y, z * operand.z };
+	}
+
+	inline vec3i operator* (int operand)
+	{
+		return vec3i{ x * operand, y * operand, z * operand };
+	}
+
+	//inline vec3 operator/ (const vec3& operand)
+	//{
+	//	return vec3{ x / operand.x, y / operand.y, z / operand.z };
+	//}
+
+	inline vec3i operator/ (int operand)
+	{
+		return vec3i{ x / operand, y / operand, z / operand };
+	}
+
+	inline vec3i operator% (int operand)
+	{
+		return vec3i{ x % operand, y % operand, z % operand };
+	}
+};
 
 struct vec4
 {

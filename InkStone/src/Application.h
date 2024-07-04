@@ -19,10 +19,6 @@ namespace NXTN {
 		std::unique_ptr<Window> m_Window;
 
 		LayerStack m_LayerStack;
-
-		unsigned int m_VertexArray;
-		std::unique_ptr<VertexBuffer> vertexBuffer;
-		std::unique_ptr<IndexBuffer> indexBuffer;
 	};
 
 	Application* CreateApplication();
