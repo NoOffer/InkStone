@@ -3,7 +3,7 @@
 #include "Log.h"
 
 namespace NXTN {
-	class NXTN_API Window
+	class Window
 	{
 	public:
 		virtual ~Window() {}

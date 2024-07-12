@@ -6,7 +6,7 @@
 #include "Renderer.h"
 
 namespace NXTN {
-	class NXTN_API VertexBuffer
+	class VertexBuffer
 	{
 	public:
 		virtual ~VertexBuffer() {}
@@ -19,7 +19,7 @@ namespace NXTN {
 		static VertexBuffer* Create(const float* vertices, unsigned int count);
 	};
 
-	class NXTN_API IndexBuffer
+	class IndexBuffer
 	{
 	public:
 		virtual ~IndexBuffer() {}

@@ -3,7 +3,7 @@
 #include "Event.h"
 
 namespace NXTN {
-	class NXTN_API KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 	public:
 		inline int GetKeyCode() { return m_KeyCode; }
@@ -16,7 +16,7 @@ namespace NXTN {
 		int m_KeyCode;
 	};
 
-	class NXTN_API KeyPressEvent : public KeyEvent
+	class KeyPressEvent : public KeyEvent
 	{
 	public:
 		KeyPressEvent(int keyCode, int repeatCount) : KeyEvent(keyCode), m_RepeatCount(repeatCount) {};
@@ -29,7 +29,7 @@ namespace NXTN {
 		int m_RepeatCount;
 	};
 
-	class NXTN_API KeyReleaseEvent : public KeyEvent
+	class KeyReleaseEvent : public KeyEvent
 	{
 	public:
 		KeyReleaseEvent(int keyCode) : KeyEvent(keyCode) {};

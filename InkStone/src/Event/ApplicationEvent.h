@@ -3,7 +3,7 @@
 #include "Event.h"
 
 namespace NXTN {
-	class NXTN_API WindowCloseEvent : public Event
+	class WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() {};
@@ -13,7 +13,7 @@ namespace NXTN {
 		virtual EventType GetEventType() const override { return EventType::WindowClosed; }
 	};
 
-	class NXTN_API WindowResizeEvent : public Event
+	class WindowResizeEvent : public Event
 	{
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height) :m_NewWidth(width), m_NewHeight(height) {};
@@ -30,7 +30,7 @@ namespace NXTN {
 		unsigned int m_NewWidth, m_NewHeight;
 	};
 
-	class NXTN_API ApplicationUpdateEvent : public Event
+	class ApplicationUpdateEvent : public Event
 	{
 	public:
 		ApplicationUpdateEvent() {};
@@ -40,7 +40,7 @@ namespace NXTN {
 		virtual EventType GetEventType() const override { return EventType::AppUpdate; }
 	};
 
-	class NXTN_API ApplicationRenderEvent : public Event
+	class ApplicationRenderEvent : public Event
 	{
 	public:
 		ApplicationRenderEvent() {};

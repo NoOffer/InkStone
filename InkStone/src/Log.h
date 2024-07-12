@@ -3,7 +3,7 @@
 #include "Core.h"
 
 namespace NXTN {
-	class NXTN_API Log
+	class Log
 	{
 	public:
 		template <typename... Args>

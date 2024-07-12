@@ -24,7 +24,7 @@ namespace NXTN {
 		Window         = BITMASK(3)
 	};
 
-	class NXTN_API Event
+	class Event
 	{
 	public:
 		virtual EventType GetEventType() const = 0;

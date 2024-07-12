@@ -16,7 +16,7 @@ namespace NXTN {
 		}
 	}
 
-	class NXTN_API OpenGLVertexArray : public VertexArray
+	class OpenGLVertexArray : public VertexArray
 	{
 	public:
 		OpenGLVertexArray(const std::shared_ptr<VertexBuffer> vertexBuffer, const VertexArrayLayout& layout);

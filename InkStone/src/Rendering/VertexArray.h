@@ -27,7 +27,7 @@ namespace NXTN {
 		std::string name;
 	};
 
-	class NXTN_API VertexArrayLayout
+	class VertexArrayLayout
 	{
 	public:
 		VertexArrayLayout();
@@ -43,7 +43,7 @@ namespace NXTN {
 		unsigned int m_Stride;  // The sum of the sizes of all attributes (The size of each vertex)
 	};
 
-	class NXTN_API VertexArray
+	class VertexArray
 	{
 	public:
 		virtual ~VertexArray() {}

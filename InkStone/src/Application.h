@@ -6,7 +6,7 @@
 #include "Rendering/Window.h"
 
 namespace NXTN {
-	class NXTN_API Application
+	class Application
 	{
 	public:
 		Application();

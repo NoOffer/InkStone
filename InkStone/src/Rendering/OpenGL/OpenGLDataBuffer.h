@@ -6,7 +6,7 @@
 
 namespace NXTN {
 	// Vertex buffer
-	class NXTN_API OpenGLVertexBuffer : public VertexBuffer
+	class OpenGLVertexBuffer : public VertexBuffer
 	{
 	public:
 		OpenGLVertexBuffer(const float* vertices, const unsigned int count);
@@ -23,7 +23,7 @@ namespace NXTN {
 	};
 
 	// Index buffer
-	class NXTN_API OpenGLIndexBuffer : public IndexBuffer
+	class OpenGLIndexBuffer : public IndexBuffer
 	{
 	public:
 		OpenGLIndexBuffer(const unsigned int* indices, const unsigned int count);

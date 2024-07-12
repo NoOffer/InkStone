@@ -4,7 +4,7 @@
 
 namespace NXTN {
 
-	class NXTN_API LayerStack
+	class LayerStack
 	{
 	public:
 		LayerStack();

@@ -3,7 +3,7 @@
 #include "Core.h"
 
 namespace NXTN {
-	class NXTN_API Input
+	class Input
 	{
 	public:
 		static bool IsKeyPressed(int keycode)

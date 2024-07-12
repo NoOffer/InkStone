@@ -2,17 +2,13 @@
 
 #include "pch.h"
 
-// NXTN_API (__declspec)
+// (__declspec)
 #ifdef NXTN_PLATFORM_WINDOWS
-	#ifdef NXTN_DYNAMIC_LINK
-		#ifdef NXTN_BUILD_DLL
-			#define NXTN_API __declspec(dllexport)
-		#else
-			#define NXTN_API __declspec(dllimport)
-		#endif // NXTN_BUILD_DLL
-	#else
-		#define NXTN_API 
-	#endif
+	//#ifdef NXTN_BUILD_DLL
+	//	#define NXTN_API __declspec(dllexport)
+	//#else
+	//	#define NXTN_API __declspec(dllimport)
+	//#endif
 #else
 	#error Platform Not Supported
 #endif // NXTN_PLATFORM_WINDOWS

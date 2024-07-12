@@ -8,7 +8,7 @@ namespace NXTN {
 		None = 0, OpenGL
 	};
 
-	class NXTN_API Renderer
+	class Renderer
 	{
 	public:
 		static inline RenderingAPI GetRenderingAPI() { return s_RenderingAPI; }

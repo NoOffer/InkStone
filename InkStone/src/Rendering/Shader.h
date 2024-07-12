@@ -7,7 +7,7 @@
 #include <GLAD/glad.h>
 
 namespace NXTN {
-	class NXTN_API Shader
+	class Shader
 	{
 	public:
 		Shader(const std::string& vertexSrc, const std::string& fragmentSrc);
