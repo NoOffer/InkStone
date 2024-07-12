@@ -1,8 +1,9 @@
 #pragma once
 
 #include "LayerStack.h"
-#include "Rendering/Window.h"
 #include "Rendering/RenderingDataBuffer.h"
+#include "Rendering/VertexArray.h"
+#include "Rendering/Window.h"
 
 namespace NXTN {
 	class NXTN_API Application

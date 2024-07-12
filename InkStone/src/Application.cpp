@@ -17,13 +17,10 @@ namespace NXTN {
 
 	void Application::Run()
 	{
-		unsigned int vertexArray;
-		std::unique_ptr<VertexBuffer> vertexBuffer;
-		std::unique_ptr<IndexBuffer> indexBuffer;
 		// Temporary draw data
-		// Vertex array
-		glGenVertexArrays(1, &vertexArray);
-		glBindVertexArray(vertexArray);
+		std::shared_ptr<VertexArray> vertexArray;
+		std::shared_ptr<VertexBuffer> vertexBuffer;
+		std::shared_ptr<IndexBuffer> indexBuffer;
 
 		// Vertex buffer
 		float vertices[9] = {
@@ -33,14 +30,15 @@ namespace NXTN {
 		};
 		vertexBuffer.reset(VertexBuffer::Create(vertices, 9));
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 12, nullptr);
+		// Vertex array
+		VertexArrayLayout layout{ {ShaderDataType::Float, 3, "Vertex Position"} };
+		vertexArray.reset(VertexArray::Create(vertexBuffer, layout));
 
 		// Index buffer
 		unsigned int indices[3] = { 0, 1, 2 };
 		indexBuffer.reset(IndexBuffer::Create(indices, 3));
 
-		// Game loop
+		// ------------------------------------------------------------------------------------------------------------------ Game loop
 		while (!m_Paused)
 		{
 			m_LayerStack.Update();
@@ -50,10 +48,12 @@ namespace NXTN {
 
 			glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
 
-			glBindVertexArray(vertexArray);
+			vertexArray->Bind();
+			indexBuffer->Bind();
 			glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			m_Window->Update();
 		}
+		// ------------------------------------------------------------------------------------------------------------------ Game loop
 	}
 }
