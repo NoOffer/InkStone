@@ -7,10 +7,10 @@ namespace NXTN {
 	{
 		switch (Renderer::GetRenderingAPI())
 		{
-		case RenderingAPI::None:
+		case GraphicsAPI::None:
 			Log::Error("No rendering API specified");
 			break;
-		case RenderingAPI::OpenGL:
+		case GraphicsAPI::OpenGL:
 			return (VertexBuffer*) new OpenGLVertexBuffer(vertices, count);
 			break;
 		default:
@@ -25,10 +25,10 @@ namespace NXTN {
 	{
 		switch (Renderer::GetRenderingAPI())
 		{
-		case RenderingAPI::None:
+		case GraphicsAPI::None:
 			Log::Error("No rendering API specified");
 			break;
-		case RenderingAPI::OpenGL:
+		case GraphicsAPI::OpenGL:
 			return (IndexBuffer*) new OpenGLIndexBuffer(indices, count);
 			break;
 		default:

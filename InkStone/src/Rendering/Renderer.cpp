@@ -3,5 +3,5 @@
 #include "Renderer.h"
 
 namespace NXTN {
-	RenderingAPI Renderer::s_RenderingAPI = RenderingAPI::OpenGL;
+	GraphicsAPI Renderer::s_GraphicsAPI = GraphicsAPI::OpenGL;
 }

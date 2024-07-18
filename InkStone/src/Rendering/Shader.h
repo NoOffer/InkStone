@@ -3,21 +3,18 @@
 #include "Core.h"
 
 #include "Log.h"
-
-#include <GLAD/glad.h>
+#include "Renderer.h"
 
 namespace NXTN {
 	class Shader
 	{
 	public:
-		Shader(const std::string& vertexSrc, const std::string& fragmentSrc);
-		~Shader();
+		virtual ~Shader() {}
 
-		void Bind();
-		void Unbind();
+		virtual void Bind() const = 0;
+		virtual void Unbind() const = 0;
 
-	private:
-		unsigned int m_RendererID;
+		static Shader* Create(const std::string& vertexSrc, const std::string& fragmentSrc);
 	};
 }
 

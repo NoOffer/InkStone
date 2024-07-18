@@ -3,7 +3,7 @@
 #include "Core.h"
 
 namespace NXTN {
-	enum class RenderingAPI
+	enum class GraphicsAPI
 	{
 		None = 0, OpenGL
 	};
@@ -11,8 +11,8 @@ namespace NXTN {
 	class Renderer
 	{
 	public:
-		static inline RenderingAPI GetRenderingAPI() { return s_RenderingAPI; }
+		static inline GraphicsAPI GetRenderingAPI() { return s_GraphicsAPI; }
 	private:
-		static RenderingAPI s_RenderingAPI;
+		static GraphicsAPI s_GraphicsAPI;
 	};
 }
