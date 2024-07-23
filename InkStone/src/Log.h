@@ -27,7 +27,8 @@ namespace NXTN {
 			tm ltm;
 			localtime_s(&ltm, &tt);
 
-			mtx.try_lock();  // Non-blocking
+			//mtx.try_lock();  // Non-blocking
+			mtx.lock();
 			printf("%02d:%02d:%02d [Warn]  ", ltm.tm_hour, ltm.tm_min, ltm.tm_sec);
 			printf(msg, args...);
 			printf("\n");
