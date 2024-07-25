@@ -6,7 +6,11 @@ namespace NXTN {
 	OpenGLRenderer::OpenGLRenderer()
 	{
 		// GLFW initialization
-		if (!glfwInit())
+		if (glfwInit())
+		{
+			Log::Info("GLFW initialized");
+		}
+		else
 		{
 			Log::Error("Failed to initialize GLFW");
 			NXTN_ERROR;

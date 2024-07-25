@@ -18,14 +18,18 @@ namespace NXTN {
 		glfwMakeContextCurrent(m_Window);
 
 		// GLAD initialization
-		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+		if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+		{
+			Log::Info("GLAD initialized");
+		}
+		else
 		{
 			Log::Error("Failed to initialize GLAD");
 			NXTN_ERROR;
 		}
 
 		// Log context information
-		Log::Info("OpenGL context Initialized");
+		Log::Info("OpenGL context initialized");
 		Log::Info("  ©À- Hardware Info:  %s", glGetString(GL_RENDERER));
 		Log::Info("  ©¸- OpenGL Version: %s", glGetString(GL_VERSION));
 
