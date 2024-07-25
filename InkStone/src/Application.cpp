@@ -77,9 +77,9 @@ namespace NXTN {
 			m_LayerStack.Update();
 
 			// Rendering
-			glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+			RenderCommand::SetClearColor(1.0f, 0.0f, 1.0f);
 
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::ClearFrameBuffer();
 
 			shader->Bind();
 			vertexArray->Bind();
