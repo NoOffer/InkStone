@@ -1,9 +1,9 @@
 #include "pch.h"
 
-#include "OpenGL/OpenGLShader.h"
+#include "Platform/GLFW/GLFWWindow.h"
 
 namespace NXTN {
-	Shader* Shader::Create(const std::string& vertexSrc, const std::string& fragmentSrc)
+	Window* Window::Create(unsigned int width, unsigned int height, std::string title)
 	{
 		switch (RenderCommand::GetGraphicsAPI())
 		{
@@ -11,7 +11,7 @@ namespace NXTN {
 			Log::Error("No rendering API specified");
 			break;
 		case GraphicsAPI::OpenGL:
-			return (Shader*) new OpenGLShader(vertexSrc, fragmentSrc);
+			return new OpenGLWindow(width, height, title);
 			break;
 		default:
 			Log::Error("Unsupported rendering API");

@@ -21,3 +21,10 @@
 #endif // NXTN_DEBUG
 
 #define BITMASK(x) (1 << x)
+
+namespace NXTN {
+	enum class GraphicsAPI
+	{
+		None = 0, OpenGL
+	};
+}

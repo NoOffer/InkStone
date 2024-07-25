@@ -2,17 +2,19 @@
 
 #include "Core.h"
 
-namespace NXTN {
-	enum class GraphicsAPI
-	{
-		None = 0, OpenGL
-	};
+#include "Log.h"
 
+namespace NXTN {
 	class Renderer
 	{
 	public:
-		static inline GraphicsAPI GetRenderingAPI() { return s_GraphicsAPI; }
-	private:
-		static GraphicsAPI s_GraphicsAPI;
+		virtual ~Renderer() {}
+
+		virtual void SetClearColor(float r, float g, float b) = 0;
+		virtual void ClearFrameBuffer() = 0;
+
+		virtual inline GraphicsAPI GetGraphicsAPI() = 0;
+
+		static Renderer* Create(GraphicsAPI api);
 	};
 }

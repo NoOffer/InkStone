@@ -1,10 +1,10 @@
 #pragma once
 
 #include "LayerStack.h"
-#include "Rendering/Window.h"
 #include "Rendering/RenderingDataBuffer.h"
 #include "Rendering/VertexArray.h"
 #include "Rendering/Shader.h"
+#include "Window.h"
 
 namespace NXTN {
 	class Application

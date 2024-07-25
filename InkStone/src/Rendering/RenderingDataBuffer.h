@@ -3,7 +3,7 @@
 #include "Core.h"
 
 #include "Log.h"
-#include "Renderer.h"
+#include "RenderCommand.h"
 
 namespace NXTN {
 	class VertexBuffer

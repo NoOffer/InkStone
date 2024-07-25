@@ -1,29 +1,13 @@
 #include "pch.h"
 
-#include "OpenGLWindow.h"
+#include "GLFWWindow.h"
 
 namespace NXTN {
 	static bool s_GLFWInitialized = false;
 
-	Window* Window::Create(unsigned int width, unsigned int height, std::string title)
-	{
-		return new OpenGLWindow(width, height, title);
-	}
-
 	OpenGLWindow::OpenGLWindow(unsigned int width, unsigned int height, std::string title, bool vSync)
-		: m_Width(width), m_Height(height), m_Title(title)
+		: m_Width(width), m_Height(height), m_Title(title), m_VSync(vSync)
 	{
-		// GLFW initialization
-		if (!s_GLFWInitialized)
-		{
-			if (!glfwInit())
-			{
-				Log::Error("Failed to initialize GLFW");
-				NXTN_ERROR;
-			}
-			s_GLFWInitialized = true;
-		}
-
 		// Create window and context
 		m_Window = glfwCreateWindow((int)width, (int)height, title.c_str(), nullptr, nullptr);
 		if (!m_Window)
@@ -33,10 +17,6 @@ namespace NXTN {
 		}
 		glfwMakeContextCurrent(m_Window);
 
-		// V Sync
-		m_VSync = vSync;
-		glfwSwapInterval(m_VSync ? 1 : 0);
-
 		// GLAD initialization
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
@@ -44,11 +24,13 @@ namespace NXTN {
 			NXTN_ERROR;
 		}
 
-		Log::Info(
-			"OpenGL context Initialized\n		   ©À- Hardware:       %s\n		   ©¸- OpenGL Version: %s",
-			glGetString(GL_RENDERER),
-			glGetString(GL_VERSION)
-		);
+		// Log context information
+		Log::Info("OpenGL context Initialized");
+		Log::Info("  ©À- Hardware Info:  %s", glGetString(GL_RENDERER));
+		Log::Info("  ©¸- OpenGL Version: %s", glGetString(GL_VERSION));
+
+		// V Sync
+		glfwSwapInterval(m_VSync ? 1 : 0);
 	}
 
 	OpenGLWindow::~OpenGLWindow()
