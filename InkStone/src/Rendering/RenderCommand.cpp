@@ -10,7 +10,16 @@ namespace NXTN {
 		s_Renderer.reset(Renderer::Create(System::GetGraphicsAPI()));
 	}
 
+	void RenderCommand::DrawMesh(const Mesh& mesh)
 	{
+		if (s_Renderer)
+		{
+			s_Renderer->DrawMesh(mesh);
+		}
+		else
+		{
+			Log::Warning("No renderer initialized");
+		}
 	}
 
 	void RenderCommand::SetClearColor(float r, float g, float b)

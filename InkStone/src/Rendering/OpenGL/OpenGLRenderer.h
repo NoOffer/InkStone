@@ -12,6 +12,8 @@ namespace NXTN {
 		OpenGLRenderer();
 		virtual ~OpenGLRenderer() {}
 
+		virtual void DrawMesh(const Mesh& mesh) override;
+
 		virtual void SetClearColor(float r, float g, float b) override;
 		virtual void ClearFrameBuffer() override;
 	};

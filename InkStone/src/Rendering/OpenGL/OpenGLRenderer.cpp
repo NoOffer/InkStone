@@ -17,6 +17,13 @@ namespace NXTN {
 		}
 	}
 
+	void OpenGLRenderer::DrawMesh(const Mesh& mesh)
+	{
+		mesh.Bind();
+		glDrawElements(GL_TRIANGLES, mesh.GetIndexBuffer().GetCount(), GL_UNSIGNED_INT, nullptr);
+		mesh.Unbind();
+	}
+
 	void OpenGLRenderer::SetClearColor(float r, float g, float b)
 	{
 		glClearColor(r, g, b, 1.0f);

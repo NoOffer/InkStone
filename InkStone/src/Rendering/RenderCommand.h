@@ -10,6 +10,7 @@ namespace NXTN {
 		static void Init();
 		static inline bool IsInitialized() { return s_Renderer != NULL; }
 
+		static void DrawMesh(const Mesh& mesh);
 
 		static void SetClearColor(float r, float g, float b);
 		static void ClearFrameBuffer();

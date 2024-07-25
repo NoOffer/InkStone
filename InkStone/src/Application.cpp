@@ -20,9 +20,8 @@ namespace NXTN {
 	void Application::Run()
 	{
 		// Temporary draw data
-		std::shared_ptr<VertexArray> vertexArray;
 		std::shared_ptr<VertexBuffer> vertexBuffer;
-		std::shared_ptr<IndexBuffer> indexBuffer;
+		std::shared_ptr<Mesh> mesh;
 		std::shared_ptr<Shader> shader;
 
 		// Vertex buffer
@@ -33,13 +32,14 @@ namespace NXTN {
 		};
 		vertexBuffer.reset(VertexBuffer::Create(vertices, 9));
 
-		// Vertex array
+		// Vertex array layout
 		VertexArrayLayout layout{ {ShaderDataType::Float, 3, "Vertex Position"} };
-		vertexArray.reset(VertexArray::Create(vertexBuffer, layout));
 
 		// Index buffer
 		unsigned int indices[3] = { 0, 1, 2 };
-		indexBuffer.reset(IndexBuffer::Create(indices, 3));
+
+		//Mesh
+		mesh.reset(new Mesh(VertexArray::Create(vertexBuffer, layout), IndexBuffer::Create(indices, 3)));
 
 		// Shader
 		std::string vertShaderSrc = R"(
@@ -82,9 +82,7 @@ namespace NXTN {
 			RenderCommand::ClearFrameBuffer();
 
 			shader->Bind();
-			vertexArray->Bind();
-			indexBuffer->Bind();
-			glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+			RenderCommand::DrawMesh(*mesh);
 
 			m_Window->Update();
 		}

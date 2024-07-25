@@ -1,8 +1,7 @@
 #pragma once
 
 #include "LayerStack.h"
-#include "Rendering/RenderingDataBuffer.h"
-#include "Rendering/VertexArray.h"
+#include "Mesh.h"
 #include "Rendering/Shader.h"
 #include "Window.h"
 
