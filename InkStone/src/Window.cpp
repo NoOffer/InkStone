@@ -5,7 +5,7 @@
 namespace NXTN {
 	Window* Window::Create(unsigned int width, unsigned int height, std::string title)
 	{
-		switch (RenderCommand::GetGraphicsAPI())
+		switch (System::GetGraphicsAPI())
 		{
 		case GraphicsAPI::None:
 			Log::Error("No rendering API specified");

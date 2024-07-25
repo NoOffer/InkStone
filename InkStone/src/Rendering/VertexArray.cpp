@@ -4,7 +4,7 @@
 
 namespace NXTN {
 	// Vertex Array Layout
-	VertexArrayLayout::VertexArrayLayout() : m_Stride(0), m_Layout(0) {}
+	VertexArrayLayout::VertexArrayLayout() : m_Layout(0), m_Stride(0) {}
 
 	VertexArrayLayout::VertexArrayLayout(const std::initializer_list<VertexArrayAtrribute>& il)
 	{
@@ -30,7 +30,7 @@ namespace NXTN {
 	// Vertex Array
 	VertexArray* VertexArray::Create(const std::shared_ptr<VertexBuffer> vertexBuffer, const VertexArrayLayout& layout)
 	{
-		switch (RenderCommand::GetGraphicsAPI())
+		switch (System::GetGraphicsAPI())
 		{
 		case GraphicsAPI::None:
 			Log::Error("No rendering API specified");
@@ -51,7 +51,7 @@ namespace NXTN {
 		const std::shared_ptr<VertexBuffer> vertexBuffer,
 		const std::initializer_list<VertexArrayAtrribute>& il)
 	{
-		switch (RenderCommand::GetGraphicsAPI())
+		switch (System::GetGraphicsAPI())
 		{
 		case GraphicsAPI::None:
 			Log::Error("No rendering API specified");

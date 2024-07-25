@@ -5,7 +5,7 @@
 namespace NXTN {
 	Shader* Shader::Create(const std::string& vertexSrc, const std::string& fragmentSrc)
 	{
-		switch (RenderCommand::GetGraphicsAPI())
+		switch (System::GetGraphicsAPI())
 		{
 		case GraphicsAPI::None:
 			Log::Error("No rendering API specified");

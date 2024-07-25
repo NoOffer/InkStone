@@ -1,15 +1,15 @@
 #pragma once
 
 #include "Renderer.h"
+#include "System.h"
 
 namespace NXTN {
 	class RenderCommand
 	{
 	public:
-		static void InitRenderer(GraphicsAPI api);
+		static void Init();
+		static inline bool IsInitialized() { return s_Renderer != NULL; }
 
-		static GraphicsAPI GetGraphicsAPI();
-		static inline bool IsRendererInit() { return s_Renderer != NULL; }
 
 		static void SetClearColor(float r, float g, float b);
 		static void ClearFrameBuffer();

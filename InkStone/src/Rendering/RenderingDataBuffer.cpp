@@ -5,7 +5,7 @@
 namespace NXTN {
 	VertexBuffer* VertexBuffer::Create(const float* vertices, unsigned int count)
 	{
-		switch (RenderCommand::GetGraphicsAPI())
+		switch (System::GetGraphicsAPI())
 		{
 		case GraphicsAPI::None:
 			Log::Error("No rendering API specified");
@@ -23,7 +23,7 @@ namespace NXTN {
 
 	IndexBuffer* IndexBuffer::Create(const unsigned int* indices, unsigned int count)
 	{
-		switch (RenderCommand::GetGraphicsAPI())
+		switch (System::GetGraphicsAPI())
 		{
 		case GraphicsAPI::None:
 			Log::Error("No rendering API specified");

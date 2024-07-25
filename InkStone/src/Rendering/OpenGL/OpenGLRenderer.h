@@ -14,8 +14,6 @@ namespace NXTN {
 
 		virtual void SetClearColor(float r, float g, float b) override;
 		virtual void ClearFrameBuffer() override;
-
-		virtual inline GraphicsAPI GetGraphicsAPI() override { return GraphicsAPI::OpenGL; }
 	};
 }
 

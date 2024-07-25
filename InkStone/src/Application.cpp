@@ -7,7 +7,7 @@
 namespace NXTN {
 	Application::Application()
 	{
-		RenderCommand::InitRenderer(GraphicsAPI::OpenGL);
+		RenderCommand::Init();
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
 	}
