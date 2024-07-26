@@ -3,7 +3,7 @@
 //#include "Core.h"
 
 #include "Log.h"
-#include "Rendering/RenderCommand.h"
+#include "System.h"
 
 namespace NXTN {
 	class Window

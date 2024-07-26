@@ -17,19 +17,19 @@ namespace NXTN {
 		}
 	}
 
-	void OpenGLRenderer::DrawMesh(const Mesh& mesh)
+	void OpenGLRenderer::DrawMeshImpl(const Mesh& mesh)
 	{
 		mesh.Bind();
 		glDrawElements(GL_TRIANGLES, mesh.GetIndexBuffer().GetCount(), GL_UNSIGNED_INT, nullptr);
 		mesh.Unbind();
 	}
 
-	void OpenGLRenderer::SetClearColor(float r, float g, float b)
+	void OpenGLRenderer::SetClearColorImpl(float r, float g, float b)
 	{
 		glClearColor(r, g, b, 1.0f);
 	}
 
-	void OpenGLRenderer::ClearFrameBuffer()
+	void OpenGLRenderer::ClearFrameBufferImpl()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	}

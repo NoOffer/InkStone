@@ -7,7 +7,7 @@
 namespace NXTN {
 	Application::Application()
 	{
-		RenderCommand::Init();
+		Renderer::Init();
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
 	}
@@ -77,12 +77,12 @@ namespace NXTN {
 			m_LayerStack.Update();
 
 			// Rendering
-			RenderCommand::SetClearColor(1.0f, 0.0f, 1.0f);
+			Renderer::SetClearColor(1.0f, 0.0f, 1.0f);
 
-			RenderCommand::ClearFrameBuffer();
+			Renderer::ClearFrameBuffer();
 
 			shader->Bind();
-			RenderCommand::DrawMesh(*mesh);
+			Renderer::DrawMesh(*mesh);
 
 			m_Window->Update();
 		}
