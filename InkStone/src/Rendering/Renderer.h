@@ -3,7 +3,7 @@
 #include "Core.h"
 
 #include "Log.h"
-#include "Mesh.h"
+#include "Component/Mesh.h"
 #include "System.h"
 
 namespace NXTN {

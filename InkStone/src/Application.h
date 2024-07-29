@@ -1,7 +1,7 @@
 #pragma once
 
 #include "LayerStack.h"
-#include "Mesh.h"
+#include "Component/Mesh.h"
 #include "Rendering/Renderer.h"
 #include "Rendering/Shader.h"
 #include "Window.h"
