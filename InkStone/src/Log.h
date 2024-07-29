@@ -6,11 +6,11 @@ namespace NXTN {
 	class Log
 	{
 	public:
+		static void Info(const std::string& msg);
+
 		template <typename... Args>
 		static void Info(const char* msg, Args... args)
 		{
-			time_t tt = time(0);
-			tm ltm;
 			localtime_s(&ltm, &tt);
 
 			mtx.lock();
@@ -23,8 +23,6 @@ namespace NXTN {
 		template <typename... Args>
 		static void Warning(const char* msg, Args... args)
 		{
-			time_t tt = time(0);
-			tm ltm;
 			localtime_s(&ltm, &tt);
 
 			//mtx.try_lock();  // Non-blocking
@@ -38,8 +36,6 @@ namespace NXTN {
 		template <typename... Args>
 		static void Error(const char* msg, Args... args)
 		{
-			time_t tt = time(0);
-			tm ltm;
 			localtime_s(&ltm, &tt);
 
 			mtx.lock();
@@ -53,6 +49,8 @@ namespace NXTN {
 
 	private:
 		static std::mutex mtx;
+		static time_t tt;
+		static tm ltm;
 	};
 }
 
