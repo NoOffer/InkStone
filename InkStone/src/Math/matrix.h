@@ -5,18 +5,15 @@
 namespace NXTN {
 	struct mat4
 	{
-		// Top-left: [0, 0], top-right: [0, 3]
-		float m_Mat[4][4];
-
 		mat4();
 
-		mat4(float a);
+		mat4(const float& a);
 
 		mat4(
-			float m00, float m01, float m02, float m03,
-			float m10, float m11, float m12, float m13,
-			float m20, float m21, float m22, float m23,
-			float m30, float m31, float m32, float m33
+			const float& m00, const float& m01, const float& m02, const float& m03,
+			const float& m10, const float& m11, const float& m12, const float& m13,
+			const float& m20, const float& m21, const float& m22, const float& m23,
+			const float& m30, const float& m31, const float& m32, const float& m33
 		);
 
 		inline float* operator[](int i)
@@ -24,23 +21,29 @@ namespace NXTN {
 			return &(m_Mat[i][0]);
 		}
 
-		mat4 Transpose();
+		inline const float* operator[](int i) const
+		{
+			return &(m_Mat[i][0]);
+		}
+
+		//mat4 Transpose();
+
+	private:
+		// Top-left: [0, 0], top-right: [0, 3]
+		float m_Mat[4][4];
 	};
 
 	struct mat3
 	{
-		// Top-left: [0, 0], top-right: [0, 3]
-		float m_Mat[3][3];
-
 		mat3();
 
 		mat3(float a);
 
-		//mat3(
-		//	float m00, float m01, float m02,
-		//	float m10, float m11, float m12,
-		//	float m20, float m21, float m22
-		//);
+		mat3(
+			const float& m00, const float& m01, const float& m02,
+			const float& m10, const float& m11, const float& m12,
+			const float& m20, const float& m21, const float& m22
+		);
 
 		mat3(mat4 m);
 
@@ -49,10 +52,20 @@ namespace NXTN {
 			return &(m_Mat[i][0]);
 		}
 
-		//mat4 Transpose();
+		inline const float* operator[](int i) const
+		{
+			return &(m_Mat[i][0]);
+		}
+
+		//mat3 Transpose();
+
+	private:
+		// Top-left: [0, 0], top-right: [0, 3]
+		float m_Mat[3][3];
 	};
 
-	mat4 Transpose(mat4 m);
+	mat3 Transpose(const mat3& m);
+	mat4 Transpose(const mat4& m);
 
 	mat4 TranslateMat(vec3 translation);
 	mat4 TranslateMat(mat4 m, vec3 translation);

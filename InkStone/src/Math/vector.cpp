@@ -25,7 +25,7 @@ namespace NXTN {
 		{
 			return v / l;
 		}
-		return vec2();
+		return v;
 	}
 
 	vec3 normalize(vec3 v)
@@ -35,7 +35,7 @@ namespace NXTN {
 		{
 			return v / l;
 		}
-		return vec3();
+		return v;
 	}
 
 	vec4 normalize(vec4 v)
@@ -45,7 +45,7 @@ namespace NXTN {
 		{
 			return v / l;
 		}
-		return vec4();
+		return v;
 	}
 
 	float dot(const vec2& v1, const vec2& v2)

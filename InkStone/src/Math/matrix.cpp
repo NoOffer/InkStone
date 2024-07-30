@@ -3,71 +3,6 @@
 #include "Matrix.h"
 
 namespace NXTN {
-	mat4::mat4()
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				m_Mat[i][j] = 0.0f;
-			}
-		}
-	}
-
-	mat4::mat4(float a)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				m_Mat[i][j] = 0.0f;
-			}
-		}
-		m_Mat[0][0] = a;
-		m_Mat[1][1] = a;
-		m_Mat[2][2] = a;
-		m_Mat[3][3] = a;
-	}
-
-	mat4::mat4(
-		float m00, float m01, float m02, float m03,
-		float m10, float m11, float m12, float m13,
-		float m20, float m21, float m22, float m23,
-		float m30, float m31, float m32, float m33
-	)
-	{
-		m_Mat[0][0] = m00;
-		m_Mat[0][1] = m01;
-		m_Mat[0][2] = m02;
-		m_Mat[0][3] = m03;
-		m_Mat[1][0] = m10;
-		m_Mat[1][1] = m11;
-		m_Mat[1][2] = m12;
-		m_Mat[1][3] = m13;
-		m_Mat[2][0] = m20;
-		m_Mat[2][1] = m21;
-		m_Mat[2][2] = m22;
-		m_Mat[2][3] = m23;
-		m_Mat[3][0] = m30;
-		m_Mat[3][1] = m31;
-		m_Mat[3][2] = m32;
-		m_Mat[3][3] = m33;
-	}
-
-	mat4 mat4::Transpose()
-	{
-		mat4 res;
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				res[i][j] = m_Mat[j][i];
-			}
-		}
-
-		return res;
-	}
-
 	mat3::mat3()
 	{
 		for (int i = 0; i < 3; i++)
@@ -94,6 +29,23 @@ namespace NXTN {
 		m_Mat[2][2] = a;
 	}
 
+	mat3::mat3(
+		const float& m00, const float& m01, const float& m02,
+		const float& m10, const float& m11, const float& m12,
+		const float& m20, const float& m21, const float& m22
+	)
+	{
+		m_Mat[0][0] = m00;
+		m_Mat[0][1] = m01;
+		m_Mat[0][2] = m02;
+		m_Mat[1][0] = m10;
+		m_Mat[1][1] = m11;
+		m_Mat[1][2] = m12;
+		m_Mat[2][0] = m20;
+		m_Mat[2][1] = m21;
+		m_Mat[2][2] = m22;
+	}
+
 	mat3::mat3(mat4 m)
 	{
 		for (int i = 0; i < 3; i++)
@@ -105,7 +57,72 @@ namespace NXTN {
 		}
 	}
 
-	mat4 Transpose(mat4 m)
+	mat3 Transpose(const mat3& m)
+	{
+		mat3 res;
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				res[i][j] = m[j][i];
+			}
+		}
+
+		return res;
+	}
+
+	mat4::mat4()
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				m_Mat[i][j] = 0.0f;
+			}
+		}
+	}
+
+	mat4::mat4(const float& a)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				m_Mat[i][j] = 0.0f;
+			}
+		}
+		m_Mat[0][0] = a;
+		m_Mat[1][1] = a;
+		m_Mat[2][2] = a;
+		m_Mat[3][3] = a;
+	}
+
+	mat4::mat4(
+		const float& m00, const float& m01, const float& m02, const float& m03,
+		const float& m10, const float& m11, const float& m12, const float& m13,
+		const float& m20, const float& m21, const float& m22, const float& m23,
+		const float& m30, const float& m31, const float& m32, const float& m33
+	)
+	{
+		m_Mat[0][0] = m00;
+		m_Mat[0][1] = m01;
+		m_Mat[0][2] = m02;
+		m_Mat[0][3] = m03;
+		m_Mat[1][0] = m10;
+		m_Mat[1][1] = m11;
+		m_Mat[1][2] = m12;
+		m_Mat[1][3] = m13;
+		m_Mat[2][0] = m20;
+		m_Mat[2][1] = m21;
+		m_Mat[2][2] = m22;
+		m_Mat[2][3] = m23;
+		m_Mat[3][0] = m30;
+		m_Mat[3][1] = m31;
+		m_Mat[3][2] = m32;
+		m_Mat[3][3] = m33;
+	}
+
+	mat4 Transpose(const mat4& m)
 	{
 		mat4 res;
 		for (int i = 0; i < 4; i++)
