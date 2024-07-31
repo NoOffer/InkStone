@@ -71,6 +71,17 @@ namespace NXTN {
 		return res;
 	}
 
+	std::string mat3::ToString()
+	{
+		std::stringstream ss;
+		ss.precision(2);
+		ss << "[[" << m_Mat[0][0] << "  " << m_Mat[0][1] << "  " << m_Mat[0][2] << "]\n";
+		ss << " [" << m_Mat[1][0] << "  " << m_Mat[1][1] << "  " << m_Mat[1][2] << "]\n";
+		ss << " [" << m_Mat[2][0] << "  " << m_Mat[2][1] << "  " << m_Mat[2][2] << "]]";
+		const std::string s = ss.str();
+		return s;
+	}
+
 	mat4::mat4()
 	{
 		for (int i = 0; i < 4; i++)
@@ -134,6 +145,18 @@ namespace NXTN {
 		}
 
 		return res;
+	}
+
+	std::string mat4::ToString()
+	{
+		std::stringstream ss;
+		ss.precision(2);
+		ss << "[[" << m_Mat[0][0] << "  " << m_Mat[0][1] << "  " << m_Mat[0][2] << "  " << m_Mat[0][3] << "]\n";
+		ss << " [" << m_Mat[1][0] << "  " << m_Mat[1][1] << "  " << m_Mat[1][2] << "  " << m_Mat[1][3] << "]\n";
+		ss << " [" << m_Mat[2][0] << "  " << m_Mat[2][1] << "  " << m_Mat[2][2] << "  " << m_Mat[2][3] << "]\n";
+		ss << " [" << m_Mat[3][0] << "  " << m_Mat[3][1] << "  " << m_Mat[3][2] << "  " << m_Mat[3][3] << "]]";
+		const std::string s = ss.str();
+		return s;
 	}
 
 	mat4 TranslateMat(vec3 translation)
@@ -235,21 +258,20 @@ namespace NXTN {
 		return res;
 	}
 
+	std::ostream& operator<<(std::ostream& ostr, mat3& m)
+	{
+		ostr << "[[" << m[0][0] << "  " << m[0][1] << "  " << m[0][2] << "]\n";
+		ostr << " [" << m[1][0] << "  " << m[1][1] << "  " << m[1][2] << "]\n";
+		ostr << " [" << m[2][0] << "  " << m[2][1] << "  " << m[2][2] << "]]";
+		return ostr;
+	}
+
 	std::ostream& operator<<(std::ostream& ostr, mat4& m)
 	{
-		ostr << "[";
-		for (int i = 0; i < 4; i++)
-		{
-			if (i > 0) ostr << " ";
-			ostr << "[";
-			for (int j = 0; j < 4; j++)
-			{
-				ostr << m[i][j] << " ";
-			}
-			ostr << "]";
-			if (i < 3) ostr << "\n";
-		}
-		ostr << "]";
+		ostr << "[[" << m[0][0] << "  " << m[0][1] << "  " << m[0][2] << "  " << m[0][3] << "]\n";
+		ostr << " [" << m[1][0] << "  " << m[1][1] << "  " << m[1][2] << "  " << m[1][3] << "]\n";
+		ostr << " [" << m[2][0] << "  " << m[2][1] << "  " << m[2][2] << "  " << m[2][3] << "]\n";
+		ostr << " [" << m[3][0] << "  " << m[3][1] << "  " << m[3][2] << "  " << m[3][3] << "]]";
 		return ostr;
 	}
 }

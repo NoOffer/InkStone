@@ -28,6 +28,8 @@ namespace NXTN {
 
 		//mat4 Transpose();
 
+		std::string ToString();
+
 	private:
 		// Top-left: [0, 0], top-right: [0, 3]
 		float m_Mat[4][4];
@@ -59,6 +61,8 @@ namespace NXTN {
 
 		//mat3 Transpose();
 
+		std::string ToString();
+
 	private:
 		// Top-left: [0, 0], top-right: [0, 3]
 		float m_Mat[3][3];
@@ -77,5 +81,6 @@ namespace NXTN {
 	vec4 mul(mat4 mat, vec4 vec);
 	mat4 mul(mat4 m1, mat4 m2);
 
+	std::ostream& operator<<(std::ostream& ostr, mat3& m);
 	std::ostream& operator<<(std::ostream& ostr, mat4& m);
 }
