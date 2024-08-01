@@ -15,6 +15,8 @@ namespace NXTN {
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
+		virtual void SetUniformMat4(const char* name, const mat4& m) override;
+
 	private:
 		unsigned int m_RendererID;
 	};

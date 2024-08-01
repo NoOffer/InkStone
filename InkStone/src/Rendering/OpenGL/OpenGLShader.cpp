@@ -130,4 +130,9 @@ namespace NXTN {
 	{
 		glUseProgram(0);
 	}
+
+	void OpenGLShader::SetUniformMat4(const char* name, const mat4& m)
+	{
+		glUniformMatrix4fv(glGetUniformLocation(m_RendererID, name), 1, GL_TRUE, &(m[0][0]));
+	}
 }
