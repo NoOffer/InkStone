@@ -19,6 +19,10 @@ namespace NXTN {
 
 	void Application::Run()
 	{
+		// Camera
+		Camera camera(1.0f, vec2i(500, 500), false);
+		camera.transform.SetPosition(0.0f, 0.0f, -10.0f);
+
 		// Temporary draw data
 		std::shared_ptr<VertexBuffer> vertexBuffer;
 		std::shared_ptr<Mesh> mesh;
@@ -47,13 +51,15 @@ namespace NXTN {
 
 			layout(location = 0) in vec3 a_PositionOS;
 
+			uniform mat4 u_VPMatrix;
+
 			out vec3 v_PositionOS;
 
 			void main()
 			{
 				v_PositionOS = a_PositionOS;
 
-				gl_Position = vec4(a_PositionOS, 1);
+				gl_Position = u_VPMatrix * vec4(a_PositionOS, 1);
 			}
 		)";
 
@@ -82,6 +88,8 @@ namespace NXTN {
 			Renderer::ClearFrameBuffer();
 
 			shader->Bind();
+			shader->SetUniformMat4("u_VPMatrix", camera.GetViewProjMatrix());
+
 			Renderer::DrawMesh(*mesh);
 
 			m_Window->Update();
