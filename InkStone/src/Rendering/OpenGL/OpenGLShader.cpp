@@ -131,8 +131,49 @@ namespace NXTN {
 		glUseProgram(0);
 	}
 
+	void OpenGLShader::SetUniformInt(const char* name, const int& i)
+	{
+		glUniform1i(GetUniformPosition(name), i);
+	}
+
+	void OpenGLShader::SetUniformUInt(const char* name, const unsigned int& i)
+	{
+		glUniform1ui(GetUniformPosition(name), i);
+	}
+
+	void OpenGLShader::SetUniformFloat(const char* name, const float& f)
+	{
+		glUniform1f(GetUniformPosition(name), f);
+	}
+
+	void OpenGLShader::SetUniformFloat3(const char* name, const vec3& v)
+	{
+		glUniform3f(GetUniformPosition(name), v.x, v.y, v.z);
+	}
+
+	void OpenGLShader::SetUniformFloat4(const char* name, const vec4& v)
+	{
+		glUniform4f(GetUniformPosition(name), v.x, v.y, v.z, v.w);
+	}
+
 	void OpenGLShader::SetUniformMat4(const char* name, const mat4& m)
 	{
-		glUniformMatrix4fv(glGetUniformLocation(m_RendererID, name), 1, GL_TRUE, &(m[0][0]));
+		glUniformMatrix4fv(GetUniformPosition(name), 1, GL_TRUE, &(m[0][0]));
+	}
+
+	int OpenGLShader::GetUniformPosition(const char* name)
+	{
+		if (m_UniformLocations.find(name) != m_UniformLocations.end())
+		{
+			return m_UniformLocations[name];
+		}
+
+		int location = glGetUniformLocation(m_RendererID, name);
+		if (location == -1)
+		{
+			Log::Warning("Uniform %s does not exist.", name);
+		}
+		m_UniformLocations[name] = location;
+		return location;
 	}
 }
