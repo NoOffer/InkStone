@@ -14,14 +14,10 @@ namespace NXTN {
 		Application();
 		virtual ~Application();
 
-		void Run();
+		virtual void Run();
 
-	private:
-		bool m_Paused = false;
-
+	protected:
 		std::unique_ptr<Window> m_Window;
-
-		LayerStack m_LayerStack;
 	};
 
 	Application* CreateApplication();
