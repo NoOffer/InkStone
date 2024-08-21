@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Math/Math.h"
+#include "src/Math/Math.h"
 
 // Angle in degrees
 namespace NXTN {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Rendering/Renderer.h"
+#include "src/Rendering/Renderer.h"
 
 #include <GLAD/glad.h>
 #include <GLFW/glfw3.h>

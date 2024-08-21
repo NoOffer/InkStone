@@ -1,5 +1,7 @@
 #pragma once
 
+#include "src/Math/Math.h"
+
 #include "src/Window.h"
 
 #include "src/Component/Camera.h"

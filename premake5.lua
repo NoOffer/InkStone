@@ -23,16 +23,18 @@ project "InkStone"
 	objdir ("bin-obj/" .. outputdir .. "/%{prj.name}")
 
 	pchheader "pch.h"
-	pchsource "%{prj.name}/src/pch.cpp"
+	pchsource "%{prj.name}/pch.cpp"
 
 	files{
 		"%{prj.name}/%{prj.name}.h",
+		"%{prj.name}/pch.h",
+		"%{prj.name}/pch.cpp",
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
 	}
 
 	includedirs{
-		"%{prj.name}/src",
+		"%{prj.name}",
 		"%{prj.name}/include/GLFW/include",
 		"%{prj.name}/include/GLAD/include",
 		"%{prj.name}/include/imgui/"

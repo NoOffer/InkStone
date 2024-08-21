@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Rendering/VertexArray.h"
-#include "Rendering/RenderingDataBuffer.h"
+#include "src/Rendering/VertexArray.h"
+#include "src/Rendering/RenderingDataBuffer.h"
 
 namespace NXTN {
 	class Mesh

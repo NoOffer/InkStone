@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Rendering/VertexArray.h"
+#include "src/Rendering/VertexArray.h"
 
 #include <GLAD/glad.h>
 

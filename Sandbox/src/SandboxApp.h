@@ -10,8 +10,3 @@ public:
 
 	virtual void Run() override;
 };
-
-NXTN::Application* NXTN::CreateApplication()
-{
-	return new Sandbox();
-}

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Core.h"
+#include "src/Core.h"
 
-#include "Log.h"
-#include "System.h"
-#include "Math/Math.h"
+#include "src/Log.h"
+#include "src/System.h"
+#include "src/Math/Math.h"
 
 namespace NXTN {
 	class Shader

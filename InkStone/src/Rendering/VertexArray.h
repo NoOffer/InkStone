@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core.h"
+#include "src/Core.h"
 #include "RenderingDataBuffer.h"
 
 namespace NXTN {

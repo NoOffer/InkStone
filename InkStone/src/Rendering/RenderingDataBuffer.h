@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Core.h"
+#include "src/Core.h"
 
-#include "Log.h"
-#include "System.h"
+#include "src/Log.h"
+#include "src/System.h"
 
 namespace NXTN {
 	class VertexBuffer

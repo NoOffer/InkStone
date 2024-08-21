@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Core.h"
+#include "src/Core.h"
 
-#include "Log.h"
-#include "Component/Mesh.h"
-#include "System.h"
+#include "src/Log.h"
+#include "src/Component/Mesh.h"
+#include "src/System.h"
 
 namespace NXTN {
 	class Renderer

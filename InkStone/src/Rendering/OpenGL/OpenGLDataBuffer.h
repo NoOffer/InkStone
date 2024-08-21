@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Rendering/RenderingDataBuffer.h"
+#include "src/Rendering/RenderingDataBuffer.h"
 
 #include <GLAD/glad.h>
 

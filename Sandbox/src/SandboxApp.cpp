@@ -82,3 +82,8 @@ void Sandbox::Run()
 	}
 	// ---------------------------------------------------------------------------------------------------------------- Game loop
 }
+
+NXTN::Application* NXTN::CreateApplication()
+{
+	return new Sandbox();
+}
