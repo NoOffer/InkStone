@@ -1,7 +1,7 @@
 .vs/
 bin/
 bin-obj/
-vendor/
-InkStone/vendor/
-InkStone/InkStone.*
-Sandbox/Sandbox.*
+dependencies/
+InkStone/include/
+InkStone/InkStone.vc*
+Sandbox/Sandbox.vc*
