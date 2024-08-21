@@ -6,9 +6,11 @@ namespace NXTN {
 	class System
 	{
 	public:
-		static inline GraphicsAPI GetGraphicsAPI() { return s_API; }
+		static inline GraphicsAPI GetGraphicsAPI() { return s_GraphicsAPI; }
+		static inline WindowAPI   GetWindowAPI()   { return s_WindowAPI; }
 	private:
-		static GraphicsAPI s_API;
+		static GraphicsAPI s_GraphicsAPI;
+		static WindowAPI   s_WindowAPI;
 	};
 }
 

@@ -27,4 +27,9 @@ namespace NXTN {
 	{
 		None = 0, OpenGL
 	};
+
+	enum class WindowAPI
+	{
+		None = 0, GLFW
+	};
 }

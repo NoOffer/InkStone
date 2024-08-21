@@ -10,6 +10,8 @@ namespace NXTN {
 		Renderer::Init();
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
+
+		Input::Init(m_Window->GetNativeWindow());
 	}
 
 	Application::~Application()

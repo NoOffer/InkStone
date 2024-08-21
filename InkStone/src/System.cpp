@@ -3,5 +3,6 @@
 #include "System.h"
 
 namespace NXTN {
-	GraphicsAPI System::s_API = GraphicsAPI::OpenGL;
+	GraphicsAPI System::s_GraphicsAPI = GraphicsAPI::OpenGL;
+	WindowAPI   System::s_WindowAPI   = WindowAPI::GLFW;
 }
