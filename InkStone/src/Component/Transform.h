@@ -26,6 +26,8 @@ namespace NXTN {
 		void RotateByAxis(float angle, const vec3& axis);
 		void SetRotation(const Quaternion& rotation);
 
+		mat4 GetModelMatrix();
+
 	private:
 		vec3 m_Position;
 		vec3 m_Scale;

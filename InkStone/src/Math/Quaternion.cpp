@@ -58,6 +58,26 @@ namespace NXTN {
 		return res;
 	}
 
+	mat4 Quaternion::GetRotationMatrix()
+	{
+		float r11 = 1.0f - 2.0f * (y * y + z * z);
+		float r12 = 2.0f * (x * y - w * z);
+		float r13 = 2.0f * (x * z + w * y);
+		float r21 = 2.0f * (x * y + w * z);
+		float r22 = 1.0f - 2.0f * (x * x + z * z);
+		float r23 = 2.0f * (y * z - w * x);
+		float r31 = 2.0f * (x * z - w * y);
+		float r32 = 2.0f * (y * z + w * x);
+		float r33 = 1.0f - 2.0f * (x * x + y * y);
+
+		return mat4(
+			r11, r12, r13, 0.0f,
+			r21, r22, r23, 0.0f,
+			r31, r32, r33, 0.0f,
+			0.0f, 0.0f, 0.0f, 1.0f
+		);
+	}
+
 	Quaternion operator*(const Quaternion& qa, const Quaternion& qb)
 	{
 		float w, x, y, z;

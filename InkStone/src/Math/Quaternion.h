@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vector.h"
+#include "Matrix.h"
 
 namespace NXTN {
 	const long double CONST_PI = 3.14159265358979323846264338327950288419716;
@@ -21,6 +21,8 @@ namespace NXTN {
 
 		void Rotate(float angle, const vec3& axis);
 		vec3 ApplyRotation(const vec3& vector);
+
+		mat4 GetRotationMatrix();
 
 		std::string ToString();
 	};

@@ -79,4 +79,24 @@ namespace NXTN {
 	{
 		m_Rotation = rotation;
 	}
+
+	mat4 Transform::GetModelMatrix()
+	{
+		float r11 = m_Scale.z - 2.0f * (m_Rotation.y * m_Rotation.y + m_Rotation.z * m_Rotation.z) * m_Scale.x;
+		float r12 = 2.0f * (m_Rotation.x * m_Rotation.y - m_Rotation.w * m_Rotation.z) * m_Scale.y;
+		float r13 = 2.0f * (m_Rotation.x * m_Rotation.z + m_Rotation.w * m_Rotation.y) * m_Scale.z;
+		float r21 = 2.0f * (m_Rotation.x * m_Rotation.y + m_Rotation.w * m_Rotation.z) * m_Scale.x;
+		float r22 = m_Scale.z - 2.0f * (m_Rotation.x * m_Rotation.x + m_Rotation.z * m_Rotation.z) * m_Scale.y;
+		float r23 = 2.0f * (m_Rotation.y * m_Rotation.z - m_Rotation.w * m_Rotation.x) * m_Scale.z;
+		float r31 = 2.0f * (m_Rotation.x * m_Rotation.z - m_Rotation.w * m_Rotation.y) * m_Scale.x;
+		float r32 = 2.0f * (m_Rotation.y * m_Rotation.z + m_Rotation.w * m_Rotation.x) * m_Scale.y;
+		float r33 = m_Scale.z - 2.0f * (m_Rotation.x * m_Rotation.x + m_Rotation.y * m_Rotation.y) * m_Scale.z;
+
+		return mat4(
+			r11, r12, r13, m_Position.x,
+			r21, r22, r23, m_Position.y,
+			r31, r32, r33, m_Position.z,
+			0.0f, 0.0f, 0.0f, 1.0f
+		);
+	}
 }

@@ -39,6 +39,7 @@ void Sandbox::Run()
 
 			layout(location = 0) in vec3 a_PositionOS;
 
+			uniform mat4 u_ModelMatrix;
 			uniform mat4 u_VPMatrix;
 
 			out vec3 v_PositionOS;
@@ -47,7 +48,7 @@ void Sandbox::Run()
 			{
 				v_PositionOS = a_PositionOS;
 
-				gl_Position = u_VPMatrix * vec4(a_PositionOS, 1);
+				gl_Position = u_VPMatrix * u_ModelMatrix * vec4(a_PositionOS, 1);
 			}
 		)";
 
@@ -74,6 +75,7 @@ void Sandbox::Run()
 		NXTN::Renderer::ClearFrameBuffer();
 
 		shader->Bind();
+		shader->SetUniformMat4("u_ModelMatrix", mesh->transform.GetModelMatrix());
 		shader->SetUniformMat4("u_VPMatrix", camera.GetViewProjMatrix());
 
 		NXTN::Renderer::DrawMesh(*mesh);
