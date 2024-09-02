@@ -2,9 +2,10 @@
 
 #include "src/Rendering/VertexArray.h"
 #include "src/Rendering/RenderingDataBuffer.h"
+#include "GameObject.h"
 
 namespace NXTN {
-	class Mesh
+	class Mesh : public GameObject
 	{
 	public:
 		Mesh(VertexArray* va, IndexBuffer* ib);

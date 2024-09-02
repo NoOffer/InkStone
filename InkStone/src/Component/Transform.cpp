@@ -3,6 +3,12 @@
 #include "Transform.h"
 
 namespace NXTN {
+	Transform::Transform()
+		: m_Position(0.0f), m_Rotation(0.0f, 0.0f, 0.0f, 0.0f), m_Scale(1.0f)
+	{
+
+	}
+
 	void Transform::Move(const vec3& dist)
 	{
 		m_Position += dist;

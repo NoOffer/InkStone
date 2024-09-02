@@ -7,7 +7,7 @@ namespace NXTN {
 	class Transform
 	{
 	public:
-		Transform() {}
+		Transform();
 		~Transform() {}
 
 		inline vec3 GetPosition() { return m_Position; }
