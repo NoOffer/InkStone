@@ -114,6 +114,52 @@ namespace NXTN {
 		// Detach shaders
 		glDetachShader(m_RendererID, vertexShader);
 		glDetachShader(m_RendererID, fragmentShader);
+
+		// List shader uniforms
+		int count;
+		glGetProgramiv(m_RendererID, GL_ACTIVE_UNIFORMS, (GLint*)&count);
+
+		GLsizei length;  // Length of uniform name
+		GLint size;      // Size of uniform
+		GLenum type;     // Type of uniform
+		char name[32];   // Name of uniform (NOTE: The name should not be longer than 32 char)
+		for (GLuint i = 0; i < count; i++)
+		{
+			glGetActiveUniform(m_RendererID, i, 32, &length, &size, &type, name);
+
+			switch (type)
+			{
+			case GL_INT:
+				m_Uniforms.push_back({ UniformType::Int, std::string(name) });
+				break;
+			case GL_FLOAT:
+				m_Uniforms.push_back({ UniformType::Float, std::string(name) });
+				break;
+			case GL_FLOAT_VEC2:
+				m_Uniforms.push_back({ UniformType::Float2, std::string(name) });
+				break;
+			case GL_FLOAT_VEC3:
+				m_Uniforms.push_back({ UniformType::Float3, std::string(name) });
+				break;
+			case GL_FLOAT_VEC4:
+				m_Uniforms.push_back({ UniformType::Float4, std::string(name) });
+				break;
+			case GL_FLOAT_MAT4:
+				m_Uniforms.push_back({ UniformType::Mat4, std::string(name) });
+				break;
+			case GL_BOOL:
+				m_Uniforms.push_back({ UniformType::Bool, std::string(name) });
+				break;
+			case GL_SAMPLER_2D:
+				m_Uniforms.push_back({ UniformType::Tex2D, std::string(name) });
+				break;
+			case GL_SAMPLER_CUBE:
+				m_Uniforms.push_back({ UniformType::TexCube, std::string(name) });
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 	OpenGLShader::~OpenGLShader()

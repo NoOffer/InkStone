@@ -22,11 +22,14 @@ namespace NXTN {
 		virtual void SetUniformFloat4(const char* name, const vec4& v) override;
 		virtual void SetUniformMat4(const char* name, const mat4& m) override;
 
+		virtual inline const std::vector<Uniform>& GetUniformList() override { return m_Uniforms; };
+
 	private:
 		int GetUniformPosition(const char* name);
 
 		unsigned int m_RendererID;
 
+		std::vector<Uniform> m_Uniforms;
 		std::unordered_map<std::string, int> m_UniformLocations;
 	};
 }

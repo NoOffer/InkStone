@@ -25,7 +25,7 @@ void Sandbox::Run()
 	vertexBuffer.reset(NXTN::VertexBuffer::Create(vertices, 9));
 
 	// Vertex array layout
-	NXTN::VertexArrayLayout layout{ {NXTN::ShaderDataType::Float, 3, "Vertex Position"} };
+	NXTN::VertexArrayLayout layout{ {NXTN::VertexDataType::Float, 3, "Vertex Position"} };
 
 	// Index buffer
 	unsigned int indices[3] = { 0, 1, 2 };

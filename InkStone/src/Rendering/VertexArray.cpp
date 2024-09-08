@@ -6,13 +6,13 @@ namespace NXTN {
 	// Vertex Array Layout
 	VertexArrayLayout::VertexArrayLayout() : m_Layout(0), m_Stride(0) {}
 
-	VertexArrayLayout::VertexArrayLayout(const std::initializer_list<VertexArrayAtrribute>& il)
+	VertexArrayLayout::VertexArrayLayout(const std::initializer_list<VertexAtrribute>& il)
 	{
 		m_Stride = 0;
 
-		for (const VertexArrayAtrribute& attribute : il)
+		for (const VertexAtrribute& attribute : il)
 		{
-			m_Stride += ShaderDataTypeSize(attribute.type) * attribute.count;
+			m_Stride += VertexDataTypeSize(attribute.type) * attribute.count;
 		}
 
 		m_Layout = il;
@@ -20,11 +20,11 @@ namespace NXTN {
 
 	VertexArrayLayout::~VertexArrayLayout() {}
 
-	void VertexArrayLayout::AddAttribute(ShaderDataType type, unsigned int count, const std::string& name)
+	void VertexArrayLayout::AddAttribute(VertexDataType type, unsigned int count, const std::string& name)
 	{
 		m_Layout.push_back({ type, count, name });
 
-		m_Stride += ShaderDataTypeSize(type) * count;
+		m_Stride += VertexDataTypeSize(type) * count;
 	}
 
 	// Vertex Array
@@ -49,7 +49,7 @@ namespace NXTN {
 	// Vertex Array
 	VertexArray* VertexArray::Create(
 		const std::shared_ptr<VertexBuffer> vertexBuffer,
-		const std::initializer_list<VertexArrayAtrribute>& il)
+		const std::initializer_list<VertexAtrribute>& il)
 	{
 		switch (System::GetGraphicsAPI())
 		{

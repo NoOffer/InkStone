@@ -15,7 +15,7 @@ namespace NXTN {
 		unsigned int index = 0;
 		unsigned int stride = m_Layout.GetStride();
 		unsigned int offset = 0;
-		for (const VertexArrayAtrribute& attribute : m_Layout.GetAttributes())
+		for (const VertexAtrribute& attribute : m_Layout.GetAttributes())
 		{
 			glEnableVertexAttribArray(index);
 			glVertexAttribPointer(
@@ -28,7 +28,7 @@ namespace NXTN {
 			);
 
 			index++;
-			offset += ShaderDataTypeSize(attribute.type);
+			offset += VertexDataTypeSize(attribute.type);
 		}
 
 		glBindVertexArray(0);
@@ -36,7 +36,7 @@ namespace NXTN {
 
 	OpenGLVertexArray::OpenGLVertexArray(
 		const std::shared_ptr<VertexBuffer> vertexBuffer,
-		const std::initializer_list<VertexArrayAtrribute>& il
+		const std::initializer_list<VertexAtrribute>& il
 	)
 		: m_VertexBuffer(vertexBuffer), m_Layout(il)
 	{
@@ -48,7 +48,7 @@ namespace NXTN {
 		unsigned int index = 0;
 		unsigned int stride = m_Layout.GetStride();
 		unsigned int offset = 0;
-		for (const VertexArrayAtrribute& attribute : m_Layout.GetAttributes())
+		for (const VertexAtrribute& attribute : m_Layout.GetAttributes())
 		{
 			glEnableVertexAttribArray(index);
 			glVertexAttribPointer(
@@ -59,7 +59,7 @@ namespace NXTN {
 				stride,
 				(const void*)offset
 			);
-			offset += ShaderDataTypeSize(attribute.type);
+			offset += VertexDataTypeSize(attribute.type);
 		}
 
 		glBindVertexArray(0);

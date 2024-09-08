@@ -6,12 +6,12 @@
 
 namespace NXTN {
 
-	static GLenum ShaderDataTypeToOpenGLType(ShaderDataType type)
+	static GLenum ShaderDataTypeToOpenGLType(VertexDataType type)
 	{
 		switch (type)
 		{
-		case ShaderDataType::Int:   return GL_INT;
-		case ShaderDataType::Float: return GL_FLOAT;
+		case VertexDataType::Int:   return GL_INT;
+		case VertexDataType::Float: return GL_FLOAT;
 		default:                    return -1;
 		}
 	}
@@ -20,7 +20,7 @@ namespace NXTN {
 	{
 	public:
 		OpenGLVertexArray(const std::shared_ptr<VertexBuffer> vertexBuffer, const VertexArrayLayout& layout);
-		OpenGLVertexArray(const std::shared_ptr<VertexBuffer> vertexBuffer, const std::initializer_list<VertexArrayAtrribute>& il);
+		OpenGLVertexArray(const std::shared_ptr<VertexBuffer> vertexBuffer, const std::initializer_list<VertexAtrribute>& il);
 		virtual ~OpenGLVertexArray();
 
 		virtual void Bind() const override;

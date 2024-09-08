@@ -7,6 +7,18 @@
 #include "src/Math/Math.h"
 
 namespace NXTN {
+
+	enum class UniformType
+	{
+		None = 0, Int, Float, Float2, Float3, Float4, Mat4, Bool, Tex2D, TexCube
+	};
+
+	struct Uniform
+	{
+		UniformType type;
+		std::string name;
+	};
+
 	class Shader
 	{
 	public:
@@ -21,6 +33,8 @@ namespace NXTN {
 		virtual void SetUniformFloat3(const char* name, const vec3& v) = 0;
 		virtual void SetUniformFloat4(const char* name, const vec4& v) = 0;
 		virtual void SetUniformMat4(const char* name, const mat4& m) = 0;
+
+		virtual const std::vector<Uniform>& GetUniformList() = 0;
 
 		static Shader* Create(const std::string& vertexSrc, const std::string& fragmentSrc);
 	};

@@ -5,25 +5,25 @@
 
 namespace NXTN {
 
-	enum class ShaderDataType
+	enum class VertexDataType
 	{
 		None = 0, Int, Float
 	};
 
-	static unsigned int ShaderDataTypeSize(ShaderDataType type)
+	static unsigned int VertexDataTypeSize(VertexDataType type)
 	{
 		switch (type)
 		{
-		case ShaderDataType::Int:   return sizeof(int);
-		case ShaderDataType::Float: return sizeof(float);
+		case VertexDataType::Int:   return sizeof(int);
+		case VertexDataType::Float: return sizeof(float);
 		default:                    return -1;
 		}
 	}
 
-	struct VertexArrayAtrribute
+	struct VertexAtrribute
 	{
-		ShaderDataType type;
-		unsigned int count;
+		VertexDataType type;  // Base type of the attribute
+		unsigned int count;   // Number of values (Combined with *type* to form compound values)
 		std::string name;
 	};
 
@@ -31,15 +31,15 @@ namespace NXTN {
 	{
 	public:
 		VertexArrayLayout();
-		VertexArrayLayout(const std::initializer_list<VertexArrayAtrribute>& il);
+		VertexArrayLayout(const std::initializer_list<VertexAtrribute>& il);
 		~VertexArrayLayout();
 
-		void AddAttribute(ShaderDataType type, unsigned int count, const std::string& name);
-		inline const std::vector<VertexArrayAtrribute>& GetAttributes() const { return m_Layout; }
+		void AddAttribute(VertexDataType type, unsigned int count, const std::string& name);
+		inline const std::vector<VertexAtrribute>& GetAttributes() const { return m_Layout; }
 		inline unsigned int GetStride() const { return m_Stride; }
 
 	private:
-		std::vector<VertexArrayAtrribute> m_Layout;
+		std::vector<VertexAtrribute> m_Layout;
 		unsigned int m_Stride;  // The sum of the sizes of all attributes (The size of each vertex)
 	};
 
@@ -54,7 +54,7 @@ namespace NXTN {
 		static VertexArray* Create(const std::shared_ptr<VertexBuffer> vertexBuffer, const VertexArrayLayout& layout);
 		static VertexArray* Create(
 			const std::shared_ptr<VertexBuffer> vertexBuffer,
-			const std::initializer_list<VertexArrayAtrribute>& il
+			const std::initializer_list<VertexAtrribute>& il
 		);
 	};
 }
