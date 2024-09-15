@@ -192,14 +192,14 @@ namespace NXTN {
 		glUniform1f(GetUniformPosition(name), f);
 	}
 
-	void OpenGLShader::SetUniformFloat3(const char* name, const vec3& v)
+	void OpenGLShader::SetUniformFloat3(const char* name, const float& f0, const float& f1, const float& f2)
 	{
-		glUniform3f(GetUniformPosition(name), v.x, v.y, v.z);
+		glUniform3f(GetUniformPosition(name), f0, f1, f2);
 	}
 
-	void OpenGLShader::SetUniformFloat4(const char* name, const vec4& v)
+	void OpenGLShader::SetUniformFloat4(const char* name, const float& f0, const float& f1, const float& f2, const float& f3)
 	{
-		glUniform4f(GetUniformPosition(name), v.x, v.y, v.z, v.w);
+		glUniform4f(GetUniformPosition(name), f0, f1, f2, f3);
 	}
 
 	void OpenGLShader::SetUniformMat4(const char* name, const mat4& m)

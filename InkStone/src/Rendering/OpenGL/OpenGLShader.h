@@ -18,8 +18,8 @@ namespace NXTN {
 		virtual void SetUniformInt(const char* name, const int& i) override;
 		virtual void SetUniformUInt(const char* name, const unsigned int& i) override;
 		virtual void SetUniformFloat(const char* name, const float& f) override;
-		virtual void SetUniformFloat3(const char* name, const vec3& v) override;
-		virtual void SetUniformFloat4(const char* name, const vec4& v) override;
+		virtual void SetUniformFloat3(const char* name, const float& f0, const float& f1, const float& f2) override;
+		virtual void SetUniformFloat4(const char* name, const float& f0, const float& f1, const float& f2, const float& f3) override;
 		virtual void SetUniformMat4(const char* name, const mat4& m) override;
 
 		virtual inline const std::vector<Uniform>& GetUniformList() override { return m_Uniforms; };

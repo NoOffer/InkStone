@@ -30,8 +30,8 @@ namespace NXTN {
 		virtual void SetUniformInt(const char* name, const int& i) = 0;
 		virtual void SetUniformUInt(const char* name, const unsigned int& i) = 0;
 		virtual void SetUniformFloat(const char* name, const float& f) = 0;
-		virtual void SetUniformFloat3(const char* name, const vec3& v) = 0;
-		virtual void SetUniformFloat4(const char* name, const vec4& v) = 0;
+		virtual void SetUniformFloat3(const char* name, const float& f0, const float& f1, const float& f2) = 0;
+		virtual void SetUniformFloat4(const char* name, const float& f0, const float& f1, const float& f2, const float& f3) = 0;
 		virtual void SetUniformMat4(const char* name, const mat4& m) = 0;
 
 		virtual const std::vector<Uniform>& GetUniformList() = 0;
