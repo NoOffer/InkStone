@@ -12,7 +12,10 @@ namespace NXTN {
 		Application();
 		virtual ~Application();
 
-		virtual void Run();
+		virtual void Init();
+		virtual void Update();
+
+		void Run();
 
 	protected:
 		std::unique_ptr<Window> m_Window;

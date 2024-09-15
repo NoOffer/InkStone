@@ -1,20 +1,14 @@
 #include "SandboxApp.h"
 
 Sandbox::Sandbox()
-{
-
-}
-
-void Sandbox::Run()
+	: Application()
 {
 	// Camera
-	NXTN::Camera camera(1.0f, NXTN::vec2i(500, 500), false);
-	camera.transform.SetPosition(0.0f, 0.0f, -10.0f);
+	m_Camera.reset(new NXTN::Camera(1.0f, NXTN::vec2i(500, 500), false));
+	m_Camera->transform.SetPosition(0.0f, 0.0f, -10.0f);
 
 	// Temporary draw data
 	std::shared_ptr<NXTN::VertexBuffer> vertexBuffer;
-	std::shared_ptr<NXTN::Mesh> mesh;
-	std::shared_ptr<NXTN::Shader> shader;
 
 	// Vertex buffer
 	float vertices[9] = {
@@ -31,7 +25,7 @@ void Sandbox::Run()
 	unsigned int indices[3] = { 0, 1, 2 };
 
 	//Mesh
-	mesh.reset(new NXTN::Mesh(NXTN::VertexArray::Create(vertexBuffer, layout), NXTN::IndexBuffer::Create(indices, 3)));
+	m_Mesh.reset(new NXTN::Mesh(NXTN::VertexArray::Create(vertexBuffer, layout), NXTN::IndexBuffer::Create(indices, 3)));
 
 	// Shader
 	std::string vertShaderSrc = R"(
@@ -64,25 +58,30 @@ void Sandbox::Run()
 				color = vec4(v_PositionOS + 0.5, 1.0);
 			}
 		)";
-	shader.reset(NXTN::Shader::Create(vertShaderSrc, fragShaderSrc));
+	m_Shader.reset(NXTN::Shader::Create(vertShaderSrc, fragShaderSrc));
+}
 
-	// ---------------------------------------------------------------------------------------------------------------- Game loop
-	while (true)
-	{
-		// Rendering
-		NXTN::Renderer::SetClearColor(1.0f, 0.0f, 1.0f);
+void Sandbox::Init()
+{
 
-		NXTN::Renderer::ClearFrameBuffer();
+}
 
-		shader->Bind();
-		shader->SetUniformMat4("u_ModelMatrix", mesh->transform.GetModelMatrix());
-		shader->SetUniformMat4("u_VPMatrix", camera.GetViewProjMatrix());
+void Sandbox::Update()
+{
+	// Rendering
+	NXTN::Renderer::SetClearColor(1.0f, 0.0f, 1.0f);
 
-		NXTN::Renderer::DrawMesh(*mesh);
+	NXTN::Renderer::ClearFrameBuffer();
 
-		m_Window->Update();
-	}
-	// ---------------------------------------------------------------------------------------------------------------- Game loop
+	m_Shader->Bind();
+	m_Shader->SetUniformMat4("u_ModelMatrix", m_Mesh->transform.GetModelMatrix());
+	m_Shader->SetUniformMat4("u_VPMatrix", m_Camera->GetViewProjMatrix());
+
+	NXTN::Renderer::DrawMesh(*m_Mesh);
+
+	m_Window->Update();
+
+	Application::Update();
 }
 
 NXTN::Application* NXTN::CreateApplication()

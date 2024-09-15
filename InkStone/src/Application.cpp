@@ -21,8 +21,23 @@ namespace NXTN {
 
 	}
 
-	void Application::Run()
+	void Application::Init()
 	{
 
+	}
+
+	void Application::Update()
+	{
+		Time::UpdateTime();
+	}
+
+	void Application::Run()
+	{
+		Init();
+
+		while (true)
+		{
+			Update();
+		}
 	}
 }
