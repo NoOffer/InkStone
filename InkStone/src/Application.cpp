@@ -11,6 +11,8 @@ namespace NXTN {
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
 
+		Time::InitTime();
+
 		Input::Init(m_Window->GetNativeWindow());
 	}
 

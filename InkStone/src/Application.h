@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Input.h"
+#include "Time.h"
 #include "Window.h"
 #include "Rendering/Renderer.h"
 
