@@ -4,8 +4,16 @@
 
 #include "src/Window.h"
 
+#include "src/Layer.h"
+#include "src/LayerStack.h"
+
 #include "src/Component/Camera.h"
 #include "src/Component/Mesh.h"
+
+#include "src/Event/Event.h"
+#include "src/Event/ApplicationEvent.h"
+#include "src/Event/KeyEvent.h"
+#include "src/Event/MouseEvent.h"
 
 #include "src/Rendering/Renderer.h"
 #include "src/Rendering/RenderingDataBuffer.h"

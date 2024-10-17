@@ -12,6 +12,7 @@ namespace NXTN {
 
 		void PushLayer(Layer* layer);
 		void Update();
+
 	private:
 		std::vector<Layer*> m_LayerStack;
 	};

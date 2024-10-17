@@ -21,20 +21,17 @@ namespace NXTN {
 
 	}
 
-	void Application::Init()
-	{
-
-	}
-
 	void Application::Update()
 	{
 		Time::UpdateTime();
+
+		m_Window->Update();
+
+		m_LayerStack.Update();
 	}
 
 	void Application::Run()
 	{
-		Init();
-
 		while (true)
 		{
 			Update();

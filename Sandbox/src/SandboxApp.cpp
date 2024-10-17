@@ -1,8 +1,10 @@
 #include "SandboxApp.h"
 
-Sandbox::Sandbox()
-	: Application()
+// Sandbox Layer
+SandboxLayer::SandboxLayer()
 {
+	m_Name = "Sandbox Gameplay Layer";
+
 	// Camera
 	m_Camera.reset(new NXTN::Camera(1.0f, NXTN::vec2i(500, 500), false));
 	m_Camera->transform.SetPosition(0.0f, 0.0f, -10.0f);
@@ -61,12 +63,7 @@ Sandbox::Sandbox()
 	m_Shader.reset(NXTN::Shader::Create(vertShaderSrc, fragShaderSrc));
 }
 
-void Sandbox::Init()
-{
-
-}
-
-void Sandbox::Update()
+void SandboxLayer::Update()
 {
 	// Rendering
 	NXTN::Renderer::SetClearColor(1.0f, 0.0f, 1.0f);
@@ -78,9 +75,22 @@ void Sandbox::Update()
 	m_Shader->SetUniformMat4("u_VPMatrix", m_Camera->GetViewProjMatrix());
 
 	NXTN::Renderer::DrawMesh(*m_Mesh);
+}
 
-	m_Window->Update();
+void SandboxLayer::Dispatch(NXTN::Event& event)
+{
 
+}
+
+// Sandbox Application
+Sandbox::Sandbox()
+	: Application()
+{
+	m_LayerStack.PushLayer(new SandboxLayer());
+}
+
+void Sandbox::Update()
+{
 	Application::Update();
 }
 
