@@ -12,6 +12,8 @@ namespace NXTN {
 		Application();
 		virtual ~Application();
 
+		const Application& Get() { return *s_Instance; }
+
 		virtual void Update();
 
 		void Run();
@@ -20,6 +22,9 @@ namespace NXTN {
 		std::shared_ptr<Window> m_Window;
 
 		LayerStack m_LayerStack;
+
+	private:
+		static Application* s_Instance;
 	};
 
 	Application* CreateApplication();
