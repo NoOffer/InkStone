@@ -3,6 +3,7 @@
 #include "src/Math/Math.h"
 
 #include "src/Window.h"
+#include "src/UI.h"
 
 #include "src/Layer.h"
 #include "src/LayerStack.h"

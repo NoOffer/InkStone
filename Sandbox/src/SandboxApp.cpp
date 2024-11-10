@@ -87,6 +87,7 @@ Sandbox::Sandbox()
 	: Application()
 {
 	m_LayerStack.PushLayer(new SandboxLayer());
+	m_LayerStack.PushLayer(NXTN::UI::Create(m_Window, "Test Window"));
 }
 
 void Sandbox::Update()

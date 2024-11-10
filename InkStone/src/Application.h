@@ -2,8 +2,7 @@
 
 #include "Input.h"
 #include "LayerStack.h"
-#include "Time.h"
-#include "Window.h"
+#include "UI.h"
 #include "Rendering/Renderer.h"
 
 namespace NXTN {
@@ -18,7 +17,7 @@ namespace NXTN {
 		void Run();
 
 	protected:
-		std::unique_ptr<Window> m_Window;
+		std::shared_ptr<Window> m_Window;
 
 		LayerStack m_LayerStack;
 	};
