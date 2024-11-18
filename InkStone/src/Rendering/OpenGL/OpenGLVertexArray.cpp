@@ -4,7 +4,7 @@
 
 namespace NXTN {
 
-	OpenGLVertexArray::OpenGLVertexArray(const std::shared_ptr<VertexBuffer> vertexBuffer, const VertexArrayLayout& layout)
+	OpenGLVertexArray::OpenGLVertexArray(VertexBuffer* vertexBuffer, const VertexArrayLayout& layout)
 		: m_VertexBuffer(vertexBuffer), m_Layout(layout)
 	{
 		glCreateVertexArrays(1, &m_ObjectID);
@@ -34,10 +34,7 @@ namespace NXTN {
 		glBindVertexArray(0);
 	}
 
-	OpenGLVertexArray::OpenGLVertexArray(
-		const std::shared_ptr<VertexBuffer> vertexBuffer,
-		const std::initializer_list<VertexAtrribute>& il
-	)
+	OpenGLVertexArray::OpenGLVertexArray(VertexBuffer* vertexBuffer, const std::initializer_list<VertexAtrribute>& il)
 		: m_VertexBuffer(vertexBuffer), m_Layout(il)
 	{
 		glCreateVertexArrays(1, &m_ObjectID);

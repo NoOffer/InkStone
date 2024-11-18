@@ -10,24 +10,27 @@ SandboxLayer::SandboxLayer()
 	m_Camera->transform.SetPosition(0.0f, 0.0f, -10.0f);
 
 	// Temporary draw data
-	std::shared_ptr<NXTN::VertexBuffer> vertexBuffer;
-
 	// Vertex buffer
-	float vertices[9] = {
+	// 1 3
+	// 0 2
+	float vertices[12] = {
 		-0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f
+		-0.5f,  0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f,
+		 0.5f,  0.5f, 0.0f
 	};
-	vertexBuffer.reset(NXTN::VertexBuffer::Create(vertices, 9));
 
 	// Vertex array layout
 	NXTN::VertexArrayLayout layout{ {NXTN::VertexDataType::Float, 3, "Vertex Position"} };
 
 	// Index buffer
-	unsigned int indices[3] = { 0, 1, 2 };
+	unsigned int indices[6] = {
+		0, 1, 3,
+		0, 3, 2
+	};
 
 	//Mesh
-	m_Mesh.reset(new NXTN::Mesh(NXTN::VertexArray::Create(vertexBuffer, layout), NXTN::IndexBuffer::Create(indices, 3)));
+	m_Mesh.reset(new NXTN::Mesh(NXTN::VertexArray::Create(NXTN::VertexBuffer::Create(vertices, 12), layout), NXTN::IndexBuffer::Create(indices, 6)));
 
 	// Shader
 	std::string vertShaderSrc = R"(

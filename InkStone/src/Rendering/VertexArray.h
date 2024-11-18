@@ -51,10 +51,7 @@ namespace NXTN {
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 
-		static VertexArray* Create(const std::shared_ptr<VertexBuffer> vertexBuffer, const VertexArrayLayout& layout);
-		static VertexArray* Create(
-			const std::shared_ptr<VertexBuffer> vertexBuffer,
-			const std::initializer_list<VertexAtrribute>& il
-		);
+		static VertexArray* Create(VertexBuffer* vertexBuffer, const VertexArrayLayout& layout);
+		static VertexArray* Create(VertexBuffer* vertexBuffer, const std::initializer_list<VertexAtrribute>& il);
 	};
 }

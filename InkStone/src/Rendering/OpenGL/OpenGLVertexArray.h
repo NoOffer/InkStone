@@ -19,8 +19,8 @@ namespace NXTN {
 	class OpenGLVertexArray : public VertexArray
 	{
 	public:
-		OpenGLVertexArray(const std::shared_ptr<VertexBuffer> vertexBuffer, const VertexArrayLayout& layout);
-		OpenGLVertexArray(const std::shared_ptr<VertexBuffer> vertexBuffer, const std::initializer_list<VertexAtrribute>& il);
+		OpenGLVertexArray(VertexBuffer* vertexBuffer, const VertexArrayLayout& layout);
+		OpenGLVertexArray(VertexBuffer* vertexBuffer, const std::initializer_list<VertexAtrribute>& il);
 		virtual ~OpenGLVertexArray();
 
 		virtual void Bind() const override;

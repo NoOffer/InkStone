@@ -10,6 +10,7 @@ namespace NXTN {
 	Application::Application()
 	{
 		if (s_Instance) Log::Warning("Duplicated Application: Application should be unique");
+
 		s_Instance = this;
 
 		Renderer::Init();

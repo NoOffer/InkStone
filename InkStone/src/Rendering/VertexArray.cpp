@@ -28,7 +28,7 @@ namespace NXTN {
 	}
 
 	// Vertex Array
-	VertexArray* VertexArray::Create(const std::shared_ptr<VertexBuffer> vertexBuffer, const VertexArrayLayout& layout)
+	VertexArray* VertexArray::Create(VertexBuffer* vertexBuffer, const VertexArrayLayout& layout)
 	{
 		switch (System::GetGraphicsAPI())
 		{
@@ -47,9 +47,7 @@ namespace NXTN {
 	}
 
 	// Vertex Array
-	VertexArray* VertexArray::Create(
-		const std::shared_ptr<VertexBuffer> vertexBuffer,
-		const std::initializer_list<VertexAtrribute>& il)
+	VertexArray* VertexArray::Create(VertexBuffer* vertexBuffer, const std::initializer_list<VertexAtrribute>& il)
 	{
 		switch (System::GetGraphicsAPI())
 		{
