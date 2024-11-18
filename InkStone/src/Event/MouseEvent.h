@@ -49,14 +49,14 @@ namespace NXTN {
 		float m_XOffset, m_YOffset;
 	};
 
-	class MouseMovementEvent : public Event
+	class MouseMoveEvent : public Event
 	{
 	public:
-		MouseMovementEvent(float x, float y) : m_MovementX(x), m_MovementY(y) {}
+		MouseMoveEvent(float x, float y) : m_MovementX(x), m_MovementY(y) {}
 
 		virtual EventFlag GetEventFlag() const override { return EventFlag::Mouse; }
 
-		virtual EventType GetEventType() const override { return EventType::MouseMovement; }
+		virtual EventType GetEventType() const override { return EventType::MouseMove; }
 
 		inline float GetX() const { return m_MovementX; }
 

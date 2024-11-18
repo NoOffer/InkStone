@@ -11,7 +11,7 @@ namespace NXTN {
 		AppUpdate, AppRender,
 		WindowClosed, WindowResized,
 		KeyPressed, KeyReleased,
-		MouseButtonPressed, MouseButtonReleased, MouseScroll, MouseMovement
+		MouseButtonPressed, MouseButtonReleased, MouseScroll, MouseMove
 	};
 
 	enum class EventFlag
