@@ -80,9 +80,9 @@ void SandboxLayer::Update()
 	NXTN::Renderer::DrawMesh(*m_Mesh);
 }
 
-void SandboxLayer::Dispatch(NXTN::Event& event)
+bool SandboxLayer::OnEvent(NXTN::Event& event)
 {
-
+	return false;
 }
 
 // Sandbox Application

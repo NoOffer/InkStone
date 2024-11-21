@@ -17,15 +17,15 @@ namespace NXTN {
 		UI(const std::string& name = "UI") : Layer(name) {}
 	};
 
-	class Inspector : public Layer
-	{
-	public:
-		static void Init() {}
-		static void InspectShader(const Shader& shader) {}
+	//class Inspector : public Layer
+	//{
+	//public:
+	//	static void Init() {}
+	//	static void InspectShader(const Shader& shader) {}
 
-	private:
-		Inspector() : Layer("UI") {}
-		~Inspector() {}
-	};
+	//private:
+	//	Inspector() : Layer("UI") {}
+	//	~Inspector() {}
+	//};
 }
 

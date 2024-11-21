@@ -14,18 +14,17 @@ namespace NXTN {
 
 	void LayerStack::PushLayer(Layer* layer)
 	{
-		m_LayerStack.emplace(m_LayerStack.end(), layer);
+		m_LayerStack.emplace_back(layer);
 	}
 
 	void LayerStack::OnEvent(Event& event)
 	{
-		switch (event.GetEventType())
+		for (Layer* layer : m_LayerStack)
 		{
-		case EventType::WindowClosed:
-
-			break;
-		default:
-			break;
+			if (layer->OnEvent(event))
+			{
+				break;
+			}
 		}
 	}
 

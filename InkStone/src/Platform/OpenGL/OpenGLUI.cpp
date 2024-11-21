@@ -13,6 +13,53 @@ namespace NXTN {
 		ImGui::StyleColorsDark();
 
 		ImGui_ImplOpenGL3_Init("#version 410");
+
+		ImGuiIO& io = ImGui::GetIO();
+		io.DisplaySize = ImVec2(m_Window->GetWidth(), m_Window->GetHeight());
+	}
+
+	bool OpenGLUI::OnEvent(Event& event)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+
+		switch (event.GetEventType())
+		{
+		case EventType::WindowResized:
+		{
+			io.DisplaySize = ImVec2(m_Window->GetWidth(), m_Window->GetHeight());
+			break;
+		}
+		case EventType::KeyPressed:
+			break;
+		case EventType::KeyReleased:
+			break;
+		case EventType::MouseButtonPressed:
+		{
+			MouseButtonPressEvent mouseBtnPressEvent = *(MouseButtonPressEvent*)&event;
+			io.MouseDown[mouseBtnPressEvent.GetButton()] = true;
+			break;
+		}
+		case EventType::MouseButtonReleased:
+		{
+			MouseButtonPressEvent mouseBtnReleaseEvent = *(MouseButtonPressEvent*)&event;
+			io.MouseDown[mouseBtnReleaseEvent.GetButton()] = false;
+			break;
+		}
+		case EventType::MouseMove:
+		{
+			MouseMoveEvent mouseMoveEvent = *(MouseMoveEvent*)&event;
+			io.MousePos = ImVec2(mouseMoveEvent.GetX(), mouseMoveEvent.GetY());
+			break;
+		}
+		case EventType::MouseScroll:
+		{
+			MouseScrollEvent mouseScrollEvent = *(MouseScrollEvent*)&event;
+			io.MouseWheel = mouseScrollEvent.GetX();
+			break;
+		}
+		}
+
+		return false;
 	}
 
 	void OpenGLUI::Update()

@@ -20,7 +20,7 @@ namespace NXTN {
 
 		virtual EventFlag GetEventFlag() const override { return EventFlag::Application; }
 
-		virtual EventType GetEventType() const override { return EventType::WindowClosed; }
+		virtual EventType GetEventType() const override { return EventType::WindowResized; }
 
 		inline int GetNewWidth() const { return m_NewWidth; }
 

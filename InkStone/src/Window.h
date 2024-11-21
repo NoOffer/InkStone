@@ -7,7 +7,7 @@
 #include "src/System.h"
 
 namespace NXTN {
-	class Window : public Layer
+	class Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;

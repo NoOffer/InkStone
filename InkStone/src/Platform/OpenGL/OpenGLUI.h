@@ -11,6 +11,7 @@ namespace NXTN {
 		OpenGLUI(const std::shared_ptr<Window>& window, const std::string& name);
 		~OpenGLUI() {}
 
+		virtual bool OnEvent(Event& event) override;
 		virtual void Update() override;
 
 	private:

@@ -12,7 +12,7 @@ namespace NXTN {
 		virtual ~Layer() {}
 
 		virtual void Update() {}
-		virtual void Dispatch(Event& event) {}
+		virtual inline bool OnEvent(Event& event) { return false; }
 
 		inline const std::string& GetName() const { return m_Name; }
 

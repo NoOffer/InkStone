@@ -47,14 +47,13 @@ namespace NXTN {
 
 	void Application::OnWindowEvent(Event& event)
 	{
-		switch (event.GetEventType())
+		if (event.GetEventType() == EventType::WindowClosed)
 		{
-		case EventType::WindowClosed:
 			m_Alive = false;
-			break;
-		default:
+		}
+		else
+		{
 			m_LayerStack.OnEvent(event);
-			break;
 		}
 	}
 }

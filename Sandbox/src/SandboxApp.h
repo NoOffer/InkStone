@@ -8,7 +8,7 @@ public:
 	SandboxLayer();
 
 	virtual void Update() override;
-	virtual void Dispatch(NXTN::Event& event) override;
+	virtual bool OnEvent(NXTN::Event& event) override;
 
 private:
 	std::shared_ptr<NXTN::Camera> m_Camera;
