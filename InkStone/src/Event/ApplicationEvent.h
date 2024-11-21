@@ -16,7 +16,7 @@ namespace NXTN {
 	class WindowResizeEvent : public Event
 	{
 	public:
-		WindowResizeEvent(unsigned int width, unsigned int height) :m_NewWidth(width), m_NewHeight(height) {};
+		WindowResizeEvent(int width, int height) :m_NewWidth(width), m_NewHeight(height) {};
 
 		virtual EventFlag GetEventFlag() const override { return EventFlag::Application; }
 
@@ -27,7 +27,7 @@ namespace NXTN {
 		inline int GetNewHeight() const { return m_NewHeight; }
 
 	private:
-		unsigned int m_NewWidth, m_NewHeight;
+		int m_NewWidth, m_NewHeight;
 	};
 
 	class ApplicationUpdateEvent : public Event

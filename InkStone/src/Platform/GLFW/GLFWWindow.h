@@ -14,20 +14,29 @@ namespace NXTN {
 
 		virtual void Update() override;
 
-		virtual inline unsigned int GetWidth() const override { return m_Width; }
-		virtual inline unsigned int GetHeight() const override { return m_Height; }
+		virtual inline unsigned int GetWidth() const override { return m_WinData.width; }
+		virtual inline unsigned int GetHeight() const override { return m_WinData.height; }
 
-		virtual inline bool IsVSync() const override { return m_VSync; }
+		virtual inline bool IsVSync() const override { return m_WinData.vSync; }
 		inline void SetVSync(bool enabled) override;
+
+		virtual void SetEventCallback(const EventCallbackFn& callback) override { m_WinData.EventCallback = callback; }
 
 		virtual inline void* GetNativeWindow() const override { return m_Window; }
 
 	private:
 		GLFWwindow* m_Window;
 
-		unsigned int m_Width, m_Height;
-		std::string m_Title;
-		bool m_VSync;
+		struct WindowData
+		{
+			int width = 0, height = 0;
+			std::string title;
+			bool vSync = false;
+
+			EventCallbackFn EventCallback;
+		};
+
+		WindowData m_WinData;
 	};
 }
 

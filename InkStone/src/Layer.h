@@ -1,13 +1,14 @@
 #pragma once
 
-#include "Event/Event.h"
+#include "Event/ApplicationEvent.h"
+#include "Event/KeyEvent.h"
+#include "Event/MouseEvent.h"
 
 namespace NXTN {
 
 	class Layer
 	{
 	public:
-		Layer(const std::string& name = "Layer");
 		virtual ~Layer() {}
 
 		virtual void Update() {}
@@ -16,6 +17,8 @@ namespace NXTN {
 		inline const std::string& GetName() const { return m_Name; }
 
 	protected:
+		Layer(const std::string& name = "Layer");
+
 		std::string m_Name;
 	};
 }

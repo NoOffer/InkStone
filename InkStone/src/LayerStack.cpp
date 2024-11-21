@@ -17,6 +17,18 @@ namespace NXTN {
 		m_LayerStack.emplace(m_LayerStack.end(), layer);
 	}
 
+	void LayerStack::OnEvent(Event& event)
+	{
+		switch (event.GetEventType())
+		{
+		case EventType::WindowClosed:
+
+			break;
+		default:
+			break;
+		}
+	}
+
 	void LayerStack::Update()
 	{
 		for (Layer* layer : m_LayerStack)

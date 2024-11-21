@@ -6,8 +6,13 @@ namespace NXTN {
 	static bool s_GLFWInitialized = false;
 
 	OpenGLWindow::OpenGLWindow(unsigned int width, unsigned int height, std::string title, bool vSync)
-		: m_Width(width), m_Height(height), m_Title(title), m_VSync(vSync)
 	{
+		m_WinData.width = width;
+		m_WinData.height = height;
+		m_WinData.vSync = vSync;
+		m_WinData.EventCallback = [](Event&) {};
+
+		// GLFW initialization
 		// Create window and context
 		m_Window = glfwCreateWindow((int)width, (int)height, title.c_str(), nullptr, nullptr);
 		if (!m_Window)
@@ -16,6 +21,8 @@ namespace NXTN {
 			NXTN_ERROR;
 		}
 		glfwMakeContextCurrent(m_Window);
+
+		glfwSetWindowUserPointer(m_Window, &m_WinData);
 
 		// GLAD initialization
 		if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -34,7 +41,26 @@ namespace NXTN {
 		Log::Info("  ©¸- OpenGL Version: %s", glGetString(GL_VERSION));
 
 		// V Sync
-		glfwSwapInterval(m_VSync ? 1 : 0);
+		glfwSwapInterval(m_WinData.vSync ? 1 : 0);
+
+		// GLFW event callbacks
+		// Window close
+		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
+			{
+				(*(WindowData*)glfwGetWindowUserPointer(window)).EventCallback(WindowCloseEvent());
+			}
+		);
+		// Window resize
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
+			{
+				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
+
+		windowData.width = width;
+		windowData.height = height;
+
+		windowData.EventCallback(WindowResizeEvent(width, height));
+			}
+		);
 	}
 
 	OpenGLWindow::~OpenGLWindow()
@@ -53,6 +79,6 @@ namespace NXTN {
 	{
 		glfwSwapInterval(enabled ? 1 : 0);
 
-		m_VSync = enabled;
+		m_WinData.vSync = enabled;
 	}
 }

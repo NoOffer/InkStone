@@ -12,7 +12,7 @@ namespace NXTN {
 		Application();
 		virtual ~Application();
 
-		const Application& Get() { return *s_Instance; }
+		static inline const Application& Get() { return *s_Instance; }
 
 		virtual void Update();
 
@@ -23,7 +23,11 @@ namespace NXTN {
 
 		LayerStack m_LayerStack;
 
+		bool m_Alive;
+
 	private:
+		void OnWindowEvent(Event& event);
+
 		static Application* s_Instance;
 	};
 

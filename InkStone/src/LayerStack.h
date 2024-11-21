@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Layer.h"
+#include "Window.h"
 
 namespace NXTN {
 
@@ -11,6 +11,7 @@ namespace NXTN {
 		virtual ~LayerStack();
 
 		void PushLayer(Layer* layer);
+		void OnEvent(Event& event);
 		void Update();
 
 	private:

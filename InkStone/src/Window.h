@@ -2,13 +2,16 @@
 
 //#include "Core.h"
 
+#include "src/Layer.h"
 #include "src/Log.h"
 #include "src/System.h"
 
 namespace NXTN {
-	class Window
+	class Window : public Layer
 	{
 	public:
+		using EventCallbackFn = std::function<void(Event&)>;
+
 		virtual ~Window() {}
 
 		virtual void Update() = 0;
@@ -18,6 +21,8 @@ namespace NXTN {
 
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
+
+		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 
 		virtual void* GetNativeWindow() const = 0;
 
