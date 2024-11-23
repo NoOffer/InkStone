@@ -21,6 +21,8 @@ namespace NXTN {
 		Time::InitTime();
 
 		//Input::Init(m_Window->GetNativeWindow());
+
+		m_LayerStack.PushLayer(UI::Create(m_Window, "Test Window"));
 	}
 
 	Application::~Application()

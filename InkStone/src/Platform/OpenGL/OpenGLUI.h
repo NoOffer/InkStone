@@ -14,9 +14,9 @@ namespace NXTN {
 		virtual bool OnEvent(Event& event) override;
 		virtual void Update() override;
 
-	private:
+	protected:
 		const std::shared_ptr<Window>& m_Window;
 
-		std::string m_Name;
+		std::string m_WindowTitle;
 	};
 }
