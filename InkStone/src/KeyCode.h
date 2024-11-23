@@ -4,9 +4,9 @@
 #define NXTN_KEY_UNKNOWN            -1
 
 /* --------- Mouse Buttons -------- */
-#define NXTN_MOUSE_BUTTON_0         0
-#define NXTN_MOUSE_BUTTON_1         1
-#define NXTN_MOUSE_BUTTON_2         2
+#define NXTN_MOUSE_BUTTON_0         0  // Left
+#define NXTN_MOUSE_BUTTON_1         1  // Right
+#define NXTN_MOUSE_BUTTON_2         2  // Middle
 #define NXTN_MOUSE_BUTTON_3         3
 #define NXTN_MOUSE_BUTTON_4         4
 #define NXTN_MOUSE_BUTTON_5         5

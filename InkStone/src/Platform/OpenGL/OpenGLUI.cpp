@@ -6,7 +6,7 @@
 
 namespace NXTN {
 	OpenGLUI::OpenGLUI(const std::shared_ptr<Window>& window, const std::string& name)
-		: m_Window(window)
+		: UI(), m_Window(window)
 	{
 		m_WindowTitle = name + " (OpenGL)";
 
@@ -14,11 +14,21 @@ namespace NXTN {
 
 		ImGui::StyleColorsDark();
 
-		ImGui_ImplOpenGL3_Init("#version 410");
-
 		ImGuiIO& io = ImGui::GetIO();
+
+		if (io.BackendRendererUserData == nullptr)
+		{
+			ImGui_ImplOpenGL3_Init("#version 410");
+		}
+
+		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
+		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
+
 		io.DisplaySize = ImVec2(m_Window->GetWidth(), m_Window->GetHeight());
 
+		io.KeyMap[ImGuiMouseButton_Left] = NXTN_MOUSE_BUTTON_LEFT;
+		io.KeyMap[ImGuiMouseButton_Right] = NXTN_MOUSE_BUTTON_RIGHT;
+		io.KeyMap[ImGuiMouseButton_Middle] = NXTN_MOUSE_BUTTON_MIDDLE;
 		io.KeyMap[ImGuiKey_Tab] = NXTN_KEY_TAB;
 		io.KeyMap[ImGuiKey_LeftArrow] = NXTN_KEY_LEFT;
 		io.KeyMap[ImGuiKey_RightArrow] = NXTN_KEY_RIGHT;
@@ -59,26 +69,29 @@ namespace NXTN {
 			break;
 		case EventType::MouseButtonPressed:
 		{
-			MouseButtonPressEvent mouseBtnPressEvent = *(MouseButtonPressEvent*)&event;
-			io.MouseDown[mouseBtnPressEvent.GetButton()] = true;
+			int mouseBtnCode = (*(MouseButtonPressEvent*)&event).GetButton();
+			if (mouseBtnCode < NXTN_MOUSE_BUTTON_3)  // ImGui mostly uses left, right, and middle button only. Setting other buttons could cause problem
+				io.MouseDown[mouseBtnCode] = true;
 			break;
 		}
 		case EventType::MouseButtonReleased:
 		{
-			MouseButtonPressEvent mouseBtnReleaseEvent = *(MouseButtonPressEvent*)&event;
-			io.MouseDown[mouseBtnReleaseEvent.GetButton()] = false;
+			int mouseBtnCode = (*(MouseButtonPressEvent*)&event).GetButton();
+			if (mouseBtnCode < NXTN_MOUSE_BUTTON_3)  // ImGui mostly uses left, right, and middle button only. Setting other buttons could cause problem
+				io.MouseDown[mouseBtnCode] = false;
 			break;
 		}
 		case EventType::MouseMove:
 		{
-			MouseMoveEvent mouseMoveEvent = *(MouseMoveEvent*)&event;
-			io.MousePos = ImVec2(mouseMoveEvent.GetX(), mouseMoveEvent.GetY());
+			MouseMoveEvent e = *(MouseMoveEvent*)&event;
+			io.MousePos = ImVec2(e.GetX(), e.GetY());
 			break;
 		}
 		case EventType::MouseScroll:
 		{
-			MouseScrollEvent mouseScrollEvent = *(MouseScrollEvent*)&event;
-			io.MouseWheel = mouseScrollEvent.GetX();
+			MouseScrollEvent e = *(MouseScrollEvent*)&event;
+			io.MouseWheelH += e.GetX();
+			io.MouseWheel += e.GetY();
 			break;
 		}
 		}
