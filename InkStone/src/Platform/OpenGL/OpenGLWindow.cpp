@@ -1,6 +1,8 @@
 #include "pch.h"
 
-#include "GLFWWindow.h"
+#include "OpenGLWindow.h"
+
+#include "src/Platform/GLFW/GLFWKeyMap.h"
 
 namespace NXTN {
 	static bool s_GLFWInitialized = false;
@@ -64,6 +66,8 @@ namespace NXTN {
 			{
 				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
 
+		key = keycodeMapFromGLFW[key];
+
 		switch (action)
 		{
 		case GLFW_PRESS:
@@ -81,6 +85,8 @@ namespace NXTN {
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int key, int action, int mods)
 			{
 				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
+
+		key = keycodeMapFromGLFW[key];
 
 		switch (action)
 		{
