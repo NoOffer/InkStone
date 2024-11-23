@@ -11,10 +11,12 @@ namespace NXTN {
 		virtual ~LayerStack();
 
 		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* layer);
 		void OnEvent(Event& event);
 		void Update();
 
 	private:
 		std::vector<Layer*> m_LayerStack;
+		std::vector<Layer*> m_OverlayStack;
 	};
 }

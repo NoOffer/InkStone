@@ -22,7 +22,7 @@ namespace NXTN {
 
 		//Input::Init(m_Window->GetNativeWindow());
 
-		m_LayerStack.PushLayer(UI::Create(m_Window, "Test Window"));
+		m_LayerStack.PushOverlay(UI::Create(m_Window, "Test Window"));
 	}
 
 	Application::~Application()

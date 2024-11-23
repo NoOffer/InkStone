@@ -17,13 +17,25 @@ namespace NXTN {
 		m_LayerStack.emplace_back(layer);
 	}
 
+	void LayerStack::PushOverlay(Layer* layer)
+	{
+		m_OverlayStack.emplace_back(layer);
+	}
+
 	void LayerStack::OnEvent(Event& event)
 	{
 		for (Layer* layer : m_LayerStack)
 		{
 			if (layer->OnEvent(event))
 			{
-				break;
+				return;
+			}
+		}
+		for (Layer* layer : m_OverlayStack)
+		{
+			if (layer->OnEvent(event))
+			{
+				return;
 			}
 		}
 	}
@@ -31,6 +43,8 @@ namespace NXTN {
 	void LayerStack::Update()
 	{
 		for (Layer* layer : m_LayerStack)
+			layer->Update();
+		for (Layer* layer : m_OverlayStack)
 			layer->Update();
 	}
 }
