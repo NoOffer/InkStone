@@ -26,9 +26,9 @@ namespace NXTN {
 				stride,
 				(const void*)offset
 			);
+			offset += VertexDataTypeSize(attribute.type) * attribute.count;
 
 			index++;
-			offset += VertexDataTypeSize(attribute.type);
 		}
 
 		glBindVertexArray(0);
@@ -56,7 +56,9 @@ namespace NXTN {
 				stride,
 				(const void*)offset
 			);
-			offset += VertexDataTypeSize(attribute.type);
+			offset += VertexDataTypeSize(attribute.type) * attribute.count;
+
+			index++;
 		}
 
 		glBindVertexArray(0);
