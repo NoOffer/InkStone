@@ -1,5 +1,7 @@
 #include "pch.h"
 
+#include "src/System.h"
+
 #include "OpenGL/OpenGLShader.h"
 
 namespace NXTN {

@@ -3,7 +3,6 @@
 #include "src/Core.h"
 
 #include "src/Log.h"
-#include "src/System.h"
 #include "src/Math/Math.h"
 
 namespace NXTN {
