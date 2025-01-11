@@ -31,13 +31,16 @@ project "InkStone"
 		"%{prj.name}/pch.cpp",
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/include/stb_image/**.h",
+		"%{prj.name}/include/stb_image/**.cpp"
 	}
 
 	includedirs{
 		"%{prj.name}",
 		"%{prj.name}/include/GLFW/include",
 		"%{prj.name}/include/GLAD/include",
-		"%{prj.name}/include/imgui/"
+		"%{prj.name}/include/imgui/",
+		"%{prj.name}/include/stb_image/"
 	}
 	
 	syslibdirs{

@@ -13,15 +13,18 @@ SandboxLayer::SandboxLayer()
 	// Vertex buffer
 	// 1 3
 	// 0 2
-	float vertices[12] = {
-		-0.5f, -0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.5f,  0.5f, 0.0f
+	float vertices[20] = {
+		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f
 	};
 
 	// Vertex array layout
-	NXTN::VertexArrayLayout layout{ {NXTN::VertexDataType::Float, 3, "Vertex Position"} };
+	NXTN::VertexArrayLayout layout({
+		{NXTN::VertexDataType::Float, 3, "Vertex Position"},
+		{NXTN::VertexDataType::Float, 2, "Texture Coordinate"}
+		});
 
 	// Index buffer
 	unsigned int indices[6] = {
@@ -30,22 +33,28 @@ SandboxLayer::SandboxLayer()
 	};
 
 	//Mesh
-	m_Mesh.reset(new NXTN::Mesh(NXTN::VertexArray::Create(NXTN::VertexBuffer::Create(vertices, 12), layout), NXTN::IndexBuffer::Create(indices, 6)));
+	m_Mesh.reset(
+		new NXTN::Mesh(
+			NXTN::VertexArray::Create(NXTN::VertexBuffer::Create(vertices, 20), layout),
+			NXTN::IndexBuffer::Create(indices, 6)
+		)
+	);
 
 	// Shader
 	std::string vertShaderSrc = R"(
 			#version 330 core
 
 			layout(location = 0) in vec3 a_PositionOS;
+			layout(location = 1) in vec2 a_TexCoord;
 
 			uniform mat4 u_ModelMatrix;
 			uniform mat4 u_VPMatrix;
 
-			out vec3 v_PositionOS;
+			out vec2 v_TexCoord;
 
 			void main()
 			{
-				v_PositionOS = a_PositionOS;
+				v_TexCoord = a_TexCoord;
 
 				gl_Position = u_VPMatrix * u_ModelMatrix * vec4(a_PositionOS, 1);
 			}
@@ -56,14 +65,18 @@ SandboxLayer::SandboxLayer()
 
 			layout(location = 0) out vec4 color;
 
-			in vec3 v_PositionOS;
+			in vec2 v_TexCoord;
+
+			uniform sampler2D u_MainTex;
 
 			void main()
 			{
-				color = vec4(v_PositionOS + 0.5, 1.0);
+				color = texture(u_MainTex, v_TexCoord);
 			}
 		)";
 	m_Shader.reset(NXTN::Shader::Create(vertShaderSrc, fragShaderSrc));
+
+	m_Texture.reset(NXTN::Texture2D::Create("Asset/Texture/Grid.png"));
 }
 
 void SandboxLayer::Update()
@@ -76,6 +89,9 @@ void SandboxLayer::Update()
 	m_Shader->Bind();
 	m_Shader->SetUniformMat4("u_ModelMatrix", m_Mesh->transform.GetModelMatrix());
 	m_Shader->SetUniformMat4("u_VPMatrix", m_Camera->GetViewProjMatrix());
+
+	m_Texture->Bind(0);
+	m_Shader->SetUniformInt("u_MainTex", 0);
 
 	NXTN::Renderer::DrawMesh(*m_Mesh);
 }

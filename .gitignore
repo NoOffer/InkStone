@@ -4,4 +4,5 @@ bin-obj/
 dependencies/
 InkStone/include/
 InkStone/InkStone.vc*
+Sandbox/Asset/
 Sandbox/Sandbox.vc*

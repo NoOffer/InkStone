@@ -19,6 +19,7 @@
 #include "src/Rendering/Renderer.h"
 #include "src/Rendering/RenderingDataBuffer.h"
 #include "src/Rendering/Shader.h"
+#include "src/Rendering/Texture.h"
 #include "src/Rendering/VertexArray.h"
 
 #include "src/Application.h"
@@ -28,6 +29,12 @@
 
 int main(int argc, char** argv)
 {
+	//char cwd[MAX_PATH];
+	//if (GetCurrentDirectoryA(MAX_PATH, cwd))
+	//{
+	//	std::cout << "Current Working Directory: " << cwd << std::endl;
+	//}
+
 	NXTN::Application* app = NXTN::CreateApplication();
 	app->Run();
 	delete app;
