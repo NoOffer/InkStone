@@ -76,7 +76,7 @@ SandboxLayer::SandboxLayer()
 		)";
 	m_Shader.reset(NXTN::Shader::Create(vertShaderSrc, fragShaderSrc));
 
-	m_Texture.reset(NXTN::Texture2D::Create("Asset/Texture/Grid.png"));
+	m_Texture.reset(NXTN::Texture2D::Create("Asset/Texture/Logo.png"));
 }
 
 void SandboxLayer::Update()

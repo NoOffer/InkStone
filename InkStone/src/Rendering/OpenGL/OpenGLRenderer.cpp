@@ -5,6 +5,9 @@
 namespace NXTN {
 	OpenGLRenderer::OpenGLRenderer()
 	{
+		glEnable(GL_BLEND);
+		// Blend function: newColor = inColor * a + bgColor * (1 - a)
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
 	void OpenGLRenderer::DrawMeshImpl(const Mesh& mesh)
