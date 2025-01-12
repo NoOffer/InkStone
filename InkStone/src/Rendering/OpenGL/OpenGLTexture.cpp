@@ -7,8 +7,8 @@
 #include <GLAD/glad.h>
 
 namespace NXTN {
-	OpenGLTexture2D::OpenGLTexture2D(const std::string& filePath)
-		: m_FilePath(filePath)
+	OpenGLTexture2D::OpenGLTexture2D(const std::string& filepath)
+		: m_FilePath(filepath)
 	{
 		/*
 		While stbi_load loads files from top to bottom
@@ -17,10 +17,10 @@ namespace NXTN {
 		stbi_set_flip_vertically_on_load(1);
 
 		int nChannel;
-		unsigned char* data = stbi_load(filePath.c_str(), &m_Width, &m_Height, &nChannel, 0);
+		unsigned char* data = stbi_load(filepath.c_str(), &m_Width, &m_Height, &nChannel, 0);
 		if (!data)
 		{
-			Log::Error("Cannot load image at %s", filePath.c_str());
+			Log::Error("Cannot load image at %s", filepath.c_str());
 		}
 
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);

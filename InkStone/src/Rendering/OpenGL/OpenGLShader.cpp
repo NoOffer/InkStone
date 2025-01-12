@@ -3,87 +3,146 @@
 #include "OpenGLShader.h"
 
 namespace NXTN {
-	OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+	OpenGLShader::OpenGLShader(const std::string& filepath)
+		: m_Filepath(filepath)
 	{
-		// Fallback
-		m_RendererID = 0;
+		Compile();
+	}
 
-		// Create an empty vertex shader handle
-		unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	OpenGLShader::~OpenGLShader()
+	{
+		glDeleteProgram(m_RendererID);
+	}
 
-		// Send the vertex shader source code to GL
-		// Note that std::string.c_str is NULL character terminated
-		const char* source = vertexSrc.c_str();
-		glShaderSource(vertexShader, 1, &source, 0);
-
-		// Compile the vertex shader
-		glCompileShader(vertexShader);
-
-		// Check compilation status
-		int status = 0;
-		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &status);
-		if (!status)
-		{
-			// Get log information string length
-			int msgLength = 0;
-			glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &msgLength);
-
-			// The maxLength includes the NULL character
-			char* msg = (char*)malloc(msgLength * sizeof(char));
-			glGetShaderInfoLog(vertexShader, msgLength, &msgLength, &msg[0]);
-
-			// Log information
-			Log::Error("Vertex shader failed to compile:\n%s", msg);
-			free(msg);
-
-			// Discard the shader
-			glDeleteShader(vertexShader);
-
-			return;
-		}
-
-		// Create an empty fragment shader handle
-		unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-		// Send the fragment shader source code to GL
-		// Note that std::string.c_str is NULL character terminated.
-		source = (const GLchar*)fragmentSrc.c_str();
-		glShaderSource(fragmentShader, 1, &source, 0);
-
-		// Compile the fragment shader
-		glCompileShader(fragmentShader);
-
-		// Check compilation status
-		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &status);
-		if (!status)
-		{
-			// Get log information string length
-			int msgLength = 0;
-			glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &msgLength);
-
-			// The maxLength includes the NULL character
-			char* msg = (char*)malloc(msgLength * sizeof(char));
-			glGetShaderInfoLog(fragmentShader, msgLength, &msgLength, &msg[0]);
-
-			// Log information
-			Log::Error("Fragment shader failed to compile:\n%s", msg);
-			free(msg);
-
-			// Discard the shader
-			glDeleteShader(fragmentShader);
-
-			return;
-		}
-
+	void OpenGLShader::Compile()
+	{
 		// Create a program object.
 		m_RendererID = glCreateProgram();
 
-		// Attach the shaders to the program
-		glAttachShader(m_RendererID, vertexShader);
-		glAttachShader(m_RendererID, fragmentShader);
+		// File content
+		std::string content;
+		// File stream
+		std::ifstream in(m_Filepath, std::ios::in, std::ios::binary);
+		if (!in)
+		{
+			Log::Error("Cannot open shader source at %s", m_Filepath.c_str());
+		}
+
+		// Load file content
+		in.seekg(0, std::ios::end);
+		content.resize(in.tellg());
+		in.seekg(0, std::ios::beg);
+		in.read(&content[0], content.size());
+
+		// Shader handles for each shader
+		std::vector<unsigned int> shaderHandles;
+
+		const char* headerToken = "#type ";
+		// Length of "#type "
+		size_t headerLength = 6;
+
+		size_t start = content.find(headerToken, 0);
+
+		int status = 0;
+		while (start != std::string::npos && start < content.size() - 1)
+		{
+			// Start of shader type
+			start += headerLength;
+			// End of line
+			size_t end = content.find_first_of("\r\n", start);
+			if (end == std::string::npos)
+			{
+				Log::Error("Shader syntax error: No shader type provided");
+				continue;
+			}
+			// Shader type
+			std::string shaderType = content.substr(start, end - start);
+
+			// Shader body
+			start = content.find_first_not_of("\r\n", end);
+			if (start == std::string::npos)
+			{
+				Log::Error("Shader syntax error: No shader body provided");
+				continue;
+			}
+			end = content.find(headerToken, start);
+			if (end == std::string::npos)
+			{
+				end = content.size() - 1;
+			}
+			std::string shaderBody = content.substr(start, end - start);
+
+			// Increment
+			start = end;
+
+			// Create an empty shader handle
+			unsigned int shaderHandle = 0;
+			//std::cout << "#type " << shaderType << std::endl;
+			if (shaderType == "vertex")
+			{
+				shaderHandle = glCreateShader(GL_VERTEX_SHADER);
+			}
+			else if (shaderType == "fragment")
+			{
+				shaderHandle = glCreateShader(GL_FRAGMENT_SHADER);
+			}
+			else
+			{
+				Log::Error("Unsupported shader type: %s", shaderType.c_str());
+				continue;
+			}
+
+			// Send the vertex shader source code to GL
+			// Note that std::string.c_str is NULL character terminated (Idk how this matters but whatever)
+			const char* source = shaderBody.c_str();
+			//std::cout << source << std::endl;
+			glShaderSource(shaderHandle, 1, &source, 0);
+
+			// Compile the vertex shader
+			glCompileShader(shaderHandle);
+
+			// Check compilation status
+			glGetShaderiv(shaderHandle, GL_COMPILE_STATUS, &status);
+			if (!status)
+			{
+				// Get log information string length
+				int msgLength = 0;
+				glGetShaderiv(shaderHandle, GL_INFO_LOG_LENGTH, &msgLength);
+
+				// The maxLength includes the NULL character
+				char* msg = (char*)malloc(msgLength * sizeof(char));
+				glGetShaderInfoLog(shaderHandle, msgLength, &msgLength, &msg[0]);
+
+				// Log information
+				Log::Error("Shader (%s) failed to compile: %s", shaderType.c_str(), msg);
+				free(msg);
+
+				// Discard the shader
+				glDeleteShader(shaderHandle);
+
+				continue;
+			}
+
+			// Attach the shaders to the program
+			// Note that once a shader is attached to a program,
+			// Calling glDeleteShader will instead defer the deletion
+			// Until the program attached to is deleted
+			// This is similar shared_ptr, which uses a reference counter
+			glAttachShader(m_RendererID, shaderHandle);
+
+			shaderHandles.push_back(shaderHandle);
+		}
 
 		// Link the program
-		glLinkProgram(m_RendererID);
+		if (shaderHandles.size() > 0)
+		{
+			glLinkProgram(m_RendererID);
+		}
+		else
+		{
+			glDeleteProgram(m_RendererID);
+			Log::Error("No shader compiled, shader program aborted");
+		}
 
 		// Check linking status
 		glGetProgramiv(m_RendererID, GL_LINK_STATUS, &status);
@@ -98,22 +157,26 @@ namespace NXTN {
 			glGetProgramInfoLog(m_RendererID, msgLength, &msgLength, &msg[0]);
 
 			// Log information
-			Log::Error("Shader program failed to link:\n%s", msg);
+			Log::Error("Shader program failed to link: %s", msg);
 			free(msg);
 
 			// Delete the program
 			glDeleteProgram(m_RendererID);
 
 			// Delete the shaders
-			glDeleteShader(vertexShader);
-			glDeleteShader(fragmentShader);
+			for (unsigned int sh : shaderHandles)
+			{
+				glDeleteShader(sh);
+			}
 
 			return;
 		}
 
-		// Detach shaders
-		glDetachShader(m_RendererID, vertexShader);
-		glDetachShader(m_RendererID, fragmentShader);
+		// Detach the shaders
+		for (unsigned int sh : shaderHandles)
+		{
+			glDetachShader(m_RendererID, sh);
+		}
 
 		// List shader uniforms
 		int count;
@@ -160,11 +223,6 @@ namespace NXTN {
 				break;
 			}
 		}
-	}
-
-	OpenGLShader::~OpenGLShader()
-	{
-		glDeleteProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Bind() const

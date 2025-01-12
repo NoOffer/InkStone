@@ -5,7 +5,7 @@
 #include "OpenGL/OpenGLShader.h"
 
 namespace NXTN {
-	Shader* Shader::Create(const std::string& vertexSrc, const std::string& fragmentSrc)
+	Shader* Shader::Create(const std::string& filepath)
 	{
 		switch (System::GetGraphicsAPI())
 		{
@@ -13,7 +13,7 @@ namespace NXTN {
 			Log::Error("No rendering API specified");
 			break;
 		case GraphicsAPI::OpenGL:
-			return (Shader*) new OpenGLShader(vertexSrc, fragmentSrc);
+			return (Shader*) new OpenGLShader(filepath);
 			break;
 		default:
 			Log::Error("Unsupported rendering API");

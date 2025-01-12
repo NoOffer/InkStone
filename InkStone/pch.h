@@ -10,9 +10,11 @@
 #include <cstdio>
 #include <ctime>
 #include <functional>
+#include <fstream>
 #include <iostream>
 #include <memory>
 #include <mutex>
+//#include <regex>
 #include <sstream>
 #include <utility>
 

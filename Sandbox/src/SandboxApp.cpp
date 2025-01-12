@@ -74,7 +74,7 @@ SandboxLayer::SandboxLayer()
 				color = texture(u_MainTex, v_TexCoord);
 			}
 		)";
-	m_Shader.reset(NXTN::Shader::Create(vertShaderSrc, fragShaderSrc));
+	m_Shader.reset(NXTN::Shader::Create("Asset/Shader/Texture.glsl"));
 
 	m_Texture.reset(NXTN::Texture2D::Create("Asset/Texture/Logo.png"));
 }

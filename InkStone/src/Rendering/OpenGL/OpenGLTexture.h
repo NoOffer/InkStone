@@ -6,7 +6,7 @@ namespace NXTN {
 	class OpenGLTexture2D : public Texture2D
 	{
 	public:
-		OpenGLTexture2D(const std::string& filePath);
+		OpenGLTexture2D(const std::string& filepath);
 		~OpenGLTexture2D();
 
 		virtual int GetWidth() const override { return m_Width; }
