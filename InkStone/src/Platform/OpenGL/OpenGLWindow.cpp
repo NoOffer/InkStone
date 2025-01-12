@@ -15,11 +15,20 @@ namespace NXTN {
 		m_WinData.EventCallback = [](Event&) {};
 
 		// GLFW initialization
+		if (glfwInit())
+		{
+			Log::Info("GLFW initialized");
+		}
+		else
+		{
+			Log::Error("Failed to initialize GLFW");
+			NXTN_ERROR;
+		}
 		// Create window and context
 		m_Window = glfwCreateWindow((int)width, (int)height, title.c_str(), nullptr, nullptr);
 		if (!m_Window)
 		{
-			Log::Error("Failed to create window (Title: %s)", title);
+			Log::Error("Failed to create window (Title: %s)", title.c_str());
 			NXTN_ERROR;
 		}
 		glfwMakeContextCurrent(m_Window);

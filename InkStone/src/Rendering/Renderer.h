@@ -25,6 +25,7 @@ namespace NXTN {
 		static void ClearFrameBuffer();
 
 		static void Init();
+		//static inline bool Initialized() { return s_Renderer != nullptr; }
 		//static Renderer* Create(GraphicsAPI api);
 
 	private:

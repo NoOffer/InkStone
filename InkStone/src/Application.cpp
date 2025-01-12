@@ -13,10 +13,10 @@ namespace NXTN {
 
 		s_Instance = this;
 
-		Renderer::Init();
-
 		m_Window.reset(Window::Create());
 		m_Window->SetEventCallback(std::bind(&Application::OnWindowEvent, this, std::placeholders::_1));
+
+		Renderer::Init();
 
 		Time::InitTime();
 

@@ -5,16 +5,6 @@
 namespace NXTN {
 	OpenGLRenderer::OpenGLRenderer()
 	{
-		// GLFW initialization
-		if (glfwInit())
-		{
-			Log::Info("GLFW initialized");
-		}
-		else
-		{
-			Log::Error("Failed to initialize GLFW");
-			NXTN_ERROR;
-		}
 	}
 
 	void OpenGLRenderer::DrawMeshImpl(const Mesh& mesh)
