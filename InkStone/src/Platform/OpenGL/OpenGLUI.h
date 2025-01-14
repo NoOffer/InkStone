@@ -8,7 +8,7 @@ namespace NXTN {
 	class OpenGLUI : public UI
 	{
 	public:
-		OpenGLUI(const std::shared_ptr<Window>& window, const std::string& name);
+		OpenGLUI(const std::shared_ptr<Window>& window, const char* name);
 		~OpenGLUI() {}
 
 		virtual bool OnEvent(Event& event) override;
@@ -17,6 +17,6 @@ namespace NXTN {
 	private:
 		const std::shared_ptr<Window>& m_Window;
 
-		std::string m_WindowTitle;
+		const char* m_WindowTitle;
 	};
 }

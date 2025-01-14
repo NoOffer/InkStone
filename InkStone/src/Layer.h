@@ -14,12 +14,12 @@ namespace NXTN {
 		virtual void Update() {}
 		virtual inline bool OnEvent(Event& event) { return false; }
 
-		inline const std::string& GetName() const { return m_Name; }
+		inline const char* GetName() const { return m_Name; }
 
 	protected:
-		Layer(const std::string& name = "Layer");
+		Layer(const char* name = "Layer");
 
-		std::string m_Name;
+		const char* m_Name;
 	};
 }
 

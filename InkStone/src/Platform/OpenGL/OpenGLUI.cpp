@@ -5,10 +5,10 @@
 #include "src/Keycode.h"
 
 namespace NXTN {
-	OpenGLUI::OpenGLUI(const std::shared_ptr<Window>& window, const std::string& name)
-		: UI(), m_Window(window)
+	OpenGLUI::OpenGLUI(const std::shared_ptr<Window>& window, const char* name)
+		: UI(name), m_Window(window)
 	{
-		m_WindowTitle = name + " (OpenGL)";
+		m_WindowTitle = name;
 
 		ImGui::CreateContext();
 
@@ -104,7 +104,7 @@ namespace NXTN {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui::NewFrame();
 
-		ImGui::Begin(m_WindowTitle.c_str() /*, 0, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize*/);
+		ImGui::Begin(m_WindowTitle /*, 0, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize*/);
 
 		float deltaTime = Time::GetDeltaTime();
 		ImGui::Text("FPS: %.0f  (Avg %.2fms/frame)", 1000.0f / deltaTime, deltaTime * 1000.0f);

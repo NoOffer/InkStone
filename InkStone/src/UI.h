@@ -10,10 +10,10 @@ namespace NXTN {
 	public:
 		virtual ~UI() {}
 
-		static Layer* Create(const std::shared_ptr<Window>& window, const std::string& name);
+		static Layer* Create(const std::shared_ptr<Window>& window, const char* name);
 
 	protected:
-		UI(const std::string& name = "UI Layer") : Layer(name) {}
+		UI(const char* name = "UI") : Layer(name) {}
 	};
 }
 

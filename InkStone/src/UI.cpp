@@ -3,7 +3,7 @@
 #include "Platform/OpenGL/OpenGLUI.h"
 
 namespace NXTN {
-	Layer* UI::Create(const std::shared_ptr<Window>& window, const std::string& name)
+	Layer* UI::Create(const std::shared_ptr<Window>& window, const char* name)
 	{
 		switch (System::GetGraphicsAPI())
 		{
