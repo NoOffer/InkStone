@@ -22,21 +22,12 @@ namespace NXTN {
 
 		//Input::Init(m_Window->GetNativeWindow());
 
-		m_LayerStack.PushOverlay(UI::Create(m_Window, "Test Window"));
+		UI::Init(m_Window);
 	}
 
 	Application::~Application()
 	{
 
-	}
-
-	void Application::Update()
-	{
-		Time::UpdateTime();
-
-		m_LayerStack.Update();
-
-		m_Window->Update();
 	}
 
 	void Application::Run()
@@ -45,6 +36,19 @@ namespace NXTN {
 		{
 			Update();
 		}
+	}
+
+	void Application::Update()
+	{
+		Time::UpdateTime();
+
+		UI::Begin();
+
+		m_LayerStack.Update();
+
+		UI::End();
+
+		m_Window->Update();
 	}
 
 	void Application::OnWindowEvent(Event& event)
@@ -64,5 +68,7 @@ namespace NXTN {
 		}
 		}
 		m_LayerStack.OnEvent(event);
+
+		UI::OnEvent(event);
 	}
 }

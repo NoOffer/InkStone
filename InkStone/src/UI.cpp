@@ -3,7 +3,9 @@
 #include "Platform/OpenGL/OpenGLUI.h"
 
 namespace NXTN {
-	Layer* UI::Create(const std::shared_ptr<Window>& window, const char* name)
+	std::unique_ptr<UI> UI::s_UI = nullptr;
+
+	void UI::Init(const std::shared_ptr<Window>& window)
 	{
 		switch (System::GetGraphicsAPI())
 		{
@@ -11,13 +13,43 @@ namespace NXTN {
 			Log::Error("No rendering API specified");
 			break;
 		case GraphicsAPI::OpenGL:
-			return (Layer*) new OpenGLUI(window, name);
+			s_UI.reset(new OpenGLUI(window));
 			break;
 		default:
 			Log::Error("Unsupported rendering API");
 			break;
 		}
 
-		return nullptr;
+		return;
+	}
+
+	void UI::Begin(const char* windowName)
+	{
+		if (!s_UI)
+		{
+			Log::Warning("UI uninitialized");
+			return;
+		}
+		s_UI->BeginImpl(windowName);
+	}
+
+	void UI::End()
+	{
+		if (!s_UI)
+		{
+			Log::Warning("UI uninitialized");
+			return;
+		}
+		s_UI->EndImpl();
+	}
+
+	void UI::OnEvent(Event& event)
+	{
+		if (!s_UI)
+		{
+			Log::Warning("UI uninitialized");
+			return;
+		}
+		s_UI->OnEventImpl(event);
 	}
 }

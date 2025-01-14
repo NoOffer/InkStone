@@ -5,11 +5,9 @@
 #include "src/Keycode.h"
 
 namespace NXTN {
-	OpenGLUI::OpenGLUI(const std::shared_ptr<Window>& window, const char* name)
-		: UI(name), m_Window(window)
+	OpenGLUI::OpenGLUI(const std::shared_ptr<Window>& window)
+		: m_Window(window)
 	{
-		m_WindowTitle = name;
-
 		ImGui::CreateContext();
 
 		ImGui::StyleColorsDark();
@@ -52,7 +50,7 @@ namespace NXTN {
 		io.KeyMap[ImGuiKey_Z] = NXTN_KEY_Z;  // Map for Ctrl+Z
 	}
 
-	bool OpenGLUI::OnEvent(Event& event)
+	void OpenGLUI::OnEventImpl(Event& event)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 
@@ -96,19 +94,24 @@ namespace NXTN {
 		}
 		}
 
-		return false;
+		return;
 	}
 
-	void OpenGLUI::Update()
+	void OpenGLUI::BeginImpl(const char* windowName)
 	{
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui::NewFrame();
 
-		ImGui::Begin(m_WindowTitle /*, 0, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize*/);
+		ImGui::Begin(windowName /*, 0, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize*/);
+	}
 
+	void OpenGLUI::EndImpl()
+	{
+		// FPS
 		float deltaTime = Time::GetDeltaTime();
 		ImGui::Text("FPS: %.0f  (Avg %.2fms/frame)", 1000.0f / deltaTime, deltaTime * 1000.0f);
 
+		// End
 		ImGui::End();
 
 		ImGui::Render();
