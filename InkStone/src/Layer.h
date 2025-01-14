@@ -12,6 +12,7 @@ namespace NXTN {
 		virtual ~Layer() {}
 
 		virtual void Update() {}
+		virtual void UIUpdate() {}
 		virtual inline bool OnEvent(Event& event) { return false; }
 
 		inline const char* GetName() const { return m_Name; }

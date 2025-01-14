@@ -22,6 +22,20 @@ namespace NXTN {
 		m_OverlayStack.emplace_back(layer);
 	}
 
+	void LayerStack::Update()
+	{
+		for (Layer* layer : m_LayerStack)
+			layer->Update();
+		for (Layer* layer : m_OverlayStack)
+			layer->Update();
+	}
+
+	void LayerStack::UIUpdate()
+	{
+		for (Layer* layer : m_LayerStack)
+			layer->UIUpdate();
+	}
+
 	void LayerStack::OnEvent(Event& event)
 	{
 		for (Layer* layer : m_LayerStack)
@@ -38,13 +52,5 @@ namespace NXTN {
 				return;
 			}
 		}
-	}
-
-	void LayerStack::Update()
-	{
-		for (Layer* layer : m_LayerStack)
-			layer->Update();
-		for (Layer* layer : m_OverlayStack)
-			layer->Update();
 	}
 }

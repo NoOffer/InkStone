@@ -12,8 +12,9 @@ namespace NXTN {
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
-		void OnEvent(Event& event);
 		void Update();
+		void UIUpdate();
+		void OnEvent(Event& event);
 
 	private:
 		std::vector<Layer*> m_LayerStack;

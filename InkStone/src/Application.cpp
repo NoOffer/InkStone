@@ -42,10 +42,12 @@ namespace NXTN {
 	{
 		Time::UpdateTime();
 
-		UI::Begin();
-
 		m_LayerStack.Update();
 
+		UI::Begin();
+		{
+			m_LayerStack.UIUpdate();
+		}
 		UI::End();
 
 		m_Window->Update();
