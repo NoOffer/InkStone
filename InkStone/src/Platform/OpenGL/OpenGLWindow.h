@@ -16,9 +16,8 @@ namespace NXTN {
 
 		virtual inline unsigned int GetWidth() const override { return m_WinData.width; }
 		virtual inline unsigned int GetHeight() const override { return m_WinData.height; }
-
 		virtual inline bool IsVSync() const override { return m_WinData.vSync; }
-		inline void SetVSync(bool enabled) override;
+		virtual void SetVSync(bool enabled) override;
 
 		virtual void SetEventCallback(const EventCallbackFn& callback) override { m_WinData.EventCallback = callback; }
 

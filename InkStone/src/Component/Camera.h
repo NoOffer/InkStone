@@ -14,8 +14,8 @@ namespace NXTN {
 			float farPlane = 100.0f);
 		~Camera() {}
 
-		void inline ResetViewPortSize(vec2i& vpSize) { m_AspectRatio = vpSize.x / (float)vpSize.y; }
-		void inline ResetViewPortSize(int x, int y) { m_AspectRatio = x / (float)y; }
+		void inline ResizeViewport(vec2i& vpSize) { m_AspectRatio = vpSize.x / (float)vpSize.y; }
+		void inline ResizeViewport(int width, int height) { m_AspectRatio = width / (float)height; }
 
 		mat4 GetViewMatrix();
 		mat4 GetProjMatrix();

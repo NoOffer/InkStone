@@ -24,6 +24,7 @@ namespace NXTN {
 		LayerStack m_LayerStack;
 
 		bool m_Alive;
+		bool m_Minimized;
 
 	private:
 		void OnWindowEvent(Event& event);

@@ -7,7 +7,7 @@
 namespace NXTN {
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application() : m_Alive(true)
+	Application::Application() : m_Alive(true), m_Minimized(false)
 	{
 		if (s_Instance) Log::Warning("Duplicated Application: Application should be unique");
 
@@ -49,13 +49,20 @@ namespace NXTN {
 
 	void Application::OnWindowEvent(Event& event)
 	{
-		if (event.GetEventType() == EventType::WindowClosed)
+		switch (event.GetEventType())
+		{
+		case EventType::WindowClosed:
 		{
 			m_Alive = false;
+			return;
 		}
-		else
+		case EventType::WindowResized:
 		{
-			m_LayerStack.OnEvent(event);
+			WindowResizeEvent e = *(WindowResizeEvent*)(&event);
+			m_Minimized = e.GetNewWidth() < 1 || e.GetNewHeight() < 1;
+			break;
 		}
+		}
+		m_LayerStack.OnEvent(event);
 	}
 }

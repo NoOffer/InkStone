@@ -46,6 +46,8 @@ namespace NXTN {
 			NXTN_ERROR;
 		}
 
+		glViewport(0, 0, width, height);
+
 		// Log context information
 		Log::Info("OpenGL context initialized");
 		Log::Info("  ©À- Hardware Info:  %s", glGetString(GL_RENDERER));
@@ -59,68 +61,76 @@ namespace NXTN {
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 			{
 				(*(WindowData*)glfwGetWindowUserPointer(window)).EventCallback(WindowCloseEvent());
-			});
+			}
+		);
 		// Window resize
-		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
+		glfwSetWindowSizeCallback(m_Window,[](GLFWwindow* window, int width, int height)
 			{
 				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
 
-		windowData.width = width;
-		windowData.height = height;
+				windowData.width = width;
+				windowData.height = height;
 
-		windowData.EventCallback(WindowResizeEvent(width, height));
-			});
+				glViewport(0, 0, width, height);
+
+				windowData.EventCallback(WindowResizeEvent(width, height));
+			}
+		);
 		// Key press
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scanCode, int action, int mods)
 			{
 				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
 
-		key = keycodeMapFromGLFW[key];
+				key = keycodeMapFromGLFW[key];
 
-		switch (action)
-		{
-		case GLFW_PRESS:
-			windowData.EventCallback(KeyPressEvent(key, 0));
-			break;
-		case GLFW_RELEASE:
-			windowData.EventCallback(KeyReleaseEvent(key));
-			break;
-		case GLFW_REPEAT:
-			windowData.EventCallback(KeyPressEvent(key, 1));
-			break;
-		}
-			});
+				switch (action)
+				{
+				case GLFW_PRESS:
+					windowData.EventCallback(KeyPressEvent(key, 0));
+					break;
+				case GLFW_RELEASE:
+					windowData.EventCallback(KeyReleaseEvent(key));
+					break;
+				case GLFW_REPEAT:
+					windowData.EventCallback(KeyPressEvent(key, 1));
+					break;
+				}
+			}
+		);
 		// Mouse button press
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int key, int action, int mods)
 			{
 				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
 
-		key = keycodeMapFromGLFW[key];
+				key = keycodeMapFromGLFW[key];
 
-		switch (action)
-		{
-		case GLFW_PRESS:
-			windowData.EventCallback(MouseButtonPressEvent(key));
-			break;
-		case GLFW_RELEASE:
-			windowData.EventCallback(MouseButtonReleaseEvent(key));
-			break;
-		}
-			});
+				switch (action)
+				{
+				case GLFW_PRESS:
+					windowData.EventCallback(MouseButtonPressEvent(key));
+					break;
+				case GLFW_RELEASE:
+					windowData.EventCallback(MouseButtonReleaseEvent(key));
+					break;
+				}
+			}
+		);
 		// Mouse scroll
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
 			{
 				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
 
-		windowData.EventCallback(MouseScrollEvent((float)xOffset, (float)yOffset));
-			});
+				windowData.EventCallback(MouseScrollEvent((float)xOffset, (float)yOffset));
+			}
+		);
 		// Cursor move
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
 			{
 				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
 
-		windowData.EventCallback(MouseMoveEvent((float)xPos, (float)yPos));
-			});
+				windowData.EventCallback(MouseMoveEvent((float)xPos, (float)yPos));
+			}
+		);
 	}
 
 	OpenGLWindow::~OpenGLWindow()

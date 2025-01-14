@@ -98,6 +98,11 @@ void SandboxLayer::Update()
 
 bool SandboxLayer::OnEvent(NXTN::Event& event)
 {
+	if (event.GetEventType() == NXTN::EventType::WindowResized)
+	{
+		NXTN::WindowResizeEvent e = *(NXTN::WindowResizeEvent*)(&event);
+		m_Camera->ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
+	}
 	return false;
 }
 
