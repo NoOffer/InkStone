@@ -2,6 +2,7 @@
 
 #include "Input.h"
 #include "LayerStack.h"
+#include "Profiler.h"
 #include "UI.h"
 #include "Rendering/Renderer.h"
 
@@ -23,12 +24,15 @@ namespace NXTN {
 
 		LayerStack m_LayerStack;
 
+		Profiler m_Profiler;  // Temporary
+
 		bool m_Alive;
 		bool m_Minimized;
 
 	private:
 		void OnWindowEvent(Event& event);
 
+	private:
 		static Application* s_Instance;
 	};
 

@@ -12,7 +12,7 @@ namespace NXTN {
 		static inline float GetDeltaTime() { return m_DeltaTime; }
 
 	private:
-		static std::chrono::time_point<std::chrono::steady_clock> m_LastTimePoint;
+		static std::chrono::steady_clock::time_point m_LastTimePoint;
 		static float m_DeltaTime;
 	};
 }
