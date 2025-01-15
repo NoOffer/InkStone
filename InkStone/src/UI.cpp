@@ -25,6 +25,8 @@ namespace NXTN {
 
 	void UI::Begin(const char* windowName)
 	{
+		NXTN_PROFILE_FUNCTION()
+
 		if (!s_UI)
 		{
 			Log::Warning("UI uninitialized");
@@ -35,6 +37,8 @@ namespace NXTN {
 
 	void UI::End()
 	{
+		NXTN_PROFILE_FUNCTION()
+
 		if (!s_UI)
 		{
 			Log::Warning("UI uninitialized");

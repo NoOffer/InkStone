@@ -186,9 +186,9 @@ namespace NXTN {
 		GLint size;      // Size of uniform
 		GLenum type;     // Type of uniform
 		char name[32];   // Name of uniform (NOTE: The name should not be longer than 32 char)
-		for (GLuint i = 0; i < count; i++)
+		for (int i = 0; i < count; i++)
 		{
-			glGetActiveUniform(m_RendererID, i, 32, &length, &size, &type, name);
+			glGetActiveUniform(m_RendererID, (GLuint)i, 32, &length, &size, &type, name);
 
 			switch (type)
 			{

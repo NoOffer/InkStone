@@ -140,6 +140,8 @@ namespace NXTN {
 
 	void OpenGLWindow::Update()
 	{
+		NXTN_PROFILE_FUNCTION()
+
 		glfwPollEvents();
 
 		glfwSwapBuffers(m_Window);

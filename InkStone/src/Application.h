@@ -2,7 +2,6 @@
 
 #include "Input.h"
 #include "LayerStack.h"
-#include "Profiler.h"
 #include "UI.h"
 #include "Rendering/Renderer.h"
 
@@ -23,8 +22,6 @@ namespace NXTN {
 		std::shared_ptr<Window> m_Window;
 
 		LayerStack m_LayerStack;
-
-		Profiler m_Profiler;  // Temporary
 
 		bool m_Alive;
 		bool m_Minimized;

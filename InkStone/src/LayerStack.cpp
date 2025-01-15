@@ -24,6 +24,8 @@ namespace NXTN {
 
 	void LayerStack::Update()
 	{
+		NXTN_PROFILE_FUNCTION()
+
 		for (Layer* layer : m_LayerStack)
 			layer->Update();
 		for (Layer* layer : m_OverlayStack)
@@ -32,6 +34,8 @@ namespace NXTN {
 
 	void LayerStack::UIUpdate()
 	{
+		NXTN_PROFILE_FUNCTION()
+
 		for (Layer* layer : m_LayerStack)
 			layer->UIUpdate();
 	}

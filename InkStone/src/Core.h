@@ -2,6 +2,9 @@
 
 #include "pch.h"
 
+//#define NXTN_PROFILE
+#include "Debug/Profiler.h"
+
 // (__declspec)
 #ifdef NXTN_PLATFORM_WINDOWS
 	//#ifdef NXTN_BUILD_DLL
