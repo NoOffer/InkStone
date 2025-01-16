@@ -2,8 +2,6 @@
 
 #include "src/UI.h"
 
-#include "ImGuiBackend/imgui_impl_opengl3.h"
-
 namespace NXTN {
 	class OpenGLUI : public UI
 	{
