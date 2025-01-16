@@ -45,6 +45,8 @@ namespace NXTN {
 
 	void Application::Update()
 	{
+		NXTN_PROFILE_FUNCTION()
+
 		Time::UpdateTime();
 
 		m_LayerStack.Update();
