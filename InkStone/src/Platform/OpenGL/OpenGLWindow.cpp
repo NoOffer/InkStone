@@ -7,10 +7,8 @@
 namespace NXTN {
 	static bool s_GLFWInitialized = false;
 
-	OpenGLWindow::OpenGLWindow(unsigned int width, unsigned int height, std::string title, bool vSync)
+	OpenGLWindow::OpenGLWindow(std::string title, bool vSync)
 	{
-		m_WinData.width = width;
-		m_WinData.height = height;
 		m_WinData.vSync = vSync;
 		m_WinData.EventCallback = [](Event&) {};
 
@@ -25,13 +23,16 @@ namespace NXTN {
 			NXTN_ERROR;
 		}
 		// Create window and context
-		m_Window = glfwCreateWindow((int)width, (int)height, title.c_str(), nullptr, nullptr);
+		m_Window = glfwCreateWindow(800, 600, title.c_str(), nullptr, nullptr);
 		if (!m_Window)
 		{
 			Log::Error("Failed to create window (Title: %s)", title.c_str());
 			NXTN_ERROR;
 		}
 		glfwMakeContextCurrent(m_Window);
+
+		glfwMaximizeWindow(m_Window);
+		glfwGetWindowSize(m_Window, &m_WinData.width, &m_WinData.height);
 
 		glfwSetWindowUserPointer(m_Window, &m_WinData);
 
@@ -46,7 +47,7 @@ namespace NXTN {
 			NXTN_ERROR;
 		}
 
-		glViewport(0, 0, width, height);
+		glViewport(0, 0, m_WinData.width, m_WinData.height);
 
 		// Log context information
 		Log::Info("OpenGL context initialized");
@@ -54,7 +55,7 @@ namespace NXTN {
 		Log::Info("  ©¸- OpenGL Version: %s", glGetString(GL_VERSION));
 
 		// V Sync
-		glfwSwapInterval(m_WinData.vSync ? 1 : 0);
+		glfwSwapInterval(vSync ? 1 : 0);
 
 		// GLFW event callbacks
 		// Window close

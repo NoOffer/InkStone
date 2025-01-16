@@ -1,12 +1,12 @@
 #include "SandboxApp.h"
 
 // Sandbox Layer
-SandboxLayer::SandboxLayer()
+SandboxLayer::SandboxLayer(unsigned int windowWidth, unsigned int windowHeight)
 {
 	m_Name = "Sandbox Gameplay Layer";
 
 	// Camera
-	m_Camera.reset(new NXTN::Camera(1.0f, NXTN::vec2i(500, 500), false));
+	m_Camera.reset(new NXTN::Camera(1.0f, NXTN::vec2i(windowWidth, windowHeight), false));
 	m_Camera->transform.SetPosition(0.0f, 0.0f, -10.0f);
 
 	// Temporary draw data
@@ -101,6 +101,7 @@ bool SandboxLayer::OnEvent(NXTN::Event& event)
 	if (event.GetEventType() == NXTN::EventType::WindowResized)
 	{
 		NXTN::WindowResizeEvent e = *(NXTN::WindowResizeEvent*)(&event);
+		std::cout << e.GetNewWidth() << ", " << e.GetNewHeight() << std::endl;
 		m_Camera->ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
 	}
 	return false;
@@ -110,7 +111,7 @@ bool SandboxLayer::OnEvent(NXTN::Event& event)
 Sandbox::Sandbox()
 	: Application()
 {
-	m_LayerStack.PushLayer(new SandboxLayer());
+	m_LayerStack.PushLayer(new SandboxLayer(m_Window->GetWidth(), m_Window->GetHeight()));
 }
 
 void Sandbox::Update()

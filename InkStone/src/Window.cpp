@@ -3,7 +3,7 @@
 #include "Platform/OpenGL/OpenGLWindow.h"
 
 namespace NXTN {
-	Window* Window::Create(unsigned int width, unsigned int height, std::string title)
+	Window* Window::Create(std::string title)
 	{
 		switch (System::GetGraphicsAPI())
 		{
@@ -11,7 +11,7 @@ namespace NXTN {
 			Log::Error("No rendering API specified");
 			break;
 		case GraphicsAPI::OpenGL:
-			return new OpenGLWindow(width, height, title);
+			return new OpenGLWindow(title);
 			break;
 		default:
 			Log::Error("Unsupported rendering API");

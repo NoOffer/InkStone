@@ -5,7 +5,7 @@
 class SandboxLayer : public NXTN::Layer
 {
 public:
-	SandboxLayer();
+	SandboxLayer(unsigned int windowWidth, unsigned int windowHeight);
 
 	virtual void Update() override;
 	virtual bool OnEvent(NXTN::Event& event) override;
