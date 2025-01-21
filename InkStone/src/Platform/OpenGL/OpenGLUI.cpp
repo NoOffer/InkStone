@@ -98,7 +98,7 @@ namespace NXTN {
 		return;
 	}
 
-	void OpenGLUI::BeginImpl()
+	void OpenGLUI::NewFrameImpl()
 	{
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui::NewFrame();
@@ -134,7 +134,7 @@ namespace NXTN {
 		ImGui::DockSpace(m_DockspaceID, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None /*ImGuiWindowFlags_NoBackground*/);
 	}
 
-	void OpenGLUI::EndImpl()
+	void OpenGLUI::EndFrameImpl()
 	{
 		// FPS
 		ImGui::SetNextWindowDockID(m_DockspaceID, ImGuiCond_FirstUseEver);

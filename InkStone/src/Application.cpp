@@ -51,11 +51,11 @@ namespace NXTN {
 
 		m_LayerStack.Update();
 
-		UI::Begin();
+		UI::NewFrame();
 		{
 			m_LayerStack.UIUpdate();
 		}
-		UI::End();
+		UI::EndFrame();
 
 		m_Window->Update();
 	}

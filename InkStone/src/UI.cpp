@@ -23,7 +23,7 @@ namespace NXTN {
 		return;
 	}
 
-	void UI::Begin()
+	void UI::NewFrame()
 	{
 		NXTN_PROFILE_FUNCTION()
 
@@ -32,10 +32,10 @@ namespace NXTN {
 			Log::Warning("UI uninitialized");
 			return;
 		}
-		s_UI->BeginImpl();
+		s_UI->NewFrameImpl();
 	}
 
-	void UI::End()
+	void UI::EndFrame()
 	{
 		NXTN_PROFILE_FUNCTION()
 
@@ -44,7 +44,7 @@ namespace NXTN {
 			Log::Warning("UI uninitialized");
 			return;
 		}
-		s_UI->EndImpl();
+		s_UI->EndFrameImpl();
 	}
 
 	void UI::OnEvent(Event& event)
