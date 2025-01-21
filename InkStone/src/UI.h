@@ -12,7 +12,7 @@ namespace NXTN {
 		static void Init(const std::shared_ptr<Window>& window);
 		
 		// Static
-		static void Begin(const char* windowName = "UI");
+		static void Begin();
 		static void End();
 		static void OnEvent(Event& event);
 
@@ -20,7 +20,7 @@ namespace NXTN {
 		UI() {}
 
 		// Virtual
-		virtual void BeginImpl(const char* windowName) = 0;
+		virtual void BeginImpl() = 0;
 		virtual void EndImpl() = 0;
 		virtual void OnEventImpl(Event& event) = 0;
 

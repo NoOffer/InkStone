@@ -23,7 +23,7 @@ namespace NXTN {
 		return;
 	}
 
-	void UI::Begin(const char* windowName)
+	void UI::Begin()
 	{
 		NXTN_PROFILE_FUNCTION()
 
@@ -32,7 +32,7 @@ namespace NXTN {
 			Log::Warning("UI uninitialized");
 			return;
 		}
-		s_UI->BeginImpl(windowName);
+		s_UI->BeginImpl();
 	}
 
 	void UI::End()

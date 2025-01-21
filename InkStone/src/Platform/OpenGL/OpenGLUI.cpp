@@ -4,9 +4,6 @@
 
 #include "src/Keycode.h"
 
-#include "ImGuiBackend/imgui_impl_glfw.h"
-#include "ImGuiBackend/imgui_impl_opengl3.h"
-
 namespace NXTN {
 	OpenGLUI::OpenGLUI(const std::shared_ptr<Window>& window)
 		: m_Window(window)
@@ -17,6 +14,10 @@ namespace NXTN {
 
 		ImGuiIO& io = ImGui::GetIO();
 
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
+
+		io.DisplaySize = ImVec2(m_Window->GetWidth(), m_Window->GetHeight());
+
 		if (io.BackendRendererUserData == nullptr)
 		{
 			ImGui_ImplOpenGL3_Init("#version 410");
@@ -24,10 +25,6 @@ namespace NXTN {
 
 		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;  // Enable cursor functionalities defined by backend
 		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;  // Allow manually setting cursor position
-
-		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
-
-		io.DisplaySize = ImVec2(m_Window->GetWidth(), m_Window->GetHeight());
 
 		// Per ImGui documentation, the docking branch of ImGui seems to not accept custom KeyMap
 		//io.KeyMap[ImGuiMouseButton_Left] = NXTN_MOUSE_BUTTON_LEFT;
@@ -101,21 +98,50 @@ namespace NXTN {
 		return;
 	}
 
-	void OpenGLUI::BeginImpl(const char* windowName)
+	void OpenGLUI::BeginImpl()
 	{
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui::NewFrame();
 
-		ImGui::DockSpaceOverViewport(0U, ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
+		// Prepare dockspace
+		ImGuiWindowFlags window_flags = 
+			ImGuiWindowFlags_MenuBar |
+			ImGuiWindowFlags_NoDocking |
+			ImGuiWindowFlags_NoTitleBar |
+			ImGuiWindowFlags_NoCollapse |
+			ImGuiWindowFlags_NoResize |
+			ImGuiWindowFlags_NoMove |
+			ImGuiWindowFlags_NoBringToFrontOnFocus|
+			ImGuiWindowFlags_NoNavFocus;
 
-		ImGui::Begin(windowName , 0, ImGuiWindowFlags_NoCollapse);
+		ImGuiViewport* viewport = ImGui::GetMainViewport();
+		ImGui::SetNextWindowPos(viewport->Pos);
+		ImGui::SetNextWindowSize(viewport->Size);
+		ImGui::SetNextWindowViewport(viewport->ID);
+
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+		// Note: Do not abort even if Begin() returns false (aka window is collapsed)
+		// Since dockspace should remain active, otherwise all active windows docked into it will lose their parent and become undocked.
+		// Note: Even though dockspace has no titlebar, ImGui requires a non-empty (not "") title for each window
+		ImGui::Begin("Dockspace", NULL, window_flags);
+		ImGui::PopStyleVar(3);
+
+		// Create dockspace
+		m_DockspaceID = ImGui::GetID("MainDockSpace");
+		// When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render the background and handle pass-thru holes, so Begin() should not render a background.
+		ImGui::DockSpace(m_DockspaceID, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None /*ImGuiWindowFlags_NoBackground*/);
 	}
 
 	void OpenGLUI::EndImpl()
 	{
 		// FPS
+		ImGui::SetNextWindowDockID(m_DockspaceID, ImGuiCond_FirstUseEver);
+		ImGui::Begin("Scene Info", NULL, ImGuiWindowFlags_NoCollapse);
 		float deltaTime = Time::GetDeltaTime();
 		ImGui::Text("FPS: %.0f  (Avg %.2fms/frame)", 1000.0f / deltaTime, deltaTime * 1000.0f);
+		ImGui::End();
 
 		// End
 		ImGui::End();
