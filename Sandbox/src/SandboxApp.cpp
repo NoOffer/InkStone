@@ -9,6 +9,8 @@ SandboxLayer::SandboxLayer(unsigned int windowWidth, unsigned int windowHeight)
 	m_Camera.reset(new NXTN::Camera(1.0f, NXTN::vec2i(windowWidth, windowHeight), false));
 	m_Camera->transform.SetPosition(0.0f, 0.0f, -10.0f);
 
+	m_FrameBuffer.reset(NXTN::FrameBuffer::Create(windowWidth, windowHeight));
+
 	// Temporary draw data
 	// Vertex buffer
 	// 1 3
@@ -40,40 +42,6 @@ SandboxLayer::SandboxLayer(unsigned int windowWidth, unsigned int windowHeight)
 		)
 	);
 
-	// Shader
-	std::string vertShaderSrc = R"(
-			#version 330 core
-
-			layout(location = 0) in vec3 a_PositionOS;
-			layout(location = 1) in vec2 a_TexCoord;
-
-			uniform mat4 u_ModelMatrix;
-			uniform mat4 u_VPMatrix;
-
-			out vec2 v_TexCoord;
-
-			void main()
-			{
-				v_TexCoord = a_TexCoord;
-
-				gl_Position = u_VPMatrix * u_ModelMatrix * vec4(a_PositionOS, 1);
-			}
-		)";
-
-	std::string fragShaderSrc = R"(
-			#version 330 core
-
-			layout(location = 0) out vec4 color;
-
-			in vec2 v_TexCoord;
-
-			uniform sampler2D u_MainTex;
-
-			void main()
-			{
-				color = texture(u_MainTex, v_TexCoord);
-			}
-		)";
 	m_Shader.reset(NXTN::Shader::Create("Asset/Shader/Texture.glsl"));
 
 	m_Texture.reset(NXTN::Texture2D::Create("Asset/Texture/Logo.png"));
@@ -81,6 +49,7 @@ SandboxLayer::SandboxLayer(unsigned int windowWidth, unsigned int windowHeight)
 
 void SandboxLayer::Update()
 {
+	m_FrameBuffer->Bind();
 	// Rendering
 	NXTN::Renderer::SetClearColor(1.0f, 0.0f, 1.0f);
 
@@ -94,6 +63,13 @@ void SandboxLayer::Update()
 	m_Shader->SetUniformInt("u_MainTex", 0);
 
 	NXTN::Renderer::DrawMesh(*m_Mesh);
+
+	m_FrameBuffer->Unbind();
+}
+
+void SandboxLayer::UIUpdate()
+{
+	NXTN::UI::ViewWindow(m_FrameBuffer->GetHandle());
 }
 
 bool SandboxLayer::OnEvent(NXTN::Event& event)

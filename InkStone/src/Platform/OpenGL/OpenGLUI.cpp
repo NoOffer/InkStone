@@ -51,6 +51,78 @@ namespace NXTN {
 		//io.KeyMap[ImGuiKey_X] = NXTN_KEY_X;  // Map for Ctrl+X
 		//io.KeyMap[ImGuiKey_Y] = NXTN_KEY_Y;  // Map for Ctrl+Y
 		//io.KeyMap[ImGuiKey_Z] = NXTN_KEY_Z;  // Map for Ctrl+Z
+
+		// Create dockspace
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui::NewFrame();
+		m_DockspaceID = ImGui::GetID("MainDockSpace");
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	}
+
+	void OpenGLUI::NewFrameImpl()
+	{
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui::NewFrame();
+
+		// Prepare dockspace
+		ImGuiWindowFlags window_flags = 
+			ImGuiWindowFlags_MenuBar |
+			ImGuiWindowFlags_NoDocking |
+			ImGuiWindowFlags_NoTitleBar |
+			ImGuiWindowFlags_NoCollapse |
+			ImGuiWindowFlags_NoResize |
+			ImGuiWindowFlags_NoMove |
+			ImGuiWindowFlags_NoBringToFrontOnFocus|
+			ImGuiWindowFlags_NoNavFocus;
+
+		ImGuiViewport* viewport = ImGui::GetMainViewport();
+		ImGui::SetNextWindowPos(viewport->Pos);
+		ImGui::SetNextWindowSize(viewport->Size);
+		ImGui::SetNextWindowViewport(viewport->ID);
+
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+		// Note: Do not abort even if Begin() returns false (aka window is collapsed)
+		// Since dockspace should remain active, otherwise all active windows docked into it will lose their parent and become undocked.
+		// Note: Even though dockspace has no titlebar, ImGui requires a non-empty (not "") title for each window
+		ImGui::Begin("Dockspace", NULL, window_flags);
+		ImGui::PopStyleVar(3);
+
+		// When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render the background and handle pass-thru holes, so Begin() should not render a background.
+		ImGui::DockSpace(m_DockspaceID, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None /*ImGuiWindowFlags_NoBackground*/);
+	}
+
+	void OpenGLUI::EndFrameImpl()
+	{
+		// FPS (Temp)
+		ImGui::SetNextWindowDockID(m_DockspaceID, ImGuiCond_FirstUseEver);
+		ImGui::Begin("Scene Info", NULL, ImGuiWindowFlags_NoCollapse);
+
+		float deltaTime = Time::GetDeltaTime();
+		ImGui::Text("FPS: %.0f  (Avg %.2fms/frame)", 1000.0f / deltaTime, deltaTime * 1000.0f);
+
+		ImGui::End();
+
+		// End
+		ImGui::End();
+
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	}
+
+	void OpenGLUI::ViewWindowImpl(unsigned int handle)
+	{
+		ImGui::SetNextWindowDockID(m_DockspaceID, ImGuiCond_FirstUseEver);
+		ImGui::Begin("View", NULL, ImGuiWindowFlags_NoCollapse);
+
+		// ImGui::Image defines uv0 and uv1 as the top-left and the bottom-right corner
+		// While OpenGL defines uv0 and uv1 as the bottom-left and the top-right corner
+		// The uv0 and uv1 parameters are manully set to fix this
+		ImGui::Image((ImTextureID)(intptr_t)handle, ImVec2(1024.0f, 576.0f), ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
+
+		ImGui::End();
 	}
 
 	void OpenGLUI::OnEventImpl(Event& event)
@@ -96,57 +168,5 @@ namespace NXTN {
 		}
 
 		return;
-	}
-
-	void OpenGLUI::NewFrameImpl()
-	{
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui::NewFrame();
-
-		// Prepare dockspace
-		ImGuiWindowFlags window_flags = 
-			ImGuiWindowFlags_MenuBar |
-			ImGuiWindowFlags_NoDocking |
-			ImGuiWindowFlags_NoTitleBar |
-			ImGuiWindowFlags_NoCollapse |
-			ImGuiWindowFlags_NoResize |
-			ImGuiWindowFlags_NoMove |
-			ImGuiWindowFlags_NoBringToFrontOnFocus|
-			ImGuiWindowFlags_NoNavFocus;
-
-		ImGuiViewport* viewport = ImGui::GetMainViewport();
-		ImGui::SetNextWindowPos(viewport->Pos);
-		ImGui::SetNextWindowSize(viewport->Size);
-		ImGui::SetNextWindowViewport(viewport->ID);
-
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-		// Note: Do not abort even if Begin() returns false (aka window is collapsed)
-		// Since dockspace should remain active, otherwise all active windows docked into it will lose their parent and become undocked.
-		// Note: Even though dockspace has no titlebar, ImGui requires a non-empty (not "") title for each window
-		ImGui::Begin("Dockspace", NULL, window_flags);
-		ImGui::PopStyleVar(3);
-
-		// Create dockspace
-		m_DockspaceID = ImGui::GetID("MainDockSpace");
-		// When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render the background and handle pass-thru holes, so Begin() should not render a background.
-		ImGui::DockSpace(m_DockspaceID, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None /*ImGuiWindowFlags_NoBackground*/);
-	}
-
-	void OpenGLUI::EndFrameImpl()
-	{
-		// FPS
-		ImGui::SetNextWindowDockID(m_DockspaceID, ImGuiCond_FirstUseEver);
-		ImGui::Begin("Scene Info", NULL, ImGuiWindowFlags_NoCollapse);
-		float deltaTime = Time::GetDeltaTime();
-		ImGui::Text("FPS: %.0f  (Avg %.2fms/frame)", 1000.0f / deltaTime, deltaTime * 1000.0f);
-		ImGui::End();
-
-		// End
-		ImGui::End();
-
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
 }
