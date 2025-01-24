@@ -16,6 +16,7 @@
 #include "src/Event/KeyEvent.h"
 #include "src/Event/MouseEvent.h"
 
+#include "src/Rendering/FrameBuffer.h"
 #include "src/Rendering/Renderer.h"
 #include "src/Rendering/RenderingDataBuffer.h"
 #include "src/Rendering/Shader.h"

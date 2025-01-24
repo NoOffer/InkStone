@@ -12,6 +12,8 @@ namespace NXTN {
 		virtual inline unsigned int GetWidth() const override { return m_Width; }
 		virtual inline unsigned int GetHeight() const override { return m_Height; }
 
+		virtual inline unsigned int GetHandle() const override { return m_ColorAttachment; }
+
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
