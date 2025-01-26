@@ -6,7 +6,7 @@ SandboxLayer::SandboxLayer(unsigned int windowWidth, unsigned int windowHeight)
 	m_Name = "Sandbox Gameplay Layer";
 
 	// Camera
-	m_Camera.reset(new NXTN::Camera(1.0f, NXTN::vec2i(windowWidth, windowHeight)));
+	m_Camera.reset(new NXTN::Camera(1.0f, NXTN::vec2i(windowWidth, windowHeight), false));
 	m_Camera->transform.SetPosition(0.0f, 0.0f, -10.0f);
 
 	// Temporary draw data
