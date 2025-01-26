@@ -1,6 +1,6 @@
 workspace "InkStone"
 	architecture "x64"
-	startproject "Sandbox"
+	startproject "InkStoneEditor"
 
 	configurations{
 		"Debug",

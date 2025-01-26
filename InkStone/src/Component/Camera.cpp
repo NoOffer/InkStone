@@ -33,10 +33,6 @@ namespace NXTN {
 	{
 		if (m_IsPerspective)
 		{
-			return mat4();
-		}
-		else
-		{
 			// m22 should be, but is not, negated for OpenGL
 			return mat4(
 				1 / m_FOV / m_AspectRatio, 0.0f, 0.0f, 0.0f,
@@ -44,6 +40,10 @@ namespace NXTN {
 				0.0f, 0.0f, 2.0f / (m_FarNear.x - m_FarNear.y), -(m_FarNear.x + m_FarNear.y) / (m_FarNear.x - m_FarNear.y),
 				0.0f, 0.0f, 0.0f, 1.0f
 			);
+		}
+		else
+		{
+			return mat4(1.0f);
 		}
 	}
 
