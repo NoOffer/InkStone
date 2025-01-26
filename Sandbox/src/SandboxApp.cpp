@@ -9,8 +9,6 @@ SandboxLayer::SandboxLayer(unsigned int windowWidth, unsigned int windowHeight)
 	m_Camera.reset(new NXTN::Camera(1.0f, NXTN::vec2i(windowWidth, windowHeight), false));
 	m_Camera->transform.SetPosition(0.0f, 0.0f, -10.0f);
 
-	m_FrameBuffer.reset(NXTN::FrameBuffer::Create(windowWidth, windowHeight));
-
 	// Temporary draw data
 	// Vertex buffer
 	// 1 3
@@ -49,7 +47,6 @@ SandboxLayer::SandboxLayer(unsigned int windowWidth, unsigned int windowHeight)
 
 void SandboxLayer::Update()
 {
-	m_FrameBuffer->Bind();
 	// Rendering
 	NXTN::Renderer::SetClearColor(1.0f, 0.0f, 1.0f);
 
@@ -63,13 +60,11 @@ void SandboxLayer::Update()
 	m_Shader->SetUniformInt("u_MainTex", 0);
 
 	NXTN::Renderer::DrawMesh(*m_Mesh);
-
-	m_FrameBuffer->Unbind();
 }
 
 void SandboxLayer::UIUpdate()
 {
-	NXTN::UI::ViewWindow(m_FrameBuffer->GetHandle());
+
 }
 
 bool SandboxLayer::OnEvent(NXTN::Event& event)

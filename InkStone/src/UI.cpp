@@ -47,18 +47,6 @@ namespace NXTN {
 		s_UI->EndFrameImpl();
 	}
 
-	void UI::ViewWindow(unsigned int handle)
-	{
-		NXTN_PROFILE_FUNCTION()
-
-		if (!s_UI)
-		{
-			Log::Warning("UI uninitialized");
-			return;
-		}
-		s_UI->ViewWindowImpl(handle);
-	}
-
 	void UI::OnEvent(Event& event)
 	{
 		if (!s_UI)

@@ -13,7 +13,6 @@ public:
 
 private:
 	std::shared_ptr<NXTN::Camera> m_Camera;
-	std::shared_ptr<NXTN::FrameBuffer> m_FrameBuffer;  // Temp
 	std::shared_ptr<NXTN::Mesh> m_Mesh;
 	std::shared_ptr<NXTN::Texture2D> m_Texture;
 	std::shared_ptr<NXTN::Shader> m_Shader;

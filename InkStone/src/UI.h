@@ -14,8 +14,6 @@ namespace NXTN {
 		// Public static interface/wrapper
 		static void NewFrame();
 		static void EndFrame();
-
-		static void ViewWindow(unsigned int handle);  // Temp
 		
 		static void OnEvent(Event& event);
 
@@ -25,8 +23,6 @@ namespace NXTN {
 		// Protected virtual implementation
 		virtual void NewFrameImpl() = 0;
 		virtual void EndFrameImpl() = 0;
-
-		virtual void ViewWindowImpl(unsigned int handle) = 0;
 
 		virtual void OnEventImpl(Event& event) = 0;
 

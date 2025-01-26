@@ -73,6 +73,44 @@ project "InkStone"
 		runtime "Release"
 		optimize "on"
 
+project "InkStoneEditor"
+	location "InkStoneEditor"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+	
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-obj/" .. outputdir .. "/%{prj.name}")
+
+	files{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+
+	includedirs{
+		"InkStone"
+	}
+
+	links{
+		"InkStone"
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+
+		defines{
+			"NXTN_PLATFORM_WINDOWS"
+		}
+
+	filter "configurations:Debug"
+		defines "NXTN_DEBUG"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "NXTN_RELEASE"
+		optimize "on"
+
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
