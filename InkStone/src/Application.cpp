@@ -72,6 +72,7 @@ namespace NXTN {
 		case EventType::WindowResized:
 		{
 			WindowResizeEvent e = *(WindowResizeEvent*)(&event);
+			Renderer::ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
 			m_Minimized = e.GetNewWidth() < 1 || e.GetNewHeight() < 1;
 			break;
 		}

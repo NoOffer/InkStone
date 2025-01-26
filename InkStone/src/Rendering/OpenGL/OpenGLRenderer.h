@@ -14,6 +14,8 @@ namespace NXTN {
 
 		virtual void DrawMeshImpl(const Mesh& mesh) override;
 
+		virtual void ResizeViewportImpl(int width, int height) override;
+
 		virtual void SetClearColorImpl(float r, float g, float b) override;
 		virtual void ClearFrameBufferImpl() override;
 	};

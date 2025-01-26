@@ -17,6 +17,11 @@ namespace NXTN {
 		mesh.Unbind();
 	}
 
+	void OpenGLRenderer::ResizeViewportImpl(int width, int height)
+	{
+		glViewport(0, 0, width, height);
+	}
+
 	void OpenGLRenderer::SetClearColorImpl(float r, float g, float b)
 	{
 		glClearColor(r, g, b, 1.0f);

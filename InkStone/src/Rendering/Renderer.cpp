@@ -31,6 +31,16 @@ namespace NXTN {
 		s_Renderer->DrawMeshImpl(mesh);
 	}
 
+	void Renderer::ResizeViewport(int width, int height)
+	{
+		if (!s_Renderer)
+		{
+			Log::Warning("Renderer not initialized");
+			return;
+		}
+		s_Renderer->ResizeViewportImpl(width, height);
+	}
+
 	void Renderer::SetClearColor(float r, float g, float b)
 	{
 		if (!s_Renderer)

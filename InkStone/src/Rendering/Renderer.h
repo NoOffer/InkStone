@@ -15,6 +15,8 @@ namespace NXTN {
 		// Static
 		static void DrawMesh(const Mesh& mesh);
 
+		static void ResizeViewport(int width, int height);
+		
 		static void SetClearColor(float r, float g, float b);
 		static void ClearFrameBuffer();
 
@@ -23,6 +25,8 @@ namespace NXTN {
 	protected:
 		// Virtual
 		virtual void DrawMeshImpl(const Mesh& mesh) = 0;
+
+		virtual void ResizeViewportImpl(int width, int height) = 0;
 
 		virtual void SetClearColorImpl(float r, float g, float b) = 0;
 		virtual void ClearFrameBufferImpl() = 0;
