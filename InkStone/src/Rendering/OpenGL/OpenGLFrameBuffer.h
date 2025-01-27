@@ -9,10 +9,12 @@ namespace NXTN {
 		OpenGLFrameBuffer(unsigned int width, unsigned int height);
 		~OpenGLFrameBuffer();
 
+		virtual void Resize(unsigned int width, unsigned int height) override;
+
 		virtual inline unsigned int GetWidth() const override { return m_Width; }
 		virtual inline unsigned int GetHeight() const override { return m_Height; }
 
-		virtual inline unsigned int GetHandle() const override { return m_ColorAttachment; }
+		virtual inline unsigned int GetColorAttachment() const override { return m_ColorAttachment; }
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;

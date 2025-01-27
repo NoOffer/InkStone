@@ -7,8 +7,8 @@ namespace NXTN {
 		m_Name = "Sandbox Gameplay Layer";
 
 		// Camera
-		m_Camera.reset(new NXTN::Camera(1.0f, NXTN::vec2i(windowWidth, windowHeight), false));
-		m_Camera->transform.SetPosition(0.0f, 0.0f, -10.0f);
+		m_SceneCamera.reset(new NXTN::Camera(1.0f, NXTN::vec2i(windowWidth, windowHeight), false));
+		m_SceneCamera->transform.SetPosition(0.0f, 0.0f, -10.0f);
 
 		m_FrameBuffer.reset(NXTN::FrameBuffer::Create(windowWidth, windowHeight));
 
@@ -74,7 +74,7 @@ namespace NXTN {
 
 		m_Shader->Bind();
 		m_Shader->SetUniformMat4("u_ModelMatrix", m_Mesh->transform.GetModelMatrix());
-		m_Shader->SetUniformMat4("u_VPMatrix", m_Camera->GetViewProjMatrix());
+		m_Shader->SetUniformMat4("u_VPMatrix", m_SceneCamera->GetViewProjMatrix());
 
 		m_Texture->Bind(0);
 		m_Shader->SetUniformInt("u_MainTex", 0);
@@ -109,23 +109,32 @@ namespace NXTN {
 			ImGui::SetNextWindowDockID(m_DockspaceID, ImGuiCond_FirstUseEver);
 			ImGui::Begin("View", NULL, ImGuiWindowFlags_NoCollapse);
 			{
+				// View
+				ImVec2 viewportSize = ImGui::GetContentRegionAvail();
 				// ImGui::Image defines uv0 and uv1 as the top-left and the bottom-right corner
 				// While OpenGL defines uv0 and uv1 as the bottom-left and the top-right corner
 				// The uv0 and uv1 parameters are manully set to fix this
-				ImGui::Image((ImTextureID)(intptr_t)m_FrameBuffer->GetHandle(), ImVec2(1024.0f, 576.0f), ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
+				ImGui::Image((ImTextureID)(intptr_t)m_FrameBuffer->GetColorAttachment(), ImVec2(viewportSize.x, viewportSize.y), ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
+				// Resize if necessary
+				if (viewportSize.x != m_ViewportSize.x || viewportSize.y != m_ViewportSize.y)
+				{
+					m_ViewportSize = viewportSize;
+					Renderer::ResizeViewport((int)m_ViewportSize.x, (int)m_ViewportSize.y);  // OpenGL viewport
+					m_SceneCamera->ResizeViewport((int)m_ViewportSize.x, (int)m_ViewportSize.y);  // Camera aspect ratio
+					m_FrameBuffer->Resize((unsigned int)m_ViewportSize.x, (unsigned int)m_ViewportSize.y);  // Frame buffer size
+				}
 			}
 			ImGui::End();
 
-			// FPS
+			// Scene Info
 			ImGui::SetNextWindowDockID(m_DockspaceID, ImGuiCond_FirstUseEver);
 			ImGui::Begin("Scene Info", NULL, ImGuiWindowFlags_NoCollapse);
 			{
+				// FPS
 				float deltaTime = Time::GetDeltaTime();
 				ImGui::Text("FPS: %.0f  (Avg %.2fms/frame)", 1000.0f / deltaTime, deltaTime * 1000.0f);
-
 			}
 			ImGui::End();
-
 		}
 		ImGui::End();
 	}
@@ -135,8 +144,8 @@ namespace NXTN {
 		if (event.GetEventType() == NXTN::EventType::WindowResized)
 		{
 			NXTN::WindowResizeEvent e = *(NXTN::WindowResizeEvent*)(&event);
-			std::cout << e.GetNewWidth() << ", " << e.GetNewHeight() << std::endl;
-			m_Camera->ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
+			//m_SceneCamera->ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
+			Renderer::ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
 		}
 		return false;
 	}

@@ -31,11 +31,11 @@ namespace NXTN {
 
 	mat4 Camera::GetProjMatrix()
 	{
-		if (m_IsPerspective)
+		if (m_IsPerspective)  // Perspective
 		{
 			return mat4();
 		}
-		else
+		else  // Orthogonal
 		{
 			// m22 should be, but is not, negated for OpenGL
 			return mat4(

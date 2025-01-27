@@ -72,8 +72,6 @@ namespace NXTN {
 				windowData.width = width;
 				windowData.height = height;
 
-				glViewport(0, 0, width, height);
-
 				windowData.EventCallback(WindowResizeEvent(width, height));
 			}
 		);

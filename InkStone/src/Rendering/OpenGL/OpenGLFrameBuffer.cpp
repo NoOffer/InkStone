@@ -35,6 +35,8 @@ namespace NXTN {
 			Log::Warning("Frame buffer incomplete");
 		}
 
+		// Unbind texture
+		glBindTexture(GL_TEXTURE_2D, 0);
 		// Unbind framebuffer
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
@@ -42,8 +44,39 @@ namespace NXTN {
 	OpenGLFrameBuffer::~OpenGLFrameBuffer()
 	{
 		glDeleteFramebuffers(1, &m_RendererID);
+		glDeleteTextures(1, &m_ColorAttachment);
 		glDeleteTextures(1, &m_DepthStencilAttachment);
-		glDeleteTextures(1, &m_DepthStencilAttachment);
+	}
+
+	void OpenGLFrameBuffer::Resize(unsigned int width, unsigned int height)
+	{
+		m_Width = width;
+		m_Height = height;
+
+		glBindFramebuffer(GL_FRAMEBUFFER, m_RendererID);
+
+		// Color attachment
+		glBindTexture(GL_TEXTURE_2D, m_ColorAttachment);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_ColorAttachment, 0);
+
+		// Depth attachment
+		glBindTexture(GL_TEXTURE_2D, m_DepthStencilAttachment);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, m_Width, m_Height, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, nullptr);
+
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, m_DepthStencilAttachment, 0);
+
+		// Check framebuffer status
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		{
+			Log::Warning("Frame buffer incomplete");
+		}
+
+		// Unbind texture
+		glBindTexture(GL_TEXTURE_2D, 0);
+		// Unbind framebuffer
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
 	void OpenGLFrameBuffer::Bind() const

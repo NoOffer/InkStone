@@ -15,7 +15,7 @@ namespace NXTN {
 		virtual bool OnEvent(NXTN::Event& event) override;
 
 	private:
-		std::shared_ptr<NXTN::Camera> m_Camera;
+		std::shared_ptr<NXTN::Camera> m_SceneCamera;
 		std::shared_ptr<NXTN::FrameBuffer> m_FrameBuffer;  // Temp
 		std::shared_ptr<NXTN::Mesh> m_Mesh;
 		std::shared_ptr<NXTN::Texture2D> m_Texture;
@@ -23,6 +23,8 @@ namespace NXTN {
 
 		ImGuiID m_DockspaceID;
 		ImGuiWindowFlags m_WindowFlag;
+
+		ImVec2 m_ViewportSize;
 	};
 
 	class InkStoneEditor : public Application
