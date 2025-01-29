@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Time.h"
-#include "Window.h"
+#include "src/Window/Window.h"
 
 namespace NXTN {
 	class UI

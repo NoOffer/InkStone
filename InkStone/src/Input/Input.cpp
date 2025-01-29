@@ -1,7 +1,8 @@
 #include "pch.h"
 
-#include "System.h"
-#include "Platform/GLFW/GLFWInput.h"
+#include "src/System.h"
+
+#include "GLFW/GLFWInput.h"
 
 namespace NXTN {
 	Input* Input::s_Instance;

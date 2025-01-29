@@ -2,7 +2,7 @@
 
 #include "OpenGLWindow.h"
 
-#include "src/Platform/GLFW/GLFWKeyMap.h"
+#include "src/Input/GLFW/GLFWKeyMap.h"
 
 namespace NXTN {
 	static bool s_GLFWInitialized = false;

@@ -1,12 +1,17 @@
 #pragma once
 
+#include "src/Core.h"
+
 #include "src/Math/Math.h"
 
-#include "src/Window.h"
-#include "src/UI.h"
+#include "src/Window/Window.h"
+
+#include "src/UI/UI.h"
 
 #include "src/Layer.h"
 #include "src/LayerStack.h"
+#include "src/System.h"
+#include "src/Time.h"
 
 #include "src/Component/Camera.h"
 #include "src/Component/Mesh.h"

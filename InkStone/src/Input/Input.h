@@ -1,10 +1,11 @@
 #pragma once
 
-#include "Core.h"
-#include "Log.h"
+#include "src/Core.h"
+#include "src/Log.h"
 
 #include "KeyCode.h"
-#include "Math/Math.h"
+
+#include "src/Math/Math.h"
 
 namespace NXTN {
 	class Input

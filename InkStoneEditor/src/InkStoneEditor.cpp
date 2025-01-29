@@ -111,17 +111,25 @@ namespace NXTN {
 			{
 				// View
 				ImVec2 viewportSize = ImGui::GetContentRegionAvail();
-				// ImGui::Image defines uv0 and uv1 as the top-left and the bottom-right corner
-				// While OpenGL defines uv0 and uv1 as the bottom-left and the top-right corner
-				// The uv0 and uv1 parameters are manully set to fix this
-				ImGui::Image((ImTextureID)(intptr_t)m_FrameBuffer->GetColorAttachment(), ImVec2(viewportSize.x, viewportSize.y), ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
-				// Resize if necessary
-				if (viewportSize.x != m_ViewportSize.x || viewportSize.y != m_ViewportSize.y)
+				// ImGui sometimes return negative viewport sizes
+				if (viewportSize.x > 0.0f && viewportSize.y > 0.0f)
 				{
-					m_ViewportSize = viewportSize;
-					Renderer::ResizeViewport((int)m_ViewportSize.x, (int)m_ViewportSize.y);  // OpenGL viewport
-					m_SceneCamera->ResizeViewport((int)m_ViewportSize.x, (int)m_ViewportSize.y);  // Camera aspect ratio
-					m_FrameBuffer->Resize((unsigned int)m_ViewportSize.x, (unsigned int)m_ViewportSize.y);  // Frame buffer size
+					// ImGui::Image defines uv0 and uv1 as the top-left and the bottom-right corner
+					// While OpenGL defines uv0 and uv1 as the bottom-left and the top-right corner
+					// The uv0 and uv1 parameters are manully set to fix this
+					ImGui::Image((ImTextureID)(intptr_t)m_FrameBuffer->GetColorAttachment(), ImVec2(viewportSize.x, viewportSize.y), ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
+					// Resize if necessary
+					if (viewportSize.x != m_ViewportSize.x || viewportSize.y != m_ViewportSize.y)
+					{
+						m_ViewportSize = viewportSize;
+						Renderer::ResizeViewport((int)m_ViewportSize.x, (int)m_ViewportSize.y);  // OpenGL viewport
+						m_SceneCamera->ResizeViewport((int)m_ViewportSize.x, (int)m_ViewportSize.y);  // Camera aspect ratio
+						m_FrameBuffer->Resize((unsigned int)m_ViewportSize.x, (unsigned int)m_ViewportSize.y);  // Frame buffer size
+					}
+				}
+				else
+				{
+					ImGui::Image((ImTextureID)(intptr_t)m_FrameBuffer->GetColorAttachment(), ImVec2(m_ViewportSize.x, m_ViewportSize.y), ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
 				}
 			}
 			ImGui::End();

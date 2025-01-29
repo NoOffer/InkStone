@@ -4,8 +4,6 @@
 
 #include "GLAD/glad.h"
 
-#include "Platform/OpenGL/ImGuiBackend/imgui_impl_opengl3.h"  // Temporary
-
 namespace NXTN {
 	Application* Application::s_Instance = nullptr;
 

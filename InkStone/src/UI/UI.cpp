@@ -1,6 +1,6 @@
 #include "pch.h"
 
-#include "Platform/OpenGL/OpenGLUI.h"
+#include "OpenGL/OpenGLUI.h"
 
 namespace NXTN {
 	std::unique_ptr<UI> UI::s_UI = nullptr;

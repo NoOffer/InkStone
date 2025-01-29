@@ -2,7 +2,7 @@
 
 #include "OpenGLUI.h"
 
-#include "src/Keycode.h"
+#include "src/Input/Keycode.h"
 
 namespace NXTN {
 	OpenGLUI::OpenGLUI(const std::shared_ptr<Window>& window)

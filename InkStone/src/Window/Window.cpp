@@ -1,6 +1,6 @@
 #include "pch.h"
 
-#include "Platform/OpenGL/OpenGLWindow.h"
+#include "OpenGL/OpenGLWindow.h"
 
 namespace NXTN {
 	Window* Window::Create(std::string title)

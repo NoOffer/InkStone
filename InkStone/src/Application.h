@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Input.h"
+#include "Input/Input.h"
 #include "LayerStack.h"
-#include "UI.h"
+#include "UI/UI.h"
 #include "Rendering/Renderer.h"
 
 namespace NXTN {

@@ -2,9 +2,11 @@
 
 //#include "Core.h"
 
-#include "src/Layer.h"
 #include "src/Log.h"
 #include "src/System.h"
+#include "src/Event/ApplicationEvent.h"
+#include "src/Event/KeyEvent.h"
+#include "src/Event/MouseEvent.h"
 
 namespace NXTN {
 	class Window

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "src/UI.h"
+#include "src/UI/UI.h"
 
 #include "ImGuiBackend/imgui_impl_glfw.h"
 #include "ImGuiBackend/imgui_impl_opengl3.h"
