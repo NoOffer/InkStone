@@ -13,8 +13,8 @@
 #include "src/System.h"
 #include "src/Time.h"
 
-#include "src/Component/Camera.h"
-#include "src/Component/Mesh.h"
+#include "src/GameObject/Camera.h"
+#include "src/GameObject/Mesh.h"
 
 #include "src/Event/Event.h"
 #include "src/Event/ApplicationEvent.h"

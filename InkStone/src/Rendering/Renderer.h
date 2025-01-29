@@ -3,7 +3,7 @@
 #include "src/Core.h"
 
 #include "src/Log.h"
-#include "src/Component/Mesh.h"
+#include "src/GameObject/Mesh.h"
 #include "src/System.h"
 
 namespace NXTN {
