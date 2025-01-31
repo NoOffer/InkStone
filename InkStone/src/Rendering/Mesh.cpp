@@ -4,9 +4,9 @@
 
 namespace NXTN {
 	Mesh::Mesh(VertexArray* va, IndexBuffer* ib)
+		: m_VertexArray(va), m_IndexBuffer(ib)
 	{
-		m_VertexArray.reset(va);
-		m_IndexBuffer.reset(ib);
+
 	}
 
 	void Mesh::Bind() const

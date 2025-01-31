@@ -21,7 +21,7 @@ namespace NXTN {
 		}
 	}
 
-	void Renderer::DrawMesh(const Mesh& mesh)
+	void Renderer::DrawMesh(const std::shared_ptr<const Mesh>& mesh)
 	{
 		if (!s_Renderer)
 		{

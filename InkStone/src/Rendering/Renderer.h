@@ -3,8 +3,9 @@
 #include "src/Core.h"
 
 #include "src/Log.h"
-#include "src/GameObject/Mesh.h"
 #include "src/System.h"
+
+#include "Mesh.h"
 
 namespace NXTN {
 	class Renderer
@@ -13,7 +14,7 @@ namespace NXTN {
 		virtual ~Renderer() {}
 
 		// Static
-		static void DrawMesh(const Mesh& mesh);
+		static void DrawMesh(const std::shared_ptr<const Mesh>& mesh);
 
 		static void ResizeViewport(int width, int height);
 		
@@ -24,14 +25,14 @@ namespace NXTN {
 
 	protected:
 		// Virtual
-		virtual void DrawMeshImpl(const Mesh& mesh) = 0;
+		virtual void DrawMeshImpl(const std::shared_ptr<const Mesh>& mesh) = 0;
 
 		virtual void ResizeViewportImpl(int width, int height) = 0;
 
 		virtual void SetClearColorImpl(float r, float g, float b) = 0;
 		virtual void ClearFrameBufferImpl() = 0;
+
 		//static inline bool Initialized() { return s_Renderer != nullptr; }
-		//static Renderer* Create(GraphicsAPI api);
 
 	private:
 		static std::unique_ptr<Renderer> s_Renderer;

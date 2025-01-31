@@ -1,11 +1,10 @@
 #pragma once
 
-#include "src/Rendering/VertexArray.h"
-#include "src/Rendering/RenderingDataBuffer.h"
-#include "GameObject.h"
+#include "VertexArray.h"
+#include "RenderingDataBuffer.h"
 
 namespace NXTN {
-	class Mesh : public GameObject
+	class Mesh
 	{
 	public:
 		Mesh(VertexArray* va, IndexBuffer* ib);
@@ -18,8 +17,8 @@ namespace NXTN {
 		const IndexBuffer& GetIndexBuffer() const;
 
 	private:
-		std::unique_ptr<VertexArray> m_VertexArray;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		const std::unique_ptr<VertexArray> m_VertexArray;
+		const std::unique_ptr<IndexBuffer> m_IndexBuffer;
 	};
 }
 

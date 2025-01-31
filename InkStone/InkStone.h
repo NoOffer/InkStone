@@ -2,31 +2,36 @@
 
 #include "src/Core.h"
 
-#include "src/Math/Math.h"
-
-#include "src/Window/Window.h"
-
-#include "src/UI/UI.h"
-
 #include "src/Layer.h"
 #include "src/LayerStack.h"
 #include "src/System.h"
 #include "src/Time.h"
 
-#include "src/GameObject/Camera.h"
-#include "src/GameObject/Mesh.h"
+#include "src/Component/Component.h"
+#include "src/Component/MeshRenderer.h"
+#include "src/Component/Transform.h"
 
 #include "src/Event/Event.h"
 #include "src/Event/ApplicationEvent.h"
 #include "src/Event/KeyEvent.h"
 #include "src/Event/MouseEvent.h"
 
+#include "src/GameObject/Camera.h"
+#include "src/GameObject/GameObject.h"
+
+#include "src/Math/Math.h"
+
 #include "src/Rendering/FrameBuffer.h"
+#include "src/Rendering/Mesh.h"
 #include "src/Rendering/Renderer.h"
 #include "src/Rendering/RenderingDataBuffer.h"
 #include "src/Rendering/Shader.h"
 #include "src/Rendering/Texture.h"
 #include "src/Rendering/VertexArray.h"
+
+#include "src/UI/UI.h"
+
+#include "src/Window/Window.h"
 
 #include "src/Application.h"
 

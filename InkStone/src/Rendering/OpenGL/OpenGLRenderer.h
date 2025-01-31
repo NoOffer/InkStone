@@ -12,7 +12,7 @@ namespace NXTN {
 		OpenGLRenderer();
 		virtual ~OpenGLRenderer() {}
 
-		virtual void DrawMeshImpl(const Mesh& mesh) override;
+		virtual void DrawMeshImpl(const std::shared_ptr<const Mesh>& mesh) override;
 
 		virtual void ResizeViewportImpl(int width, int height) override;
 

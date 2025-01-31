@@ -7,10 +7,10 @@ namespace NXTN {
 		m_Name = "Sandbox Gameplay Layer";
 
 		// Camera
-		m_SceneCamera.reset(new NXTN::Camera(1.0f, NXTN::vec2i(windowWidth, windowHeight), false));
+		m_SceneCamera.reset(new Camera(1.0f, vec2i(windowWidth, windowHeight), false));
 		m_SceneCamera->transform.SetPosition(0.0f, 0.0f, -10.0f);
 
-		m_FrameBuffer.reset(NXTN::FrameBuffer::Create(windowWidth, windowHeight));
+		m_FrameBuffer.reset(FrameBuffer::Create(windowWidth, windowHeight));
 
 		// Temporary draw data
 		// Vertex buffer
@@ -24,9 +24,9 @@ namespace NXTN {
 		};
 
 		// Vertex array layout
-		NXTN::VertexArrayLayout layout({
-			{NXTN::VertexDataType::Float, 3, "Vertex Position"},
-			{NXTN::VertexDataType::Float, 2, "Texture Coordinate"}
+		VertexArrayLayout layout({
+			{VertexDataType::Float, 3, "Vertex Position"},
+			{VertexDataType::Float, 2, "Texture Coordinate"}
 			});
 
 		// Index buffer
@@ -36,16 +36,19 @@ namespace NXTN {
 		};
 
 		//Mesh
-		m_Mesh.reset(
-			new NXTN::Mesh(
-				NXTN::VertexArray::Create(NXTN::VertexBuffer::Create(vertices, 20), layout),
-				NXTN::IndexBuffer::Create(indices, 6)
+		m_TestObj.reset(new GameObject);
+		m_TestObj->AddComponent(
+			new MeshRenderer(
+				new Mesh(
+					VertexArray::Create(VertexBuffer::Create(vertices, 20), layout),
+					IndexBuffer::Create(indices, 6)
+				)
 			)
 		);
 
-		m_Shader.reset(NXTN::Shader::Create("Asset/Shader/Texture.glsl"));
+		m_Shader.reset(Shader::Create("Asset/Shader/Texture.glsl"));
 
-		m_Texture.reset(NXTN::Texture2D::Create("Asset/Texture/Logo.png"));
+		m_Texture.reset(Texture2D::Create("Asset/Texture/Logo.png"));
 
 		// UI config
 		// Create dockspace
@@ -68,18 +71,18 @@ namespace NXTN {
 	{
 		m_FrameBuffer->Bind();
 		// Rendering
-		NXTN::Renderer::SetClearColor(1.0f, 0.0f, 1.0f);
+		Renderer::SetClearColor(1.0f, 0.0f, 1.0f);
 
-		NXTN::Renderer::ClearFrameBuffer();
+		Renderer::ClearFrameBuffer();
 
 		m_Shader->Bind();
-		m_Shader->SetUniformMat4("u_ModelMatrix", m_Mesh->transform.GetModelMatrix());
+		m_Shader->SetUniformMat4("u_ModelMatrix", m_TestObj->transform.GetModelMatrix());
 		m_Shader->SetUniformMat4("u_VPMatrix", m_SceneCamera->GetViewProjMatrix());
 
 		m_Texture->Bind(0);
 		m_Shader->SetUniformInt("u_MainTex", 0);
 
-		NXTN::Renderer::DrawMesh(*m_Mesh);
+		m_TestObj->Update();
 
 		m_FrameBuffer->Unbind();
 	}
@@ -147,11 +150,11 @@ namespace NXTN {
 		ImGui::End();
 	}
 
-	bool EditorLayer::OnEvent(NXTN::Event& event)
+	bool EditorLayer::OnEvent(Event& event)
 	{
-		if (event.GetEventType() == NXTN::EventType::WindowResized)
+		if (event.GetEventType() == EventType::WindowResized)
 		{
-			NXTN::WindowResizeEvent e = *(NXTN::WindowResizeEvent*)(&event);
+			WindowResizeEvent e = *(WindowResizeEvent*)(&event);
 			//m_SceneCamera->ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
 			Renderer::ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
 		}

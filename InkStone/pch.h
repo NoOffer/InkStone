@@ -16,6 +16,7 @@
 #include <mutex>
 //#include <regex>
 #include <sstream>
+#include <typeindex>
 #include <utility>
 
 // Data structure

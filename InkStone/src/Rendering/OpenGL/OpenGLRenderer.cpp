@@ -10,11 +10,13 @@ namespace NXTN {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
-	void OpenGLRenderer::DrawMeshImpl(const Mesh& mesh)
+	void OpenGLRenderer::DrawMeshImpl(const std::shared_ptr<const Mesh>& mesh)
 	{
-		mesh.Bind();
-		glDrawElements(GL_TRIANGLES, mesh.GetIndexBuffer().GetCount(), GL_UNSIGNED_INT, nullptr);
-		mesh.Unbind();
+		mesh->Bind();
+
+		glDrawElements(GL_TRIANGLES, mesh->GetIndexBuffer().GetCount(), GL_UNSIGNED_INT, nullptr);
+		
+		mesh->Unbind();
 	}
 
 	void OpenGLRenderer::ResizeViewportImpl(int width, int height)
