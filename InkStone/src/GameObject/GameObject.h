@@ -10,15 +10,17 @@ namespace NXTN {
 		virtual ~GameObject() {}
 		
 		void AddComponent(Component* component_ptr);
+
+		void AddChild(GameObject* child);
 		
 		void Update();
 
 		Transform transform;
 
 	private:
-		// Warning: the std::type_id of a same type may differ across different environments and compilations
-		// Also this implementation limits the map to contain one object per type
 		std::vector<std::unique_ptr<Component>> m_Components;
+
+		std::vector<std::unique_ptr<GameObject>> m_Children;
 	};
 }
 
