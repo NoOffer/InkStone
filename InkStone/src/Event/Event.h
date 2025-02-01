@@ -27,9 +27,9 @@ namespace NXTN {
 	class Event
 	{
 	public:
-		virtual EventType GetEventType() const = 0;
-		virtual EventFlag GetEventFlag() const = 0;
-		//virtual std::string ToString() const = 0;
+		virtual EventType GetEventType() const { return EventType::None; }
+		virtual EventFlag GetEventFlag() const { return EventFlag::None; }
+		//virtual std::string ToString() const {}
 
 	protected:
 		bool m_Handled = false;

@@ -65,11 +65,11 @@ namespace NXTN {
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
 
-	void OpenGLUI::OnEventImpl(Event& event)
+	void OpenGLUI::OnEventImpl(Event*& event_ptr)
 	{
 		ImGuiIO& io = ImGui::GetIO();
 
-		switch (event.GetEventType())
+		switch (event_ptr->GetEventType())
 		{
 		case EventType::WindowResized:
 		{
@@ -82,25 +82,25 @@ namespace NXTN {
 			break;
 		case EventType::MouseButtonPressed:
 		{
-			int mouseBtnCode = (*(MouseButtonPressEvent*)&event).GetButton();
+			int mouseBtnCode = (*(MouseButtonPressEvent*)event_ptr).GetButton();
 			io.MouseDown[mouseBtnCode] = true;
 			break;
 		}
 		case EventType::MouseButtonReleased:
 		{
-			int mouseBtnCode = (*(MouseButtonPressEvent*)&event).GetButton();
+			int mouseBtnCode = (*(MouseButtonPressEvent*)event_ptr).GetButton();
 			io.MouseDown[mouseBtnCode] = false;
 			break;
 		}
 		case EventType::MouseMove:
 		{
-			MouseMoveEvent e = *(MouseMoveEvent*)&event;
+			MouseMoveEvent e = *(MouseMoveEvent*)event_ptr;
 			io.MousePos = ImVec2(e.GetX(), e.GetY());
 			break;
 		}
 		case EventType::MouseScroll:
 		{
-			MouseScrollEvent e = *(MouseScrollEvent*)&event;
+			MouseScrollEvent e = *(MouseScrollEvent*)event_ptr;
 			io.MouseWheelH += e.GetX();
 			io.MouseWheel += e.GetY();
 			break;

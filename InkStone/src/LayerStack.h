@@ -10,14 +10,16 @@ namespace NXTN {
 		LayerStack();
 		virtual ~LayerStack();
 
-		void PushLayer(Layer* layer);
-		void PushOverlay(Layer* layer);
+		void AddLayer(Layer* layer);
+
 		void Update();
 		void UIUpdate();
-		void OnEvent(Event& event);
+
+		void OnEvent(Event*& event_ptr);
 
 	private:
+		// Clearly C++ is not happy about Layer being abstract
+		// So pointer type is required here
 		std::vector<Layer*> m_LayerStack;
-		std::vector<Layer*> m_OverlayStack;
 	};
 }

@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Event/ApplicationEvent.h"
-#include "Event/KeyEvent.h"
-#include "Event/MouseEvent.h"
+#include "Event/EventBuffer.h"
 
 namespace NXTN {
 
@@ -11,14 +9,14 @@ namespace NXTN {
 	public:
 		virtual ~Layer() {}
 
-		virtual void Update() {}
-		virtual void UIUpdate() {}
-		virtual inline bool OnEvent(Event& event) { return false; }
+		virtual void Update() = 0;
+		virtual void UIUpdate() = 0;
+		virtual inline bool OnEvent(Event*& event_ptr) = 0;
 
 		inline const char* GetName() const { return m_Name; }
 
 	protected:
-		Layer(const char* name = "Layer");
+		Layer(const char* name = "Layer") : m_Name(name) {}
 
 		const char* m_Name;
 	};

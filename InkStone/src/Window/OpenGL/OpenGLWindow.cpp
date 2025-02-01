@@ -9,8 +9,8 @@ namespace NXTN {
 
 	OpenGLWindow::OpenGLWindow(std::string title, bool vSync)
 	{
-		m_WinData.vSync = vSync;
-		m_WinData.EventCallback = [](Event&) {};
+		vSync = vSync;
+		//EventCallback = [](Event&) {};
 
 		// GLFW initialization
 		if (glfwInit())
@@ -32,9 +32,9 @@ namespace NXTN {
 		glfwMakeContextCurrent(m_Window);
 
 		glfwMaximizeWindow(m_Window);
-		glfwGetWindowSize(m_Window, &m_WinData.width, &m_WinData.height);
+		glfwGetWindowSize(m_Window, &width, &height);
 
-		glfwSetWindowUserPointer(m_Window, &m_WinData);
+		//glfwSetWindowUserPointer(m_Window, &m_WinData);
 
 		// GLAD initialization
 		if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -47,7 +47,7 @@ namespace NXTN {
 			NXTN_ERROR;
 		}
 
-		glViewport(0, 0, m_WinData.width, m_WinData.height);
+		glViewport(0, 0, width, height);
 
 		// Log context information
 		Log::Info("OpenGL context initialized");
@@ -61,37 +61,37 @@ namespace NXTN {
 		// Window close
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 			{
-				(*(WindowData*)glfwGetWindowUserPointer(window)).EventCallback(WindowCloseEvent());
+				EventBuffer::PushEvent(new WindowCloseEvent());
 			}
 		);
 		// Window resize
 		glfwSetWindowSizeCallback(m_Window,[](GLFWwindow* window, int width, int height)
 			{
-				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
+				//WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
 
-				windowData.width = width;
-				windowData.height = height;
+				//windowData.width = width;
+				//windowData.height = height;
 
-				windowData.EventCallback(WindowResizeEvent(width, height));
+				EventBuffer::PushEvent(new WindowResizeEvent(width, height));
 			}
 		);
 		// Key press
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scanCode, int action, int mods)
 			{
-				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
+				//WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
 
 				key = keycodeMapFromGLFW[key];
 
 				switch (action)
 				{
 				case GLFW_PRESS:
-					windowData.EventCallback(KeyPressEvent(key, 0));
+					EventBuffer::PushEvent(new KeyPressEvent(key, 0));
 					break;
 				case GLFW_RELEASE:
-					windowData.EventCallback(KeyReleaseEvent(key));
+					EventBuffer::PushEvent(new KeyReleaseEvent(key));
 					break;
 				case GLFW_REPEAT:
-					windowData.EventCallback(KeyPressEvent(key, 1));
+					EventBuffer::PushEvent(new KeyPressEvent(key, 1));
 					break;
 				}
 			}
@@ -99,17 +99,17 @@ namespace NXTN {
 		// Mouse button press
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int key, int action, int mods)
 			{
-				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
+				//WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
 
 				key = keycodeMapFromGLFW[key];
 
 				switch (action)
 				{
 				case GLFW_PRESS:
-					windowData.EventCallback(MouseButtonPressEvent(key));
+					EventBuffer::PushEvent(new MouseButtonPressEvent(key));
 					break;
 				case GLFW_RELEASE:
-					windowData.EventCallback(MouseButtonReleaseEvent(key));
+					EventBuffer::PushEvent(new MouseButtonReleaseEvent(key));
 					break;
 				}
 			}
@@ -117,17 +117,17 @@ namespace NXTN {
 		// Mouse scroll
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
 			{
-				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
+				//WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
 
-				windowData.EventCallback(MouseScrollEvent((float)xOffset, (float)yOffset));
+				EventBuffer::PushEvent(new MouseScrollEvent((float)xOffset, (float)yOffset));
 			}
 		);
 		// Cursor move
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
 			{
-				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
+				//WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
 
-				windowData.EventCallback(MouseMoveEvent((float)xPos, (float)yPos));
+				EventBuffer::PushEvent(new MouseMoveEvent((float)xPos, (float)yPos));
 			}
 		);
 	}
@@ -150,6 +150,6 @@ namespace NXTN {
 	{
 		glfwSwapInterval(enabled ? 1 : 0);
 
-		m_WinData.vSync = enabled;
+		vSync = enabled;
 	}
 }

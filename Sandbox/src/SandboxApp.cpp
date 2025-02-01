@@ -19,16 +19,17 @@ void SandboxLayer::UIUpdate()
 
 }
 
-bool SandboxLayer::OnEvent(NXTN::Event& event)
+bool SandboxLayer::OnEvent(NXTN::Event*& event_ptr)
 {
-
+	return false;
 }
+
 
 // Sandbox Application
 Sandbox::Sandbox()
 	: Application()
 {
-	m_LayerStack.PushLayer(new SandboxLayer(m_Window->GetWidth(), m_Window->GetHeight()));
+	m_LayerStack.AddLayer(new SandboxLayer(m_Window->GetWidth(), m_Window->GetHeight()));
 }
 
 void Sandbox::Update()

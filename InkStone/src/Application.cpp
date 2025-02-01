@@ -17,7 +17,7 @@ namespace NXTN {
 		s_Instance = this;
 
 		m_Window.reset(Window::Create());
-		m_Window->SetEventCallback(std::bind(&Application::OnWindowEvent, this, std::placeholders::_1));
+		//m_Window->SetEventCallback(std::bind(&Application::OnWindowEvent, this, std::placeholders::_1));
 
 		Renderer::Init();
 
@@ -45,6 +45,8 @@ namespace NXTN {
 	{
 		NXTN_PROFILE_FUNCTION()
 
+		EventBuffer::PushEvent(new ApplicationUpdateEvent());
+
 		Time::UpdateTime();
 
 		m_LayerStack.Update();
@@ -56,27 +58,35 @@ namespace NXTN {
 		UI::EndFrame();
 
 		m_Window->Update();
+
+		for (Event*& event_ptr : EventBuffer::GetEventBuffer())
+		{
+			switch (event_ptr->GetEventType())
+			{
+			case EventType::WindowClosed:
+			{
+				m_Alive = false;
+				return;
+			}
+			case EventType::WindowResized:
+			{
+				WindowResizeEvent e = *(WindowResizeEvent*)(event_ptr);
+				//Renderer::ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
+				m_Minimized = e.GetNewWidth() < 1 || e.GetNewHeight() < 1;
+				break;
+			}
+			}
+
+			m_LayerStack.OnEvent(event_ptr);
+
+			UI::OnEvent(event_ptr);
+		}
+
+		EventBuffer::Clear();
 	}
 
-	void Application::OnWindowEvent(Event& event)
-	{
-		switch (event.GetEventType())
-		{
-		case EventType::WindowClosed:
-		{
-			m_Alive = false;
-			return;
-		}
-		case EventType::WindowResized:
-		{
-			WindowResizeEvent e = *(WindowResizeEvent*)(&event);
-			Renderer::ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
-			m_Minimized = e.GetNewWidth() < 1 || e.GetNewHeight() < 1;
-			break;
-		}
-		}
-		m_LayerStack.OnEvent(event);
-
-		UI::OnEvent(event);
-	}
+	//void Application::OnWindowEvent(Event& event)
+	//{
+	//	EventBuffer::PushEvent(event);
+	//}
 }

@@ -20,6 +20,7 @@
 #include <utility>
 
 // Data structure
+#include <deque>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>

@@ -150,11 +150,11 @@ namespace NXTN {
 		ImGui::End();
 	}
 
-	bool EditorLayer::OnEvent(Event& event)
+	bool EditorLayer::OnEvent(Event*& event_ptr)
 	{
-		if (event.GetEventType() == EventType::WindowResized)
+		if (event_ptr->GetEventType() == EventType::WindowResized)
 		{
-			WindowResizeEvent e = *(WindowResizeEvent*)(&event);
+			WindowResizeEvent e = *(WindowResizeEvent*)(event_ptr);
 			//m_SceneCamera->ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
 			Renderer::ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
 		}
@@ -165,7 +165,7 @@ namespace NXTN {
 	InkStoneEditor::InkStoneEditor()
 		: Application()
 	{
-		m_LayerStack.PushLayer(new EditorLayer(m_Window->GetWidth(), m_Window->GetHeight()));
+		m_LayerStack.AddLayer(new EditorLayer(m_Window->GetWidth(), m_Window->GetHeight()));
 	}
 
 	void InkStoneEditor::Update()

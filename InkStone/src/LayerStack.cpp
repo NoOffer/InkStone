@@ -6,20 +6,11 @@ namespace NXTN {
 
 	LayerStack::LayerStack() {}
 
-	LayerStack::~LayerStack()
-	{
-		for (Layer* layer : m_LayerStack)
-			delete layer;
-	}
+	LayerStack::~LayerStack() {}
 
-	void LayerStack::PushLayer(Layer* layer)
+	void LayerStack::AddLayer(Layer* layer)
 	{
-		m_LayerStack.emplace_back(layer);
-	}
-
-	void LayerStack::PushOverlay(Layer* layer)
-	{
-		m_OverlayStack.emplace_back(layer);
+		m_LayerStack.emplace_back(std::move(layer));
 	}
 
 	void LayerStack::Update()
@@ -27,8 +18,6 @@ namespace NXTN {
 		NXTN_PROFILE_FUNCTION()
 
 		for (Layer* layer : m_LayerStack)
-			layer->Update();
-		for (Layer* layer : m_OverlayStack)
 			layer->Update();
 	}
 
@@ -40,18 +29,11 @@ namespace NXTN {
 			layer->UIUpdate();
 	}
 
-	void LayerStack::OnEvent(Event& event)
+	void LayerStack::OnEvent(Event*& event_ptr)
 	{
 		for (Layer* layer : m_LayerStack)
 		{
-			if (layer->OnEvent(event))
-			{
-				return;
-			}
-		}
-		for (Layer* layer : m_OverlayStack)
-		{
-			if (layer->OnEvent(event))
+			if (layer->OnEvent(event_ptr))
 			{
 				return;
 			}

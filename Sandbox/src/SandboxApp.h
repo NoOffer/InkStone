@@ -9,7 +9,8 @@ public:
 
 	virtual void Update() override;
 	virtual void UIUpdate() override;
-	virtual bool OnEvent(NXTN::Event& event) override;
+
+	virtual bool OnEvent(NXTN::Event*& event_ptr) override;
 
 private:
 

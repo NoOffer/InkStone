@@ -12,7 +12,8 @@ namespace NXTN {
 
 		virtual void Update() override;
 		virtual void UIUpdate() override;
-		virtual bool OnEvent(NXTN::Event& event) override;
+
+		virtual bool OnEvent(Event*& event_ptr) override;
 
 	private:
 		std::shared_ptr<NXTN::Camera> m_SceneCamera;

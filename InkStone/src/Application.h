@@ -26,8 +26,8 @@ namespace NXTN {
 		bool m_Alive;
 		bool m_Minimized;
 
-	private:
-		void OnWindowEvent(Event& event);
+	//private:
+		//void OnWindowEvent(Event& event);
 
 	private:
 		static Application* s_Instance;

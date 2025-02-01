@@ -15,7 +15,7 @@ namespace NXTN {
 		virtual void NewFrameImpl() override;
 		virtual void EndFrameImpl() override;
 
-		virtual void OnEventImpl(Event& event) override;
+		virtual void OnEventImpl(Event*& event_ptr) override;
 
 	private:
 		const std::shared_ptr<Window>& m_Window;

@@ -4,15 +4,13 @@
 
 #include "src/Log.h"
 #include "src/System.h"
-#include "src/Event/ApplicationEvent.h"
-#include "src/Event/KeyEvent.h"
-#include "src/Event/MouseEvent.h"
+#include "src/Event/EventBuffer.h"
 
 namespace NXTN {
 	class Window
 	{
 	public:
-		using EventCallbackFn = std::function<void(Event&)>;
+		//using EventCallbackFn = std::function<void(Event&)>;
 
 		virtual ~Window() {}
 
@@ -23,7 +21,7 @@ namespace NXTN {
 		virtual bool IsVSync() const = 0;
 		virtual void SetVSync(bool enabled) = 0;
 
-		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
+		//virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 
 		virtual void* GetNativeWindow() const = 0;
 

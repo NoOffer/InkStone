@@ -47,13 +47,13 @@ namespace NXTN {
 		s_UI->EndFrameImpl();
 	}
 
-	void UI::OnEvent(Event& event)
+	void UI::OnEvent(Event*& event_ptr)
 	{
 		if (!s_UI)
 		{
 			Log::Warning("UI uninitialized");
 			return;
 		}
-		s_UI->OnEventImpl(event);
+		s_UI->OnEventImpl(event_ptr);
 	}
 }
