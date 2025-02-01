@@ -32,9 +32,9 @@ namespace NXTN {
 		glfwMakeContextCurrent(m_Window);
 
 		glfwMaximizeWindow(m_Window);
-		glfwGetWindowSize(m_Window, &width, &height);
+		glfwGetWindowSize(m_Window, &m_WinData.width, &m_WinData.height);
 
-		//glfwSetWindowUserPointer(m_Window, &m_WinData);
+		glfwSetWindowUserPointer(m_Window, &m_WinData);
 
 		// GLAD initialization
 		if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -47,7 +47,7 @@ namespace NXTN {
 			NXTN_ERROR;
 		}
 
-		glViewport(0, 0, width, height);
+		glViewport(0, 0, m_WinData.width, m_WinData.height);
 
 		// Log context information
 		Log::Info("OpenGL context initialized");
@@ -65,12 +65,12 @@ namespace NXTN {
 			}
 		);
 		// Window resize
-		glfwSetWindowSizeCallback(m_Window,[](GLFWwindow* window, int width, int height)
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 			{
-				//WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
+				WindowData& windowData = *(WindowData*)glfwGetWindowUserPointer(window);
 
-				//windowData.width = width;
-				//windowData.height = height;
+				windowData.width = width;
+				windowData.height = height;
 
 				EventBuffer::PushEvent(new WindowResizeEvent(width, height));
 			}
@@ -150,6 +150,6 @@ namespace NXTN {
 	{
 		glfwSwapInterval(enabled ? 1 : 0);
 
-		vSync = enabled;
+		m_WinData.vSync = enabled;
 	}
 }
