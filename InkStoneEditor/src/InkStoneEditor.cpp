@@ -154,9 +154,7 @@ namespace NXTN {
 	{
 		if (event_ptr->GetEventType() == EventType::WindowResized)
 		{
-			WindowResizeEvent e = *(WindowResizeEvent*)(event_ptr);
-			//m_SceneCamera->ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
-			Renderer::ResizeViewport(e.GetNewWidth(), e.GetNewHeight());
+			Renderer::ResizeViewport((unsigned int)m_ViewportSize.x, (unsigned int)m_ViewportSize.y);
 		}
 		return false;
 	}
