@@ -4,6 +4,8 @@
 
 #include "include/imgui/imgui.h"
 
+#define NXTN_EDITOR
+
 namespace NXTN {
 	class EditorLayer : public Layer
 	{
