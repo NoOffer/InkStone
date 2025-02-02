@@ -36,7 +36,8 @@ namespace NXTN {
 		};
 
 		//Mesh
-		m_TestObj.reset(new GameObject);
+		//m_TestScene.reset(new Scene);  // TODO
+		m_TestObj.reset(new GameObject());
 		m_TestObj->AddComponent(
 			new MeshRenderer(
 				new Mesh(
@@ -45,6 +46,7 @@ namespace NXTN {
 				)
 			)
 		);
+		//m_TestScene->AddObject(testObj);  // TODO
 
 		m_Shader.reset(Shader::Create("Asset/Shader/Texture.glsl"));
 

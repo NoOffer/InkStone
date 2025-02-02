@@ -7,17 +7,19 @@
 #include "src/System.h"
 #include "src/Time.h"
 
-#include "src/Component/Component.h"
-#include "src/Component/MeshRenderer.h"
-#include "src/Component/Transform.h"
-
 #include "src/Event/Event.h"
 #include "src/Event/ApplicationEvent.h"
 #include "src/Event/KeyEvent.h"
 #include "src/Event/MouseEvent.h"
 
-#include "src/GameObject/Camera.h"
-#include "src/GameObject/GameObject.h"
+#include "src/Game/Component/Component.h"
+#include "src/Game/Component/MeshRenderer.h"
+#include "src/Game/Component/Transform.h"
+
+#include "src/Game/GameObject/Camera.h"
+#include "src/Game/GameObject/GameObject.h"
+
+#include "src/Game/Scene/Scene.h"
 
 #include "src/Math/Math.h"
 

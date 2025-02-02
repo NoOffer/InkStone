@@ -3,6 +3,12 @@
 #include "GameObject.h"
 
 namespace NXTN {
+	unsigned long long GameObject::s_ObjID = 0;
+
+	GameObject::GameObject() : m_ObjID(s_ObjID++) {}
+
+	GameObject::GameObject(const GameObject& other) : m_ObjID(s_ObjID++) {}
+
 	void GameObject::AddComponent(Component* component_ptr)
 	{
 		m_Components.emplace_back(std::unique_ptr<Component>(component_ptr));
