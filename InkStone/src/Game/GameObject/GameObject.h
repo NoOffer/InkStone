@@ -1,6 +1,6 @@
 #pragma once
 
-#include "src/Game/Component/Transform.h"
+#include "src/Game/Component/Component.h"
 
 namespace NXTN {
 	class GameObject

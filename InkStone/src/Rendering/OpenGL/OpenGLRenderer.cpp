@@ -4,19 +4,30 @@
 
 namespace NXTN {
 	OpenGLRenderer::OpenGLRenderer()
+		: m_VPMatrix(1.0f)
 	{
 		glEnable(GL_BLEND);
 		// Blend function: newColor = inColor * a + bgColor * (1 - a)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
-	void OpenGLRenderer::DrawMeshImpl(const std::shared_ptr<const Mesh>& mesh)
+	void OpenGLRenderer::SetVPMatrixImpl(const mat4& vpMatrix)
+	{
+		m_VPMatrix = vpMatrix;
+	}
+
+	void OpenGLRenderer::DrawMeshImpl(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Shader>& shader, const mat4& mMatrix)
 	{
 		mesh->Bind();
+		shader->Bind();
+
+		shader->SetUniformMat4("u_ModelMatrix", mMatrix);
+		shader->SetUniformMat4("u_VPMatrix", m_VPMatrix);
 
 		glDrawElements(GL_TRIANGLES, mesh->GetIndexBuffer().GetCount(), GL_UNSIGNED_INT, nullptr);
-		
+
 		mesh->Unbind();
+		shader->Unbind();
 	}
 
 	void OpenGLRenderer::ResizeViewportImpl(int width, int height)

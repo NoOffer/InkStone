@@ -6,6 +6,7 @@
 #include "src/System.h"
 
 #include "Mesh.h"
+#include "Shader.h"
 
 namespace NXTN {
 	class Renderer
@@ -14,7 +15,8 @@ namespace NXTN {
 		virtual ~Renderer() {}
 
 		// Static
-		static void DrawMesh(const std::shared_ptr<const Mesh>& mesh);
+		static void SetVPMatrix(const mat4& vpMatrix);
+		static void DrawMesh(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Shader>& shader, const mat4& mMatrix);
 
 		static void ResizeViewport(int width, int height);
 		
@@ -25,7 +27,8 @@ namespace NXTN {
 
 	protected:
 		// Virtual
-		virtual void DrawMeshImpl(const std::shared_ptr<const Mesh>& mesh) = 0;
+		virtual void SetVPMatrixImpl(const mat4& vpMatrix) = 0;
+		virtual void DrawMeshImpl(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Shader>& shader, const mat4& mMatrix) = 0;
 
 		virtual void ResizeViewportImpl(int width, int height) = 0;
 

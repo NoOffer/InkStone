@@ -21,14 +21,24 @@ namespace NXTN {
 		}
 	}
 
-	void Renderer::DrawMesh(const std::shared_ptr<const Mesh>& mesh)
+	void Renderer::SetVPMatrix(const mat4& vpMatrix)
 	{
 		if (!s_Renderer)
 		{
 			Log::Warning("Renderer not initialized");
 			return;
 		}
-		s_Renderer->DrawMeshImpl(mesh);
+		s_Renderer->SetVPMatrixImpl(vpMatrix);
+	}
+
+	void Renderer::DrawMesh(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Shader>& shader, const mat4& mMatrix)
+	{
+		if (!s_Renderer)
+		{
+			Log::Warning("Renderer not initialized");
+			return;
+		}
+		s_Renderer->DrawMeshImpl(mesh, shader, mMatrix);
 	}
 
 	void Renderer::ResizeViewport(int width, int height)

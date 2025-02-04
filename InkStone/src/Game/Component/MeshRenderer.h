@@ -8,12 +8,13 @@ namespace NXTN {
 	class MeshRenderer : public Component
 	{
 	public:
-		MeshRenderer(Mesh* mesh);
+		MeshRenderer(Mesh* mesh, Shader* shader);
 		~MeshRenderer() {}
 
-		virtual void Update() override;
+		virtual void Update(Transform& transform) override;
 
 	private:
-		std::shared_ptr<const Mesh> m_Mesh;
+		std::shared_ptr<Mesh> m_Mesh;
+		std::shared_ptr<Shader> m_Shader;
 	};
 }

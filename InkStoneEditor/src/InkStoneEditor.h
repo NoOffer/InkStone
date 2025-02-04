@@ -20,8 +20,7 @@ namespace NXTN {
 	private:
 		std::shared_ptr<Camera> m_SceneCamera;
 		std::shared_ptr<FrameBuffer> m_FrameBuffer;
-		std::shared_ptr<GameObject> m_TestObj;  // TODO
-		//std::shared_ptr<Scene> m_TestScene;   // TODO
+		std::shared_ptr<Scene> m_TestScene;
 		std::shared_ptr<Texture2D> m_Texture;
 		std::shared_ptr<Shader> m_Shader;
 

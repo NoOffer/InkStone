@@ -35,22 +35,24 @@ namespace NXTN {
 			0, 3, 2
 		};
 
-		//Mesh
-		//m_TestScene.reset(new Scene);  // TODO
-		m_TestObj.reset(new GameObject());
-		m_TestObj->AddComponent(
+		// Shader
+		m_Shader.reset(Shader::Create("Asset/Shader/Texture.glsl"));
+		// Texture
+		m_Texture.reset(Texture2D::Create("Asset/Texture/Logo.png"));
+
+		// Scene
+		m_TestScene.reset(new Scene);
+		GameObject* testObj = new GameObject();
+		testObj->AddComponent(
 			new MeshRenderer(
 				new Mesh(
 					VertexArray::Create(VertexBuffer::Create(vertices, 20), layout),
 					IndexBuffer::Create(indices, 6)
-				)
+				),
+				m_Shader.get()
 			)
 		);
-		//m_TestScene->AddObject(testObj);  // TODO
-
-		m_Shader.reset(Shader::Create("Asset/Shader/Texture.glsl"));
-
-		m_Texture.reset(Texture2D::Create("Asset/Texture/Logo.png"));
+		m_TestScene->AddObject(testObj);
 
 		// UI config
 		// Create dockspace
@@ -72,19 +74,18 @@ namespace NXTN {
 	void EditorLayer::Update()
 	{
 		m_FrameBuffer->Bind();
+
 		// Rendering
 		Renderer::SetClearColor(1.0f, 0.0f, 1.0f);
 
 		Renderer::ClearFrameBuffer();
 
-		m_Shader->Bind();
-		m_Shader->SetUniformMat4("u_ModelMatrix", m_TestObj->transform.GetModelMatrix());
-		m_Shader->SetUniformMat4("u_VPMatrix", m_SceneCamera->GetViewProjMatrix());
+		Renderer::SetVPMatrix(m_SceneCamera->GetViewProjMatrix());
 
 		m_Texture->Bind(0);
 		m_Shader->SetUniformInt("u_MainTex", 0);
 
-		m_TestObj->Update();
+		m_TestScene->Update();
 
 		m_FrameBuffer->Unbind();
 	}

@@ -23,7 +23,7 @@ namespace NXTN {
 	{
 		for (std::unique_ptr<Component>& c : m_Components)
 		{
-			c->Update();
+			c->Update(transform);
 		}
 
 		for (std::unique_ptr<GameObject>& c : m_Children)
