@@ -3,9 +3,9 @@
 #include "GameObject.h"
 
 namespace NXTN {
-	unsigned long long GameObject::s_ObjID = 0;
+	ObjectID GameObject::s_ObjID = 0;
 
-	GameObject::GameObject() : m_ObjID(s_ObjID++) {}
+	GameObject::GameObject(std::string name) : m_ObjID(s_ObjID++), m_Name(name) {}
 
 	GameObject::GameObject(const GameObject& other) : m_ObjID(s_ObjID++) {}
 

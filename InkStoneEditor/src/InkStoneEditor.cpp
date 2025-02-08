@@ -147,6 +147,10 @@ namespace NXTN {
 				// FPS
 				float deltaTime = Time::GetDeltaTime();
 				ImGui::Text("FPS: %.0f  (Avg %.2fms/frame)", 1000.0f / deltaTime, deltaTime * 1000.0f);
+
+				ImGui::Separator();
+
+				DrawHierarchy(m_TestScene->AllObjects());
 			}
 			ImGui::End();
 		}
@@ -160,6 +164,19 @@ namespace NXTN {
 			Renderer::ResizeViewport((unsigned int)m_ViewportSize.x, (unsigned int)m_ViewportSize.y);
 		}
 		return false;
+	}
+
+	void EditorLayer::DrawHierarchy(const std::vector<std::unique_ptr<GameObject>>& gameObjects)
+	{
+		for (const std::unique_ptr<GameObject>& gameObj : gameObjects)
+		{
+			if (ImGui::TreeNode(gameObj->GetName().c_str()))
+			{
+				DrawHierarchy(gameObj->GetChildren());
+				// TODO: List components and/or other information
+				ImGui::TreePop();
+			}
+		}
 	}
 
 	// Sandbox Application

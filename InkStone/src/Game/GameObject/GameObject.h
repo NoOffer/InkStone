@@ -3,10 +3,12 @@
 #include "src/Game/Component/Component.h"
 
 namespace NXTN {
+	typedef unsigned long long ObjectID;
+
 	class GameObject
 	{
 	public:
-		GameObject();
+		GameObject(std::string name = "GameObject");
 		GameObject(const GameObject& other);
 		virtual ~GameObject() {}
 
@@ -16,7 +18,9 @@ namespace NXTN {
 
 		void Update();
 
-		inline unsigned long long GetID() { return m_ObjID; }
+		inline ObjectID GetID() const { return m_ObjID; }
+		inline const std::string& GetName() const { return m_Name; }
+		inline const std::vector<std::unique_ptr<GameObject>>& GetChildren() const { return m_Children; }
 
 		Transform transform;
 
@@ -25,10 +29,12 @@ namespace NXTN {
 
 		std::vector<std::unique_ptr<GameObject>> m_Children;
 
-		unsigned long long m_ObjID;
-
 	private:
-		static unsigned long long s_ObjID;
+		static ObjectID s_ObjID;
+
+		ObjectID m_ObjID;
+
+		std::string m_Name;
 	};
 }
 

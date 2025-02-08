@@ -11,7 +11,8 @@ namespace NXTN {
 
 		void AddObject(GameObject* gameObj);
 		bool DeleteObject(unsigned long long objID);
-		size_t inline GetObjectCount() { return m_GameObjects.size(); }
+		inline size_t GetObjectCount() const { return m_GameObjects.size(); }
+		inline const std::vector<std::unique_ptr<GameObject>>& AllObjects() const { return m_GameObjects; }
 
 		void Update();
 
@@ -19,4 +20,3 @@ namespace NXTN {
 		std::vector<std::unique_ptr<GameObject>> m_GameObjects;
 	};
 }
-

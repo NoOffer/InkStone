@@ -18,6 +18,9 @@ namespace NXTN {
 		virtual bool OnEvent(Event*& event_ptr) override;
 
 	private:
+		void DrawHierarchy(const std::vector<std::unique_ptr<GameObject>>& gameObjects);
+
+	private:
 		std::shared_ptr<Camera> m_SceneCamera;
 		std::shared_ptr<FrameBuffer> m_FrameBuffer;
 		std::shared_ptr<Scene> m_TestScene;
