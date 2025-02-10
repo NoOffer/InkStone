@@ -60,7 +60,7 @@ namespace NXTN {
 		m_DockspaceID = ImGui::GetID("MainDockSpace");
 		UI::EndFrame();
 		// Window flag
-		m_WindowFlag =
+		m_DockSpaceFlag =
 			ImGuiWindowFlags_MenuBar |
 			ImGuiWindowFlags_NoDocking |
 			ImGuiWindowFlags_NoTitleBar |
@@ -69,6 +69,9 @@ namespace NXTN {
 			ImGuiWindowFlags_NoMove |
 			ImGuiWindowFlags_NoBringToFrontOnFocus |
 			ImGuiWindowFlags_NoNavFocus;
+		m_SubWindowFlag =
+			ImGuiWindowFlags_NoTitleBar |
+			ImGuiWindowFlags_NoCollapse;
 	}
 
 	void EditorLayer::Update()
@@ -104,7 +107,7 @@ namespace NXTN {
 		// Note: Do not abort even if Begin() returns false (aka window is collapsed)
 		// Since dockspace should remain active, otherwise all active windows docked into it will lose their parent and become undocked.
 		// Note: Even though dockspace has no titlebar, ImGui requires a non-empty (not "") title for each window
-		ImGui::Begin("Dockspace", NULL, m_WindowFlag);
+		ImGui::Begin("Dockspace", NULL, m_DockSpaceFlag);
 		{
 			ImGui::PopStyleVar(3);
 
@@ -113,7 +116,7 @@ namespace NXTN {
 
 			// View window
 			ImGui::SetNextWindowDockID(m_DockspaceID, ImGuiCond_FirstUseEver);
-			ImGui::Begin("View", NULL, ImGuiWindowFlags_NoCollapse);
+			ImGui::Begin("View", NULL, m_SubWindowFlag);
 			{
 				// View
 				ImVec2 viewportSize = ImGui::GetContentRegionAvail();
@@ -142,7 +145,7 @@ namespace NXTN {
 
 			// Scene Info
 			ImGui::SetNextWindowDockID(m_DockspaceID, ImGuiCond_FirstUseEver);
-			ImGui::Begin("Scene Info", NULL, ImGuiWindowFlags_NoCollapse);
+			ImGui::Begin("Scene Info", NULL, m_SubWindowFlag);
 			{
 				// FPS
 				float deltaTime = Time::GetDeltaTime();

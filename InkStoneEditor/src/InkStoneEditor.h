@@ -28,7 +28,8 @@ namespace NXTN {
 		std::shared_ptr<Shader> m_Shader;
 
 		ImGuiID m_DockspaceID;
-		ImGuiWindowFlags m_WindowFlag;
+		ImGuiWindowFlags m_DockSpaceFlag;
+		ImGuiWindowFlags m_SubWindowFlag;
 
 		ImVec2 m_ViewportSize;
 	};
