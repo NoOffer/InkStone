@@ -148,3 +148,4 @@ project "Sandbox"
 	filter "configurations:Release"
 		defines "NXTN_RELEASE"
 		optimize "on"
+		
