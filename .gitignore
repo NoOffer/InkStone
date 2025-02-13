@@ -2,7 +2,9 @@
 bin/
 bin-obj/
 dependencies/
-InkStone/include/
+InkStone/include/GLAD/bin
+InkStone/include/GLAD/bin-obj
+InkStone/include/GLAD/GLAD.vc*
 InkStone/InkStone.vc*
 Sandbox/Asset/
 Sandbox/Sandbox.vc*
