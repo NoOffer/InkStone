@@ -37,8 +37,9 @@ project "InkStone"
 
 	includedirs{
 		"%{prj.name}",
-		"%{prj.name}/include/GLFW/include",
+		"%{prj.name}/include/EnTT/include",
 		"%{prj.name}/include/GLAD/include",
+		"%{prj.name}/include/GLFW/include",
 		"%{prj.name}/include/imgui/",
 		"%{prj.name}/include/stb_image/"
 	}
