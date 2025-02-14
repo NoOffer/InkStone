@@ -90,7 +90,8 @@ project "InkStoneEditor"
 	}
 
 	includedirs{
-		"InkStone"
+		"InkStone",
+		"InkStone/include/EnTT/include"
 	}
 
 	links{
